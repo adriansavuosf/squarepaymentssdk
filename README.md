@@ -1,0 +1,1 @@
+Square Connect Magento SDK 
