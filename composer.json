@@ -1,5 +1,5 @@
 {
-    "name": "adriansavuosf/squaremagentosdk",
+    "name": "adriansavuosf/squarepaymentssdk",
     "description": "Magento client library for the Square Connect v2 API",
 
     "homepage": "https://github.com/adriansavuosf/square-connect-magento-sdk",
