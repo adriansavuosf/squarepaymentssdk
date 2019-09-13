@@ -247,7 +247,7 @@ class TransactionsApi
             $headerParams['Accept'] = $_header_accept;
         }
         $headerParams['Content-Type'] = ApiClient::selectHeaderContentType(['application/json']);
-        $headerParams['Square-Version'] = "2018-07-12";
+        $headerParams['Square-Version'] = "2019-08-14";
 
         // path params
         if ($location_id !== null) {
