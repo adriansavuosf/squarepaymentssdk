@@ -18,6 +18,7 @@ namespace SquareConnect;
  */
 class ApiClient
 {
+
     public static $PATCH = "PATCH";
     public static $POST = "POST";
     public static $GET = "GET";
@@ -30,13 +31,13 @@ class ApiClient
      * Configuration
      * @var Configuration
      */
-    private $config;
+    protected $config;
 
     /**
      * Object Serializer
      * @var ObjectSerializer
      */
-    private $serializer;
+    protected $serializer;
 
     /**
      * Constructor of the class
@@ -85,7 +86,7 @@ class ApiClient
         }
 
         if (isset($prefix)) {
-            $keyWithPrefix = $prefix . " " . $apiKey;
+            $keyWithPrefix = $prefix." ".$apiKey;
         } else {
             $keyWithPrefix = $apiKey;
         }
@@ -96,10 +97,10 @@ class ApiClient
     /**
      * Make the HTTP call (Sync)
      * @param string $resourcePath path to method endpoint
-     * @param string $method method to call
-     * @param array $queryParams parameters to be place in query URL
-     * @param array $postData parameters to be placed in POST body
-     * @param array $headerParams parameters to be place in request header
+     * @param string $method       method to call
+     * @param array  $queryParams  parameters to be place in query URL
+     * @param array  $postData     parameters to be placed in POST body
+     * @param array  $headerParams parameters to be place in request header
      * @param string $responseType expected response type of the endpoint
      * @throws \SquareConnect\ApiException on a non 2xx response
      * @return mixed
@@ -107,7 +108,7 @@ class ApiClient
     public function callApi($resourcePath, $method, $queryParams, $postData, $headerParams, $responseType = null)
     {
 
-        $headers = [];
+        $headers = array();
 
         // construct the http header
         $headerParams = array_merge(
@@ -116,11 +117,11 @@ class ApiClient
         );
 
         foreach ($headerParams as $key => $val) {
-            if (strcasecmp($key, "Authorization") == 0) {
-                if (strrpos($val, "Bearer", -strlen($val)) === false) {
-                    $headers[] = "$key: Bearer $val";
-                    continue;
-                }
+            if (strcasecmp($key, "Authorization") == 0 ) {
+              if (strrpos($val, "Bearer", -strlen($val)) === false) {
+                $headers[] = "$key: Bearer $val";
+                continue;
+              }
             }
             $headers[] = "$key: $val";
         }
@@ -128,8 +129,7 @@ class ApiClient
         // form data
         if ($postData and in_array('Content-Type: application/x-www-form-urlencoded', $headers)) {
             $postData = http_build_query($postData);
-        } elseif ((is_object($postData) or is_array($postData)) and
-            !in_array('Content-Type: multipart/form-data', $headers)) { // json model
+        } elseif ((is_object($postData) or is_array($postData)) and !in_array('Content-Type: multipart/form-data', $headers)) { // json model
             $postData = json_encode(\SquareConnect\ObjectSerializer::sanitizeForSerialization($postData));
         }
 
@@ -151,7 +151,7 @@ class ApiClient
             curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
         }
 
-        if (!empty($queryParams)) {
+        if (! empty($queryParams)) {
             $url = ($url . '?' . http_build_query($queryParams));
         }
 
@@ -173,7 +173,7 @@ class ApiClient
             curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
             curl_setopt($curl, CURLOPT_POSTFIELDS, $postData);
         } elseif ($method != self::$GET) {
-            throw new \SquareConnect\ApiException('Method ' . $method . ' is not recognized.');
+            throw new ApiException('Method ' . $method . ' is not recognized.');
         }
         curl_setopt($curl, CURLOPT_URL, $url);
 
@@ -182,18 +182,10 @@ class ApiClient
 
         // debugging for curl
         if ($this->config->getDebug()) {
-            error_log(
-                "[DEBUG] HTTP Request body  ~BEGIN~\n" . print_r($postData, true) . "\n~END~\n",
-                3,
-                $this->config->getDebugFile()
-            );
+            error_log("[DEBUG] HTTP Request body  ~BEGIN~\n".print_r($postData, true)."\n~END~\n", 3, $this->config->getDebugFile());
 
             curl_setopt($curl, CURLOPT_VERBOSE, 1);
-            curl_setopt(
-                $curl,
-                CURLOPT_STDERR,
-                fopen($this->config->getDebugFile(), 'a')
-            );
+            curl_setopt($curl, CURLOPT_STDERR, fopen($this->config->getDebugFile(), 'a'));
         } else {
             curl_setopt($curl, CURLOPT_VERBOSE, 0);
         }
@@ -210,11 +202,7 @@ class ApiClient
 
         // debug HTTP response body
         if ($this->config->getDebug()) {
-            error_log(
-                "[DEBUG] HTTP Response body ~BEGIN~\n" . print_r($http_body, true) . "\n~END~\n",
-                3,
-                $this->config->getDebugFile()
-            );
+            error_log("[DEBUG] HTTP Response body ~BEGIN~\n".print_r($http_body, true)."\n~END~\n", 3, $this->config->getDebugFile());
         }
 
         // Handle the response
@@ -228,11 +216,11 @@ class ApiClient
                 $error_message = "API call to $url failed, but for an unknown reason. " .
                     "This could happen if you are disconnected from the network.";
             }
-            throw new \SquareConnect\ApiException($error_message, 0, null, null);
-        } elseif ($response_info['http_code'] >= 200 && $response_info['http_code'] <= 299) {
+            throw new ApiException($error_message, 0, null, null);
+        } elseif ($response_info['http_code'] >= 200 && $response_info['http_code'] <= 299 ) {
             // return raw body if response is a file
             if ($responseType == '\SplFileObject' || $responseType == 'ByteArray') {
-                return [$http_body, $response_info['http_code'], $http_header];
+                return array($http_body, $response_info['http_code'], $http_header);
             }
 
             $data = json_decode($http_body);
@@ -245,14 +233,12 @@ class ApiClient
                 $data = $http_body;
             }
 
-            throw new \SquareConnect\ApiException(
+            throw new ApiException(
                 "[{$http_header[0]}] $http_body",
-                $response_info['http_code'],
-                $http_header,
-                $data
+                $response_info['http_code'], $http_header, $data
             );
         }
-        return [$data, $response_info['http_code'], $http_header];
+        return array($data, $response_info['http_code'], $http_header);
     }
 
     /**
@@ -299,15 +285,18 @@ class ApiClient
      *
      * @return
      */
-    public static function getV1BatchTokenFromHeaders($http_headers)
-    {
-        if (is_array($http_headers) && isset($http_headers['Link'])) {
+    public static function getV1BatchTokenFromHeaders($http_headers) {
+        if (is_array($http_headers) && isset($http_headers['Link']))
+        {
             $connect_link_regexp = "/^<([^>]+)>;rel='next'$/";
-            if (preg_match($connect_link_regexp, $http_headers['Link'], $match) === 1) {
+            if (preg_match($connect_link_regexp, $http_headers['Link'], $match) === 1)
+            {
                 $link_uri = $match[1];
-                if ($query = parse_url($link_uri, PHP_URL_QUERY)) {
+                if ($query = parse_url($link_uri, PHP_URL_QUERY))
+                {
                     parse_str($query, $query_params);
-                    if (is_array($query_params) && isset($query_params['batch_token'])) {
+                    if (is_array($query_params) && isset($query_params['batch_token']))
+                    {
                         return $query_params['batch_token'];
                     }
                 }
@@ -317,39 +306,49 @@ class ApiClient
         return null;
     }
 
-    /**
-     * Return an array of HTTP response headers
-     *
-     * @param string $raw_headers A string of raw HTTP response headers
-     *
-     * @return string[] Array of HTTP response heaers
-     */
-    private function http_parse_headers($raw_headers)
+   /**
+    * Return an array of HTTP response headers
+    *
+    * @param string $raw_headers A string of raw HTTP response headers
+    *
+    * @return \SquareConnect\Util\CaseInsensitiveArray(string[]) CaseInsensitiveArray of HTTP response headers
+    */
+    protected function http_parse_headers($raw_headers)
     {
-        $headers = [];
-        $key = '';
+        // ref/credit: http://php.net/manual/en/function.http-parse-headers.php#112986
+        $headers = new \SquareConnect\Util\CaseInsensitiveArray();
+        $key = ''; // [+]
 
-        foreach (explode("\n", $raw_headers) as $i => $h) {
+        foreach(explode("\n", $raw_headers) as $i => $h)
+        {
             $h = explode(':', $h, 2);
 
-            if (isset($h[1])) {
-                if (!isset($headers[$h[0]])) {
+            if (isset($h[1]))
+            {
+                if (!isset($headers[$h[0]]))
                     $headers[$h[0]] = trim($h[1]);
-                } elseif (is_array($headers[$h[0]])) {
-                    $headers[$h[0]] = array_merge($headers[$h[0]], [trim($h[1])]);
-                } else {
-                    $headers[$h[0]] = array_merge([$headers[$h[0]]], [trim($h[1])]);
+                elseif (is_array($headers[$h[0]]))
+                {
+                    // $tmp = array_merge($headers[$h[0]], array(trim($h[1]))); // [-]
+                    // $headers[$h[0]] = $tmp; // [-]
+                    $headers[$h[0]] = array_merge($headers[$h[0]], array(trim($h[1]))); // [+]
+                }
+                else
+                {
+                    // $tmp = array_merge(array($headers[$h[0]]), array(trim($h[1]))); // [-]
+                    // $headers[$h[0]] = $tmp; // [-]
+                    $headers[$h[0]] = array_merge(array($headers[$h[0]]), array(trim($h[1]))); // [+]
                 }
 
-                $key = $h[0];
-            } else {
-                if (substr($h[0], 0, 1) == "\t") {
-                    $headers[$key] .= "\r\n\t" . trim($h[0]);
-                } elseif (!$key) {
-                    $headers[0] = trim($h[0]);
-                }
-                trim($h[0]);
+                $key = $h[0]; // [+]
             }
+            else // [+]
+            { // [+]
+                if (substr($h[0], 0, 1) == "\t") // [+]
+                    $headers[$key] .= "\r\n\t".trim($h[0]); // [+]
+                elseif (!$key) // [+]
+                    $headers[0] = trim($h[0]);trim($h[0]); // [+]
+            } // [+]
         }
 
         return $headers;
