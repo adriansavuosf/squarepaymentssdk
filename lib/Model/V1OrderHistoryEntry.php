@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * V1OrderHistoryEntry Class Doc Comment
  *
@@ -21,51 +20,51 @@ use \ArrayAccess;
 class V1OrderHistoryEntry implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
         'action' => 'string',
         'created_at' => 'string'
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'action' => 'action',
         'created_at' => 'created_at'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'action' => 'setAction',
         'created_at' => 'setCreatedAt'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'action' => 'getAction',
         'created_at' => 'getCreatedAt'
-    ];
-
+    );
+  
     /**
-     * $action The type of action performed on the order.
-     * @var string
-     */
-    private $action;
+      * $action The type of action performed on the order. See [V1OrderHistoryEntryAction](#type-v1orderhistoryentryaction) for possible values
+      * @var string
+      */
+    protected $action;
     /**
-     * $created_at The time when the action was performed, in ISO 8601 format.
-     * @var string
-     */
-    private $created_at;
+      * $created_at The time when the action was performed, in ISO 8601 format.
+      * @var string
+      */
+    protected $created_at;
 
     /**
      * Constructor
@@ -75,18 +74,17 @@ class V1OrderHistoryEntry implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["action"])) {
-                $this->action = $data["action"];
+              $this->action = $data["action"];
             } else {
-                $this->action = null;
+              $this->action = null;
             }
             if (isset($data["created_at"])) {
-                $this->created_at = $data["created_at"];
+              $this->created_at = $data["created_at"];
             } else {
-                $this->created_at = null;
+              $this->created_at = null;
             }
         }
     }
-
     /**
      * Gets action
      * @return string
@@ -95,10 +93,10 @@ class V1OrderHistoryEntry implements ArrayAccess
     {
         return $this->action;
     }
-
+  
     /**
      * Sets action
-     * @param string $action The type of action performed on the order.
+     * @param string $action The type of action performed on the order. See [V1OrderHistoryEntryAction](#type-v1orderhistoryentryaction) for possible values
      * @return $this
      */
     public function setAction($action)
@@ -106,7 +104,6 @@ class V1OrderHistoryEntry implements ArrayAccess
         $this->action = $action;
         return $this;
     }
-
     /**
      * Gets created_at
      * @return string
@@ -115,7 +112,7 @@ class V1OrderHistoryEntry implements ArrayAccess
     {
         return $this->created_at;
     }
-
+  
     /**
      * Sets created_at
      * @param string $created_at The time when the action was performed, in ISO 8601 format.
@@ -126,48 +123,47 @@ class V1OrderHistoryEntry implements ArrayAccess
         $this->created_at = $created_at;
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string

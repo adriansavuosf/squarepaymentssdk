@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * OrderLineItemTax Class Doc Comment
  *
@@ -21,80 +20,105 @@ use \ArrayAccess;
 class OrderLineItemTax implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
+        'uid' => 'string',
         'catalog_object_id' => 'string',
         'name' => 'string',
         'type' => 'string',
         'percentage' => 'string',
-        'applied_money' => \SquareConnect\Model\Money::class
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+        'metadata' => 'map[string,string]',
+        'applied_money' => '\SquareConnect\Model\Money',
+        'scope' => 'string'
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
+        'uid' => 'uid',
         'catalog_object_id' => 'catalog_object_id',
         'name' => 'name',
         'type' => 'type',
         'percentage' => 'percentage',
-        'applied_money' => 'applied_money'
-    ];
-
+        'metadata' => 'metadata',
+        'applied_money' => 'applied_money',
+        'scope' => 'scope'
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
+        'uid' => 'setUid',
         'catalog_object_id' => 'setCatalogObjectId',
         'name' => 'setName',
         'type' => 'setType',
         'percentage' => 'setPercentage',
-        'applied_money' => 'setAppliedMoney'
-    ];
-
+        'metadata' => 'setMetadata',
+        'applied_money' => 'setAppliedMoney',
+        'scope' => 'setScope'
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
+        'uid' => 'getUid',
         'catalog_object_id' => 'getCatalogObjectId',
         'name' => 'getName',
         'type' => 'getType',
         'percentage' => 'getPercentage',
-        'applied_money' => 'getAppliedMoney'
-    ];
-
+        'metadata' => 'getMetadata',
+        'applied_money' => 'getAppliedMoney',
+        'scope' => 'getScope'
+    );
+  
     /**
-     * $catalog_object_id The catalog object id referencing [CatalogTax](#type-catalogtax).
-     * @var string
-     */
-    private $catalog_object_id;
+      * $uid Unique ID that identifies the tax only within this order.
+      * @var string
+      */
+    protected $uid;
     /**
-     * $name The tax's name.
-     * @var string
-     */
-    private $name;
+      * $catalog_object_id The catalog object id referencing `CatalogTax`.
+      * @var string
+      */
+    protected $catalog_object_id;
     /**
-     * $type Indicates the calculation method used to apply the tax.
-     * See [OrderLineItemTaxType](#type-orderlineitemtaxtype) for possible values.
-     * @var string
-     */
-    private $type;
+      * $name The tax's name.
+      * @var string
+      */
+    protected $name;
     /**
-     * $percentage The percentage of the tax, as a string representation of a decimal number.
-     * A value of `7.25` corresponds to a percentage of 7.25%.
-     * @var string
-     */
-    private $percentage;
+      * $type Indicates the calculation method used to apply the tax. See [OrderLineItemTaxType](#type-orderlineitemtaxtype) for possible values
+      * @var string
+      */
+    protected $type;
     /**
-     * $applied_money The amount of the money applied by the tax in an order.
-     * @var \SquareConnect\Model\Money
-     */
-    private $applied_money;
+      * $percentage The percentage of the tax, as a string representation of a decimal number. For example, a value of `\"7.25\"` corresponds to a percentage of 7.25%.
+      * @var string
+      */
+    protected $percentage;
+    /**
+      * $metadata Application-defined data attached to this tax. Metadata fields are intended to store descriptive references or associations with an entity in another system or store brief information about the object. Square does not process this field; it only stores and returns it in relevant API calls. Do not use metadata to store any sensitive information (personally identifiable information, card details, etc.).  Keys written by applications must be 60 characters or less and must be in the character set `[a-zA-Z0-9_-]`. Entries may also include metadata generated by Square. These keys are prefixed with a namespace, separated from the key with a ':' character.  Values have a max length of 255 characters.  An application may have up to 10 entries per metadata field.  Entries written by applications are private and can only be read or modified by the same application.  See [Metadata](https://developer.squareup.com/docs/build-basics/metadata) for more information.
+      * @var map[string,string]
+      */
+    protected $metadata;
+    /**
+      * $applied_money The amount of the money applied by the tax in the order.
+      * @var \SquareConnect\Model\Money
+      */
+    protected $applied_money;
+    /**
+      * $scope Indicates the level at which the tax applies. For `ORDER` scoped taxes, Square generates references in `applied_taxes` on all order line items that do not have them. For `LINE_ITEM` scoped taxes, the tax will only apply to line items with references in their `applied_taxes` field.  This field is immutable. To change the scope, you must delete the tax and re-add it as a new tax. See [OrderLineItemTaxScope](#type-orderlineitemtaxscope) for possible values
+      * @var string
+      */
+    protected $scope;
 
     /**
      * Constructor
@@ -103,34 +127,67 @@ class OrderLineItemTax implements ArrayAccess
     public function __construct(array $data = null)
     {
         if ($data != null) {
-            if (isset($data["catalog_object_id"])) {
-                $this->catalog_object_id = $data["catalog_object_id"];
+            if (isset($data["uid"])) {
+              $this->uid = $data["uid"];
             } else {
-                $this->catalog_object_id = null;
+              $this->uid = null;
+            }
+            if (isset($data["catalog_object_id"])) {
+              $this->catalog_object_id = $data["catalog_object_id"];
+            } else {
+              $this->catalog_object_id = null;
             }
             if (isset($data["name"])) {
-                $this->name = $data["name"];
+              $this->name = $data["name"];
             } else {
-                $this->name = null;
+              $this->name = null;
             }
             if (isset($data["type"])) {
-                $this->type = $data["type"];
+              $this->type = $data["type"];
             } else {
-                $this->type = null;
+              $this->type = null;
             }
             if (isset($data["percentage"])) {
-                $this->percentage = $data["percentage"];
+              $this->percentage = $data["percentage"];
             } else {
-                $this->percentage = null;
+              $this->percentage = null;
+            }
+            if (isset($data["metadata"])) {
+              $this->metadata = $data["metadata"];
+            } else {
+              $this->metadata = null;
             }
             if (isset($data["applied_money"])) {
-                $this->applied_money = $data["applied_money"];
+              $this->applied_money = $data["applied_money"];
             } else {
-                $this->applied_money = null;
+              $this->applied_money = null;
+            }
+            if (isset($data["scope"])) {
+              $this->scope = $data["scope"];
+            } else {
+              $this->scope = null;
             }
         }
     }
-
+    /**
+     * Gets uid
+     * @return string
+     */
+    public function getUid()
+    {
+        return $this->uid;
+    }
+  
+    /**
+     * Sets uid
+     * @param string $uid Unique ID that identifies the tax only within this order.
+     * @return $this
+     */
+    public function setUid($uid)
+    {
+        $this->uid = $uid;
+        return $this;
+    }
     /**
      * Gets catalog_object_id
      * @return string
@@ -139,10 +196,10 @@ class OrderLineItemTax implements ArrayAccess
     {
         return $this->catalog_object_id;
     }
-
+  
     /**
      * Sets catalog_object_id
-     * @param string $catalog_object_id The catalog object id referencing [CatalogTax](#type-catalogtax).
+     * @param string $catalog_object_id The catalog object id referencing `CatalogTax`.
      * @return $this
      */
     public function setCatalogObjectId($catalog_object_id)
@@ -150,7 +207,6 @@ class OrderLineItemTax implements ArrayAccess
         $this->catalog_object_id = $catalog_object_id;
         return $this;
     }
-
     /**
      * Gets name
      * @return string
@@ -159,7 +215,7 @@ class OrderLineItemTax implements ArrayAccess
     {
         return $this->name;
     }
-
+  
     /**
      * Sets name
      * @param string $name The tax's name.
@@ -170,7 +226,6 @@ class OrderLineItemTax implements ArrayAccess
         $this->name = $name;
         return $this;
     }
-
     /**
      * Gets type
      * @return string
@@ -179,11 +234,10 @@ class OrderLineItemTax implements ArrayAccess
     {
         return $this->type;
     }
-
+  
     /**
      * Sets type
-     * @param string $type Indicates the calculation method used to apply the tax.
-     * See [OrderLineItemTaxType](#type-orderlineitemtaxtype) for possible values.
+     * @param string $type Indicates the calculation method used to apply the tax. See [OrderLineItemTaxType](#type-orderlineitemtaxtype) for possible values
      * @return $this
      */
     public function setType($type)
@@ -191,7 +245,6 @@ class OrderLineItemTax implements ArrayAccess
         $this->type = $type;
         return $this;
     }
-
     /**
      * Gets percentage
      * @return string
@@ -200,11 +253,10 @@ class OrderLineItemTax implements ArrayAccess
     {
         return $this->percentage;
     }
-
+  
     /**
      * Sets percentage
-     * @param string $percentage The percentage of the tax, as a string representation of a decimal number.
-     * A value of `7.25` corresponds to a percentage of 7.25%.
+     * @param string $percentage The percentage of the tax, as a string representation of a decimal number. For example, a value of `\"7.25\"` corresponds to a percentage of 7.25%.
      * @return $this
      */
     public function setPercentage($percentage)
@@ -212,7 +264,25 @@ class OrderLineItemTax implements ArrayAccess
         $this->percentage = $percentage;
         return $this;
     }
-
+    /**
+     * Gets metadata
+     * @return map[string,string]
+     */
+    public function getMetadata()
+    {
+        return $this->metadata;
+    }
+  
+    /**
+     * Sets metadata
+     * @param map[string,string] $metadata Application-defined data attached to this tax. Metadata fields are intended to store descriptive references or associations with an entity in another system or store brief information about the object. Square does not process this field; it only stores and returns it in relevant API calls. Do not use metadata to store any sensitive information (personally identifiable information, card details, etc.).  Keys written by applications must be 60 characters or less and must be in the character set `[a-zA-Z0-9_-]`. Entries may also include metadata generated by Square. These keys are prefixed with a namespace, separated from the key with a ':' character.  Values have a max length of 255 characters.  An application may have up to 10 entries per metadata field.  Entries written by applications are private and can only be read or modified by the same application.  See [Metadata](https://developer.squareup.com/docs/build-basics/metadata) for more information.
+     * @return $this
+     */
+    public function setMetadata($metadata)
+    {
+        $this->metadata = $metadata;
+        return $this;
+    }
     /**
      * Gets applied_money
      * @return \SquareConnect\Model\Money
@@ -221,10 +291,10 @@ class OrderLineItemTax implements ArrayAccess
     {
         return $this->applied_money;
     }
-
+  
     /**
      * Sets applied_money
-     * @param \SquareConnect\Model\Money $applied_money The amount of the money applied by the tax in an order.
+     * @param \SquareConnect\Model\Money $applied_money The amount of the money applied by the tax in the order.
      * @return $this
      */
     public function setAppliedMoney($applied_money)
@@ -232,48 +302,66 @@ class OrderLineItemTax implements ArrayAccess
         $this->applied_money = $applied_money;
         return $this;
     }
-
+    /**
+     * Gets scope
+     * @return string
+     */
+    public function getScope()
+    {
+        return $this->scope;
+    }
+  
+    /**
+     * Sets scope
+     * @param string $scope Indicates the level at which the tax applies. For `ORDER` scoped taxes, Square generates references in `applied_taxes` on all order line items that do not have them. For `LINE_ITEM` scoped taxes, the tax will only apply to line items with references in their `applied_taxes` field.  This field is immutable. To change the scope, you must delete the tax and re-add it as a new tax. See [OrderLineItemTaxScope](#type-orderlineitemtaxscope) for possible values
+     * @return $this
+     */
+    public function setScope($scope)
+    {
+        $this->scope = $scope;
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string

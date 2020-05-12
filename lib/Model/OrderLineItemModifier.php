@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * OrderLineItemModifier Class Doc Comment
  *
@@ -21,70 +20,78 @@ use \ArrayAccess;
 class OrderLineItemModifier implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
+        'uid' => 'string',
         'catalog_object_id' => 'string',
         'name' => 'string',
-        'base_price_money' => \SquareConnect\Model\Money::class,
-        'total_price_money' => \SquareConnect\Model\Money::class
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+        'base_price_money' => '\SquareConnect\Model\Money',
+        'total_price_money' => '\SquareConnect\Model\Money'
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
+        'uid' => 'uid',
         'catalog_object_id' => 'catalog_object_id',
         'name' => 'name',
         'base_price_money' => 'base_price_money',
         'total_price_money' => 'total_price_money'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
+        'uid' => 'setUid',
         'catalog_object_id' => 'setCatalogObjectId',
         'name' => 'setName',
         'base_price_money' => 'setBasePriceMoney',
         'total_price_money' => 'setTotalPriceMoney'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
+        'uid' => 'getUid',
         'catalog_object_id' => 'getCatalogObjectId',
         'name' => 'getName',
         'base_price_money' => 'getBasePriceMoney',
         'total_price_money' => 'getTotalPriceMoney'
-    ];
-
+    );
+  
     /**
-     * $catalog_object_id The catalog object id referencing [CatalogModifier](#type-catalogmodifier).
-     * @var string
-     */
-    private $catalog_object_id;
+      * $uid Unique ID that identifies the modifier only within this order.
+      * @var string
+      */
+    protected $uid;
     /**
-     * $name The name of the item modifier.
-     * @var string
-     */
-    private $name;
+      * $catalog_object_id The catalog object id referencing `CatalogModifier`.
+      * @var string
+      */
+    protected $catalog_object_id;
     /**
-     * $base_price_money The base price of the item modifier.
-     * @var \SquareConnect\Model\Money
-     */
-    private $base_price_money;
+      * $name The name of the item modifier.
+      * @var string
+      */
+    protected $name;
     /**
-     * $total_price_money The total price of the item modifier for its line item.
-     * This is the modifier's base_price_money multiplied by the line item's quantity.
-     * @var \SquareConnect\Model\Money
-     */
-    private $total_price_money;
+      * $base_price_money The base price for the modifier.  `base_price_money` is required for ad hoc modifiers. If both `catalog_object_id` and `base_price_money` are set, `base_price_money` will override the predefined `CatalogModifier` price.
+      * @var \SquareConnect\Model\Money
+      */
+    protected $base_price_money;
+    /**
+      * $total_price_money The total price of the item modifier for its line item. This is the modifier's `base_price_money` multiplied by the line item's quantity.
+      * @var \SquareConnect\Model\Money
+      */
+    protected $total_price_money;
 
     /**
      * Constructor
@@ -93,29 +100,52 @@ class OrderLineItemModifier implements ArrayAccess
     public function __construct(array $data = null)
     {
         if ($data != null) {
-            if (isset($data["catalog_object_id"])) {
-                $this->catalog_object_id = $data["catalog_object_id"];
+            if (isset($data["uid"])) {
+              $this->uid = $data["uid"];
             } else {
-                $this->catalog_object_id = null;
+              $this->uid = null;
+            }
+            if (isset($data["catalog_object_id"])) {
+              $this->catalog_object_id = $data["catalog_object_id"];
+            } else {
+              $this->catalog_object_id = null;
             }
             if (isset($data["name"])) {
-                $this->name = $data["name"];
+              $this->name = $data["name"];
             } else {
-                $this->name = null;
+              $this->name = null;
             }
             if (isset($data["base_price_money"])) {
-                $this->base_price_money = $data["base_price_money"];
+              $this->base_price_money = $data["base_price_money"];
             } else {
-                $this->base_price_money = null;
+              $this->base_price_money = null;
             }
             if (isset($data["total_price_money"])) {
-                $this->total_price_money = $data["total_price_money"];
+              $this->total_price_money = $data["total_price_money"];
             } else {
-                $this->total_price_money = null;
+              $this->total_price_money = null;
             }
         }
     }
-
+    /**
+     * Gets uid
+     * @return string
+     */
+    public function getUid()
+    {
+        return $this->uid;
+    }
+  
+    /**
+     * Sets uid
+     * @param string $uid Unique ID that identifies the modifier only within this order.
+     * @return $this
+     */
+    public function setUid($uid)
+    {
+        $this->uid = $uid;
+        return $this;
+    }
     /**
      * Gets catalog_object_id
      * @return string
@@ -124,10 +154,10 @@ class OrderLineItemModifier implements ArrayAccess
     {
         return $this->catalog_object_id;
     }
-
+  
     /**
      * Sets catalog_object_id
-     * @param string $catalog_object_id The catalog object id referencing [CatalogModifier](#type-catalogmodifier).
+     * @param string $catalog_object_id The catalog object id referencing `CatalogModifier`.
      * @return $this
      */
     public function setCatalogObjectId($catalog_object_id)
@@ -135,7 +165,6 @@ class OrderLineItemModifier implements ArrayAccess
         $this->catalog_object_id = $catalog_object_id;
         return $this;
     }
-
     /**
      * Gets name
      * @return string
@@ -144,7 +173,7 @@ class OrderLineItemModifier implements ArrayAccess
     {
         return $this->name;
     }
-
+  
     /**
      * Sets name
      * @param string $name The name of the item modifier.
@@ -155,7 +184,6 @@ class OrderLineItemModifier implements ArrayAccess
         $this->name = $name;
         return $this;
     }
-
     /**
      * Gets base_price_money
      * @return \SquareConnect\Model\Money
@@ -164,10 +192,10 @@ class OrderLineItemModifier implements ArrayAccess
     {
         return $this->base_price_money;
     }
-
+  
     /**
      * Sets base_price_money
-     * @param \SquareConnect\Model\Money $base_price_money The base price of the item modifier.
+     * @param \SquareConnect\Model\Money $base_price_money The base price for the modifier.  `base_price_money` is required for ad hoc modifiers. If both `catalog_object_id` and `base_price_money` are set, `base_price_money` will override the predefined `CatalogModifier` price.
      * @return $this
      */
     public function setBasePriceMoney($base_price_money)
@@ -175,7 +203,6 @@ class OrderLineItemModifier implements ArrayAccess
         $this->base_price_money = $base_price_money;
         return $this;
     }
-
     /**
      * Gets total_price_money
      * @return \SquareConnect\Model\Money
@@ -184,11 +211,10 @@ class OrderLineItemModifier implements ArrayAccess
     {
         return $this->total_price_money;
     }
-
+  
     /**
      * Sets total_price_money
-     * @param \SquareConnect\Model\Money $total_price_money The total price of the item modifier for its line item.
-     * This is the modifier's base_price_money multiplied by the line item's quantity.
+     * @param \SquareConnect\Model\Money $total_price_money The total price of the item modifier for its line item. This is the modifier's `base_price_money` multiplied by the line item's quantity.
      * @return $this
      */
     public function setTotalPriceMoney($total_price_money)
@@ -196,48 +222,47 @@ class OrderLineItemModifier implements ArrayAccess
         $this->total_price_money = $total_price_money;
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string

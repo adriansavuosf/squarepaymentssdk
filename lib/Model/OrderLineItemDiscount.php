@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * OrderLineItemDiscount Class Doc Comment
  *
@@ -21,105 +20,114 @@ use \ArrayAccess;
 class OrderLineItemDiscount implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
+        'uid' => 'string',
         'catalog_object_id' => 'string',
         'name' => 'string',
         'type' => 'string',
         'percentage' => 'string',
-        'amount_money' => \SquareConnect\Model\Money::class,
-        'applied_money' => \SquareConnect\Model\Money::class,
+        'amount_money' => '\SquareConnect\Model\Money',
+        'applied_money' => '\SquareConnect\Model\Money',
+        'metadata' => 'map[string,string]',
         'scope' => 'string'
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
+        'uid' => 'uid',
         'catalog_object_id' => 'catalog_object_id',
         'name' => 'name',
         'type' => 'type',
         'percentage' => 'percentage',
         'amount_money' => 'amount_money',
         'applied_money' => 'applied_money',
+        'metadata' => 'metadata',
         'scope' => 'scope'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
+        'uid' => 'setUid',
         'catalog_object_id' => 'setCatalogObjectId',
         'name' => 'setName',
         'type' => 'setType',
         'percentage' => 'setPercentage',
         'amount_money' => 'setAmountMoney',
         'applied_money' => 'setAppliedMoney',
+        'metadata' => 'setMetadata',
         'scope' => 'setScope'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
+        'uid' => 'getUid',
         'catalog_object_id' => 'getCatalogObjectId',
         'name' => 'getName',
         'type' => 'getType',
         'percentage' => 'getPercentage',
         'amount_money' => 'getAmountMoney',
         'applied_money' => 'getAppliedMoney',
+        'metadata' => 'getMetadata',
         'scope' => 'getScope'
-    ];
-
+    );
+  
     /**
-     * $catalog_object_id The catalog object id referencing [CatalogDiscount](#type-catalogdiscount).
-     * @var string
-     */
-    private $catalog_object_id;
+      * $uid Unique ID that identifies the discount only within this order.
+      * @var string
+      */
+    protected $uid;
     /**
-     * $name The discount's name.
-     * @var string
-     */
-    private $name;
+      * $catalog_object_id The catalog object id referencing `CatalogDiscount`.
+      * @var string
+      */
+    protected $catalog_object_id;
     /**
-     * $type The type of the discount. If it is created by API, it would be either `FIXED_PERCENTAGE` or `FIXED_AMOUNT`.
-     * VARIABLE_* is not supported in API because the order is created at the time of sale and either percentage or
-     * amount has to be specified.  See [OrderLineItemDiscountType](#type-orderlineitemdiscounttype)
-     * for possible values.
-     * @var string
-     */
-    private $type;
+      * $name The discount's name.
+      * @var string
+      */
+    protected $name;
     /**
-     * $percentage The percentage of the tax, as a string representation of a decimal number. A value of `7.25`
-     * corresponds to a percentage of 7.25%.  The percentage won't be set for an amount-based discount.
-     * @var string
-     */
-    private $percentage;
+      * $type The type of the discount.  Discounts that don't reference a catalog object ID must have a type of `FIXED_PERCENTAGE` or `FIXED_AMOUNT`. See [OrderLineItemDiscountType](#type-orderlineitemdiscounttype) for possible values
+      * @var string
+      */
+    protected $type;
     /**
-     * $amount_money The total monetary amount of the applicable discount. If it is at order level, it is the value of
-     * the order level discount. If it is at line item level, it is the value of the line item level discount.
-     * The amount_money won't be set for a percentage-based discount.
-     * @var \SquareConnect\Model\Money
-     */
-    private $amount_money;
+      * $percentage The percentage of the discount, as a string representation of a decimal number. A value of `7.25` corresponds to a percentage of 7.25%.  `percentage` is not set for amount-based discounts.
+      * @var string
+      */
+    protected $percentage;
     /**
-     * $applied_money The amount of discount actually applied to this line item.  Represents the amount of money
-     * applied to a line item as a discount When an amount-based discount is at order-level, this value is different
-     * from `amount_money` because the discount is distributed across the line items.
-     * @var \SquareConnect\Model\Money
-     */
-    private $applied_money;
+      * $amount_money The total declared monetary amount of the discount.  `amount_money` is not set for percentage-based discounts.
+      * @var \SquareConnect\Model\Money
+      */
+    protected $amount_money;
     /**
-     * $scope Indicates the level at which the discount applies.
-     * See [OrderLineItemDiscountScope](#type-orderlineitemdiscountscope) for possible values.
-     * @var string
-     */
-    private $scope;
+      * $applied_money The amount of discount actually applied to the line item.  Represents the amount of money applied as a line item-scoped discount. When an amount-based discount is scoped to the entire order, the value of `applied_money` is different from `amount_money` because the total amount of the discount is distributed across all line items.
+      * @var \SquareConnect\Model\Money
+      */
+    protected $applied_money;
+    /**
+      * $metadata Application-defined data attached to this discount. Metadata fields are intended to store descriptive references or associations with an entity in another system or store brief information about the object. Square does not process this field; it only stores and returns it in relevant API calls. Do not use metadata to store any sensitive information (personally identifiable information, card details, etc.).  Keys written by applications must be 60 characters or less and must be in the character set `[a-zA-Z0-9_-]`. Entries may also include metadata generated by Square. These keys are prefixed with a namespace, separated from the key with a ':' character.  Values have a max length of 255 characters.  An application may have up to 10 entries per metadata field.  Entries written by applications are private and can only be read or modified by the same application.  See [Metadata](https://developer.squareup.com/docs/build-basics/metadata) for more information.
+      * @var map[string,string]
+      */
+    protected $metadata;
+    /**
+      * $scope Indicates the level at which the discount applies. For `ORDER` scoped discounts, Square generates references in `applied_discounts` on all order line items that do not have them. For `LINE_ITEM` scoped discounts, the discount only applies to line items with a discount reference in their `applied_discounts` field.  This field is immutable. To change the scope of a discount you must delete the discount and re-add it as a new discount. See [OrderLineItemDiscountScope](#type-orderlineitemdiscountscope) for possible values
+      * @var string
+      */
+    protected $scope;
 
     /**
      * Constructor
@@ -128,44 +136,72 @@ class OrderLineItemDiscount implements ArrayAccess
     public function __construct(array $data = null)
     {
         if ($data != null) {
-            if (isset($data["catalog_object_id"])) {
-                $this->catalog_object_id = $data["catalog_object_id"];
+            if (isset($data["uid"])) {
+              $this->uid = $data["uid"];
             } else {
-                $this->catalog_object_id = null;
+              $this->uid = null;
+            }
+            if (isset($data["catalog_object_id"])) {
+              $this->catalog_object_id = $data["catalog_object_id"];
+            } else {
+              $this->catalog_object_id = null;
             }
             if (isset($data["name"])) {
-                $this->name = $data["name"];
+              $this->name = $data["name"];
             } else {
-                $this->name = null;
+              $this->name = null;
             }
             if (isset($data["type"])) {
-                $this->type = $data["type"];
+              $this->type = $data["type"];
             } else {
-                $this->type = null;
+              $this->type = null;
             }
             if (isset($data["percentage"])) {
-                $this->percentage = $data["percentage"];
+              $this->percentage = $data["percentage"];
             } else {
-                $this->percentage = null;
+              $this->percentage = null;
             }
             if (isset($data["amount_money"])) {
-                $this->amount_money = $data["amount_money"];
+              $this->amount_money = $data["amount_money"];
             } else {
-                $this->amount_money = null;
+              $this->amount_money = null;
             }
             if (isset($data["applied_money"])) {
-                $this->applied_money = $data["applied_money"];
+              $this->applied_money = $data["applied_money"];
             } else {
-                $this->applied_money = null;
+              $this->applied_money = null;
+            }
+            if (isset($data["metadata"])) {
+              $this->metadata = $data["metadata"];
+            } else {
+              $this->metadata = null;
             }
             if (isset($data["scope"])) {
-                $this->scope = $data["scope"];
+              $this->scope = $data["scope"];
             } else {
-                $this->scope = null;
+              $this->scope = null;
             }
         }
     }
-
+    /**
+     * Gets uid
+     * @return string
+     */
+    public function getUid()
+    {
+        return $this->uid;
+    }
+  
+    /**
+     * Sets uid
+     * @param string $uid Unique ID that identifies the discount only within this order.
+     * @return $this
+     */
+    public function setUid($uid)
+    {
+        $this->uid = $uid;
+        return $this;
+    }
     /**
      * Gets catalog_object_id
      * @return string
@@ -174,10 +210,10 @@ class OrderLineItemDiscount implements ArrayAccess
     {
         return $this->catalog_object_id;
     }
-
+  
     /**
      * Sets catalog_object_id
-     * @param string $catalog_object_id The catalog object id referencing [CatalogDiscount](#type-catalogdiscount).
+     * @param string $catalog_object_id The catalog object id referencing `CatalogDiscount`.
      * @return $this
      */
     public function setCatalogObjectId($catalog_object_id)
@@ -185,7 +221,6 @@ class OrderLineItemDiscount implements ArrayAccess
         $this->catalog_object_id = $catalog_object_id;
         return $this;
     }
-
     /**
      * Gets name
      * @return string
@@ -194,7 +229,7 @@ class OrderLineItemDiscount implements ArrayAccess
     {
         return $this->name;
     }
-
+  
     /**
      * Sets name
      * @param string $name The discount's name.
@@ -205,7 +240,6 @@ class OrderLineItemDiscount implements ArrayAccess
         $this->name = $name;
         return $this;
     }
-
     /**
      * Gets type
      * @return string
@@ -214,13 +248,10 @@ class OrderLineItemDiscount implements ArrayAccess
     {
         return $this->type;
     }
-
+  
     /**
      * Sets type
-     * @param string $type The type of the discount. If it is created by API, it would be either `FIXED_PERCENTAGE` or
-     * `FIXED_AMOUNT`.  VARIABLE_* is not supported in API because the order is created at the time of sale and either
-     * percentage or amount has to be specified.  See [OrderLineItemDiscountType](#type-orderlineitemdiscounttype)
-     * for possible values.
+     * @param string $type The type of the discount.  Discounts that don't reference a catalog object ID must have a type of `FIXED_PERCENTAGE` or `FIXED_AMOUNT`. See [OrderLineItemDiscountType](#type-orderlineitemdiscounttype) for possible values
      * @return $this
      */
     public function setType($type)
@@ -228,7 +259,6 @@ class OrderLineItemDiscount implements ArrayAccess
         $this->type = $type;
         return $this;
     }
-
     /**
      * Gets percentage
      * @return string
@@ -237,12 +267,10 @@ class OrderLineItemDiscount implements ArrayAccess
     {
         return $this->percentage;
     }
-
+  
     /**
      * Sets percentage
-     * @param string $percentage The percentage of the tax, as a string representation of a decimal number.
-     * A value of `7.25` corresponds to a percentage of 7.25%.  The percentage won't be set for an amount-based
-     * discount.
+     * @param string $percentage The percentage of the discount, as a string representation of a decimal number. A value of `7.25` corresponds to a percentage of 7.25%.  `percentage` is not set for amount-based discounts.
      * @return $this
      */
     public function setPercentage($percentage)
@@ -250,7 +278,6 @@ class OrderLineItemDiscount implements ArrayAccess
         $this->percentage = $percentage;
         return $this;
     }
-
     /**
      * Gets amount_money
      * @return \SquareConnect\Model\Money
@@ -259,13 +286,10 @@ class OrderLineItemDiscount implements ArrayAccess
     {
         return $this->amount_money;
     }
-
+  
     /**
      * Sets amount_money
-     * @param \SquareConnect\Model\Money $amount_money The total monetary amount of the applicable discount.
-     * If it is at order level, it is the value of the order level discount.
-     * If it is at line item level, it is the value of the line item level discount.
-     * The amount_money won't be set for a percentage-based discount.
+     * @param \SquareConnect\Model\Money $amount_money The total declared monetary amount of the discount.  `amount_money` is not set for percentage-based discounts.
      * @return $this
      */
     public function setAmountMoney($amount_money)
@@ -273,7 +297,6 @@ class OrderLineItemDiscount implements ArrayAccess
         $this->amount_money = $amount_money;
         return $this;
     }
-
     /**
      * Gets applied_money
      * @return \SquareConnect\Model\Money
@@ -282,13 +305,10 @@ class OrderLineItemDiscount implements ArrayAccess
     {
         return $this->applied_money;
     }
-
+  
     /**
      * Sets applied_money
-     * @param \SquareConnect\Model\Money $applied_money The amount of discount actually applied to this line item.
-     * Represents the amount of money applied to a line item as a discount When an amount-based discount is at
-     * order-level, this value is different from `amount_money` because the discount is distributed across the line
-     * items.
+     * @param \SquareConnect\Model\Money $applied_money The amount of discount actually applied to the line item.  Represents the amount of money applied as a line item-scoped discount. When an amount-based discount is scoped to the entire order, the value of `applied_money` is different from `amount_money` because the total amount of the discount is distributed across all line items.
      * @return $this
      */
     public function setAppliedMoney($applied_money)
@@ -296,7 +316,25 @@ class OrderLineItemDiscount implements ArrayAccess
         $this->applied_money = $applied_money;
         return $this;
     }
-
+    /**
+     * Gets metadata
+     * @return map[string,string]
+     */
+    public function getMetadata()
+    {
+        return $this->metadata;
+    }
+  
+    /**
+     * Sets metadata
+     * @param map[string,string] $metadata Application-defined data attached to this discount. Metadata fields are intended to store descriptive references or associations with an entity in another system or store brief information about the object. Square does not process this field; it only stores and returns it in relevant API calls. Do not use metadata to store any sensitive information (personally identifiable information, card details, etc.).  Keys written by applications must be 60 characters or less and must be in the character set `[a-zA-Z0-9_-]`. Entries may also include metadata generated by Square. These keys are prefixed with a namespace, separated from the key with a ':' character.  Values have a max length of 255 characters.  An application may have up to 10 entries per metadata field.  Entries written by applications are private and can only be read or modified by the same application.  See [Metadata](https://developer.squareup.com/docs/build-basics/metadata) for more information.
+     * @return $this
+     */
+    public function setMetadata($metadata)
+    {
+        $this->metadata = $metadata;
+        return $this;
+    }
     /**
      * Gets scope
      * @return string
@@ -305,11 +343,10 @@ class OrderLineItemDiscount implements ArrayAccess
     {
         return $this->scope;
     }
-
+  
     /**
      * Sets scope
-     * @param string $scope Indicates the level at which the discount applies.
-     * See [OrderLineItemDiscountScope](#type-orderlineitemdiscountscope) for possible values.
+     * @param string $scope Indicates the level at which the discount applies. For `ORDER` scoped discounts, Square generates references in `applied_discounts` on all order line items that do not have them. For `LINE_ITEM` scoped discounts, the discount only applies to line items with a discount reference in their `applied_discounts` field.  This field is immutable. To change the scope of a discount you must delete the discount and re-add it as a new discount. See [OrderLineItemDiscountScope](#type-orderlineitemdiscountscope) for possible values
      * @return $this
      */
     public function setScope($scope)
@@ -317,48 +354,47 @@ class OrderLineItemDiscount implements ArrayAccess
         $this->scope = $scope;
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string

@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * V1UpdateOrderRequest Class Doc Comment
  *
@@ -21,79 +20,78 @@ use \ArrayAccess;
 class V1UpdateOrderRequest implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
         'action' => 'string',
         'shipped_tracking_number' => 'string',
         'completed_note' => 'string',
         'refunded_note' => 'string',
         'canceled_note' => 'string'
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'action' => 'action',
         'shipped_tracking_number' => 'shipped_tracking_number',
         'completed_note' => 'completed_note',
         'refunded_note' => 'refunded_note',
         'canceled_note' => 'canceled_note'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'action' => 'setAction',
         'shipped_tracking_number' => 'setShippedTrackingNumber',
         'completed_note' => 'setCompletedNote',
         'refunded_note' => 'setRefundedNote',
         'canceled_note' => 'setCanceledNote'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'action' => 'getAction',
         'shipped_tracking_number' => 'getShippedTrackingNumber',
         'completed_note' => 'getCompletedNote',
         'refunded_note' => 'getRefundedNote',
         'canceled_note' => 'getCanceledNote'
-    ];
-
+    );
+  
     /**
-     * $action The action to perform on the order (COMPLETE, CANCEL, or REFUND).
-     * @var string
-     */
-    private $action;
+      * $action The action to perform on the order (COMPLETE, CANCEL, or REFUND). See [V1UpdateOrderRequestAction](#type-v1updateorderrequestaction) for possible values
+      * @var string
+      */
+    protected $action;
     /**
-     * $shipped_tracking_number The tracking number of the shipment associated with the order. Only valid if action is
-     * COMPLETE.
-     * @var string
-     */
-    private $shipped_tracking_number;
+      * $shipped_tracking_number The tracking number of the shipment associated with the order. Only valid if action is COMPLETE.
+      * @var string
+      */
+    protected $shipped_tracking_number;
     /**
-     * $completed_note A merchant-specified note about the completion of the order. Only valid if action is COMPLETE.
-     * @var string
-     */
-    private $completed_note;
+      * $completed_note A merchant-specified note about the completion of the order. Only valid if action is COMPLETE.
+      * @var string
+      */
+    protected $completed_note;
     /**
-     * $refunded_note A merchant-specified note about the refunding of the order. Only valid if action is REFUND.
-     * @var string
-     */
-    private $refunded_note;
+      * $refunded_note A merchant-specified note about the refunding of the order. Only valid if action is REFUND.
+      * @var string
+      */
+    protected $refunded_note;
     /**
-     * $canceled_note A merchant-specified note about the canceling of the order. Only valid if action is CANCEL.
-     * @var string
-     */
-    private $canceled_note;
+      * $canceled_note A merchant-specified note about the canceling of the order. Only valid if action is CANCEL.
+      * @var string
+      */
+    protected $canceled_note;
 
     /**
      * Constructor
@@ -103,33 +101,32 @@ class V1UpdateOrderRequest implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["action"])) {
-                $this->action = $data["action"];
+              $this->action = $data["action"];
             } else {
-                $this->action = null;
+              $this->action = null;
             }
             if (isset($data["shipped_tracking_number"])) {
-                $this->shipped_tracking_number = $data["shipped_tracking_number"];
+              $this->shipped_tracking_number = $data["shipped_tracking_number"];
             } else {
-                $this->shipped_tracking_number = null;
+              $this->shipped_tracking_number = null;
             }
             if (isset($data["completed_note"])) {
-                $this->completed_note = $data["completed_note"];
+              $this->completed_note = $data["completed_note"];
             } else {
-                $this->completed_note = null;
+              $this->completed_note = null;
             }
             if (isset($data["refunded_note"])) {
-                $this->refunded_note = $data["refunded_note"];
+              $this->refunded_note = $data["refunded_note"];
             } else {
-                $this->refunded_note = null;
+              $this->refunded_note = null;
             }
             if (isset($data["canceled_note"])) {
-                $this->canceled_note = $data["canceled_note"];
+              $this->canceled_note = $data["canceled_note"];
             } else {
-                $this->canceled_note = null;
+              $this->canceled_note = null;
             }
         }
     }
-
     /**
      * Gets action
      * @return string
@@ -138,10 +135,10 @@ class V1UpdateOrderRequest implements ArrayAccess
     {
         return $this->action;
     }
-
+  
     /**
      * Sets action
-     * @param string $action The action to perform on the order (COMPLETE, CANCEL, or REFUND).
+     * @param string $action The action to perform on the order (COMPLETE, CANCEL, or REFUND). See [V1UpdateOrderRequestAction](#type-v1updateorderrequestaction) for possible values
      * @return $this
      */
     public function setAction($action)
@@ -149,7 +146,6 @@ class V1UpdateOrderRequest implements ArrayAccess
         $this->action = $action;
         return $this;
     }
-
     /**
      * Gets shipped_tracking_number
      * @return string
@@ -158,11 +154,10 @@ class V1UpdateOrderRequest implements ArrayAccess
     {
         return $this->shipped_tracking_number;
     }
-
+  
     /**
      * Sets shipped_tracking_number
-     * @param string $shipped_tracking_number The tracking number of the shipment associated with the order.
-     * Only valid if action is COMPLETE.
+     * @param string $shipped_tracking_number The tracking number of the shipment associated with the order. Only valid if action is COMPLETE.
      * @return $this
      */
     public function setShippedTrackingNumber($shipped_tracking_number)
@@ -170,7 +165,6 @@ class V1UpdateOrderRequest implements ArrayAccess
         $this->shipped_tracking_number = $shipped_tracking_number;
         return $this;
     }
-
     /**
      * Gets completed_note
      * @return string
@@ -179,11 +173,10 @@ class V1UpdateOrderRequest implements ArrayAccess
     {
         return $this->completed_note;
     }
-
+  
     /**
      * Sets completed_note
-     * @param string $completed_note A merchant-specified note about the completion of the order.
-     * Only valid if action is COMPLETE.
+     * @param string $completed_note A merchant-specified note about the completion of the order. Only valid if action is COMPLETE.
      * @return $this
      */
     public function setCompletedNote($completed_note)
@@ -191,7 +184,6 @@ class V1UpdateOrderRequest implements ArrayAccess
         $this->completed_note = $completed_note;
         return $this;
     }
-
     /**
      * Gets refunded_note
      * @return string
@@ -200,11 +192,10 @@ class V1UpdateOrderRequest implements ArrayAccess
     {
         return $this->refunded_note;
     }
-
+  
     /**
      * Sets refunded_note
-     * @param string $refunded_note A merchant-specified note about the refunding of the order.
-     * Only valid if action is REFUND.
+     * @param string $refunded_note A merchant-specified note about the refunding of the order. Only valid if action is REFUND.
      * @return $this
      */
     public function setRefundedNote($refunded_note)
@@ -212,7 +203,6 @@ class V1UpdateOrderRequest implements ArrayAccess
         $this->refunded_note = $refunded_note;
         return $this;
     }
-
     /**
      * Gets canceled_note
      * @return string
@@ -221,11 +211,10 @@ class V1UpdateOrderRequest implements ArrayAccess
     {
         return $this->canceled_note;
     }
-
+  
     /**
      * Sets canceled_note
-     * @param string $canceled_note A merchant-specified note about the canceling of the order.
-     * Only valid if action is CANCEL.
+     * @param string $canceled_note A merchant-specified note about the canceling of the order. Only valid if action is CANCEL.
      * @return $this
      */
     public function setCanceledNote($canceled_note)
@@ -233,48 +222,47 @@ class V1UpdateOrderRequest implements ArrayAccess
         $this->canceled_note = $canceled_note;
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string
