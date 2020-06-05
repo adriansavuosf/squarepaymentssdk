@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * V1Order Class Doc Comment
  *
@@ -21,22 +20,22 @@ use \ArrayAccess;
 class V1Order implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
         'errors' => '\SquareConnect\Model\Error[]',
         'id' => 'string',
         'buyer_email' => 'string',
         'recipient_name' => 'string',
         'recipient_phone_number' => 'string',
         'state' => 'string',
-        'shipping_address' => \SquareConnect\Model\Address::class,
-        'subtotal_money' => \SquareConnect\Model\V1Money::class,
-        'total_shipping_money' => \SquareConnect\Model\V1Money::class,
-        'total_tax_money' => \SquareConnect\Model\V1Money::class,
-        'total_price_money' => \SquareConnect\Model\V1Money::class,
-        'total_discount_money' => \SquareConnect\Model\V1Money::class,
+        'shipping_address' => '\SquareConnect\Model\Address',
+        'subtotal_money' => '\SquareConnect\Model\V1Money',
+        'total_shipping_money' => '\SquareConnect\Model\V1Money',
+        'total_tax_money' => '\SquareConnect\Model\V1Money',
+        'total_price_money' => '\SquareConnect\Model\V1Money',
+        'total_discount_money' => '\SquareConnect\Model\V1Money',
         'created_at' => 'string',
         'updated_at' => 'string',
         'expires_at' => 'string',
@@ -45,18 +44,18 @@ class V1Order implements ArrayAccess
         'completed_note' => 'string',
         'refunded_note' => 'string',
         'canceled_note' => 'string',
-        'tender' => \SquareConnect\Model\V1Tender::class,
+        'tender' => '\SquareConnect\Model\V1Tender',
         'order_history' => '\SquareConnect\Model\V1OrderHistoryEntry[]',
         'promo_code' => 'string',
         'btc_receive_address' => 'string',
         'btc_price_satoshi' => 'float'
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'errors' => 'errors',
         'id' => 'id',
         'buyer_email' => 'buyer_email',
@@ -82,13 +81,13 @@ class V1Order implements ArrayAccess
         'promo_code' => 'promo_code',
         'btc_receive_address' => 'btc_receive_address',
         'btc_price_satoshi' => 'btc_price_satoshi'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'errors' => 'setErrors',
         'id' => 'setId',
         'buyer_email' => 'setBuyerEmail',
@@ -114,13 +113,13 @@ class V1Order implements ArrayAccess
         'promo_code' => 'setPromoCode',
         'btc_receive_address' => 'setBtcReceiveAddress',
         'btc_price_satoshi' => 'setBtcPriceSatoshi'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'errors' => 'getErrors',
         'id' => 'getId',
         'buyer_email' => 'getBuyerEmail',
@@ -146,134 +145,133 @@ class V1Order implements ArrayAccess
         'promo_code' => 'getPromoCode',
         'btc_receive_address' => 'getBtcReceiveAddress',
         'btc_price_satoshi' => 'getBtcPriceSatoshi'
-    ];
-
+    );
+  
     /**
-     * $errors Any errors that occurred during the request.
-     * @var \SquareConnect\Model\Error[]
-     */
-    private $errors;
+      * $errors Any errors that occurred during the request.
+      * @var \SquareConnect\Model\Error[]
+      */
+    protected $errors;
     /**
-     * $id The order's unique identifier.
-     * @var string
-     */
-    private $id;
+      * $id The order's unique identifier.
+      * @var string
+      */
+    protected $id;
     /**
-     * $buyer_email The email address of the order's buyer.
-     * @var string
-     */
-    private $buyer_email;
+      * $buyer_email The email address of the order's buyer.
+      * @var string
+      */
+    protected $buyer_email;
     /**
-     * $recipient_name The name of the order's buyer.
-     * @var string
-     */
-    private $recipient_name;
+      * $recipient_name The name of the order's buyer.
+      * @var string
+      */
+    protected $recipient_name;
     /**
-     * $recipient_phone_number The phone number to use for the order's delivery.
-     * @var string
-     */
-    private $recipient_phone_number;
+      * $recipient_phone_number The phone number to use for the order's delivery.
+      * @var string
+      */
+    protected $recipient_phone_number;
     /**
-     * $state Whether the tax is an ADDITIVE tax or an INCLUSIVE tax.
-     * @var string
-     */
-    private $state;
+      * $state Whether the tax is an ADDITIVE tax or an INCLUSIVE tax. See [V1OrderState](#type-v1orderstate) for possible values
+      * @var string
+      */
+    protected $state;
     /**
-     * $shipping_address The address to ship the order to.
-     * @var \SquareConnect\Model\Address
-     */
-    private $shipping_address;
+      * $shipping_address The address to ship the order to.
+      * @var \SquareConnect\Model\Address
+      */
+    protected $shipping_address;
     /**
-     * $subtotal_money The amount of all items purchased in the order, before taxes and shipping.
-     * @var \SquareConnect\Model\V1Money
-     */
-    private $subtotal_money;
+      * $subtotal_money The amount of all items purchased in the order, before taxes and shipping.
+      * @var \SquareConnect\Model\V1Money
+      */
+    protected $subtotal_money;
     /**
-     * $total_shipping_money The shipping cost for the order.
-     * @var \SquareConnect\Model\V1Money
-     */
-    private $total_shipping_money;
+      * $total_shipping_money The shipping cost for the order.
+      * @var \SquareConnect\Model\V1Money
+      */
+    protected $total_shipping_money;
     /**
-     * $total_tax_money The total of all taxes applied to the order.
-     * @var \SquareConnect\Model\V1Money
-     */
-    private $total_tax_money;
+      * $total_tax_money The total of all taxes applied to the order.
+      * @var \SquareConnect\Model\V1Money
+      */
+    protected $total_tax_money;
     /**
-     * $total_price_money The total cost of the order.
-     * @var \SquareConnect\Model\V1Money
-     */
-    private $total_price_money;
+      * $total_price_money The total cost of the order.
+      * @var \SquareConnect\Model\V1Money
+      */
+    protected $total_price_money;
     /**
-     * $total_discount_money The total of all discounts applied to the order.
-     * @var \SquareConnect\Model\V1Money
-     */
-    private $total_discount_money;
+      * $total_discount_money The total of all discounts applied to the order.
+      * @var \SquareConnect\Model\V1Money
+      */
+    protected $total_discount_money;
     /**
-     * $created_at The time when the order was created, in ISO 8601 format.
-     * @var string
-     */
-    private $created_at;
+      * $created_at The time when the order was created, in ISO 8601 format.
+      * @var string
+      */
+    protected $created_at;
     /**
-     * $updated_at The time when the order was last modified, in ISO 8601 format.
-     * @var string
-     */
-    private $updated_at;
+      * $updated_at The time when the order was last modified, in ISO 8601 format.
+      * @var string
+      */
+    protected $updated_at;
     /**
-     * $expires_at The time when the order expires if no action is taken, in ISO 8601 format.
-     * @var string
-     */
-    private $expires_at;
+      * $expires_at The time when the order expires if no action is taken, in ISO 8601 format.
+      * @var string
+      */
+    protected $expires_at;
     /**
-     * $payment_id The unique identifier of the payment associated with the order.
-     * @var string
-     */
-    private $payment_id;
+      * $payment_id The unique identifier of the payment associated with the order.
+      * @var string
+      */
+    protected $payment_id;
     /**
-     * $buyer_note A note provided by the buyer when the order was created, if any.
-     * @var string
-     */
-    private $buyer_note;
+      * $buyer_note A note provided by the buyer when the order was created, if any.
+      * @var string
+      */
+    protected $buyer_note;
     /**
-     * $completed_note A note provided by the merchant when the order's state was set to COMPLETED, if any
-     * @var string
-     */
-    private $completed_note;
+      * $completed_note A note provided by the merchant when the order's state was set to COMPLETED, if any
+      * @var string
+      */
+    protected $completed_note;
     /**
-     * $refunded_note A note provided by the merchant when the order's state was set to REFUNDED, if any.
-     * @var string
-     */
-    private $refunded_note;
+      * $refunded_note A note provided by the merchant when the order's state was set to REFUNDED, if any.
+      * @var string
+      */
+    protected $refunded_note;
     /**
-     * $canceled_note A note provided by the merchant when the order's state was set to CANCELED, if any.
-     * @var string
-     */
-    private $canceled_note;
+      * $canceled_note A note provided by the merchant when the order's state was set to CANCELED, if any.
+      * @var string
+      */
+    protected $canceled_note;
     /**
-     * $tender The tender used to pay for the order.
-     * @var \SquareConnect\Model\V1Tender
-     */
-    private $tender;
+      * $tender The tender used to pay for the order.
+      * @var \SquareConnect\Model\V1Tender
+      */
+    protected $tender;
     /**
-     * $order_history The history of actions associated with the order.
-     * @var \SquareConnect\Model\V1OrderHistoryEntry[]
-     */
-    private $order_history;
+      * $order_history The history of actions associated with the order.
+      * @var \SquareConnect\Model\V1OrderHistoryEntry[]
+      */
+    protected $order_history;
     /**
-     * $promo_code The promo code provided by the buyer, if any.
-     * @var string
-     */
-    private $promo_code;
+      * $promo_code The promo code provided by the buyer, if any.
+      * @var string
+      */
+    protected $promo_code;
     /**
-     * $btc_receive_address For Bitcoin transactions, the address that the buyer sent Bitcoin to.
-     * @var string
-     */
-    private $btc_receive_address;
+      * $btc_receive_address For Bitcoin transactions, the address that the buyer sent Bitcoin to.
+      * @var string
+      */
+    protected $btc_receive_address;
     /**
-     * $btc_price_satoshi For Bitcoin transactions, the price of the buyer's order in satoshi (100 million satoshi
-     * equals 1 BTC).
-     * @var float
-     */
-    private $btc_price_satoshi;
+      * $btc_price_satoshi For Bitcoin transactions, the price of the buyer's order in satoshi (100 million satoshi equals 1 BTC).
+      * @var float
+      */
+    protected $btc_price_satoshi;
 
     /**
      * Constructor
@@ -283,133 +281,132 @@ class V1Order implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["errors"])) {
-                $this->errors = $data["errors"];
+              $this->errors = $data["errors"];
             } else {
-                $this->errors = null;
+              $this->errors = null;
             }
             if (isset($data["id"])) {
-                $this->id = $data["id"];
+              $this->id = $data["id"];
             } else {
-                $this->id = null;
+              $this->id = null;
             }
             if (isset($data["buyer_email"])) {
-                $this->buyer_email = $data["buyer_email"];
+              $this->buyer_email = $data["buyer_email"];
             } else {
-                $this->buyer_email = null;
+              $this->buyer_email = null;
             }
             if (isset($data["recipient_name"])) {
-                $this->recipient_name = $data["recipient_name"];
+              $this->recipient_name = $data["recipient_name"];
             } else {
-                $this->recipient_name = null;
+              $this->recipient_name = null;
             }
             if (isset($data["recipient_phone_number"])) {
-                $this->recipient_phone_number = $data["recipient_phone_number"];
+              $this->recipient_phone_number = $data["recipient_phone_number"];
             } else {
-                $this->recipient_phone_number = null;
+              $this->recipient_phone_number = null;
             }
             if (isset($data["state"])) {
-                $this->state = $data["state"];
+              $this->state = $data["state"];
             } else {
-                $this->state = null;
+              $this->state = null;
             }
             if (isset($data["shipping_address"])) {
-                $this->shipping_address = $data["shipping_address"];
+              $this->shipping_address = $data["shipping_address"];
             } else {
-                $this->shipping_address = null;
+              $this->shipping_address = null;
             }
             if (isset($data["subtotal_money"])) {
-                $this->subtotal_money = $data["subtotal_money"];
+              $this->subtotal_money = $data["subtotal_money"];
             } else {
-                $this->subtotal_money = null;
+              $this->subtotal_money = null;
             }
             if (isset($data["total_shipping_money"])) {
-                $this->total_shipping_money = $data["total_shipping_money"];
+              $this->total_shipping_money = $data["total_shipping_money"];
             } else {
-                $this->total_shipping_money = null;
+              $this->total_shipping_money = null;
             }
             if (isset($data["total_tax_money"])) {
-                $this->total_tax_money = $data["total_tax_money"];
+              $this->total_tax_money = $data["total_tax_money"];
             } else {
-                $this->total_tax_money = null;
+              $this->total_tax_money = null;
             }
             if (isset($data["total_price_money"])) {
-                $this->total_price_money = $data["total_price_money"];
+              $this->total_price_money = $data["total_price_money"];
             } else {
-                $this->total_price_money = null;
+              $this->total_price_money = null;
             }
             if (isset($data["total_discount_money"])) {
-                $this->total_discount_money = $data["total_discount_money"];
+              $this->total_discount_money = $data["total_discount_money"];
             } else {
-                $this->total_discount_money = null;
+              $this->total_discount_money = null;
             }
             if (isset($data["created_at"])) {
-                $this->created_at = $data["created_at"];
+              $this->created_at = $data["created_at"];
             } else {
-                $this->created_at = null;
+              $this->created_at = null;
             }
             if (isset($data["updated_at"])) {
-                $this->updated_at = $data["updated_at"];
+              $this->updated_at = $data["updated_at"];
             } else {
-                $this->updated_at = null;
+              $this->updated_at = null;
             }
             if (isset($data["expires_at"])) {
-                $this->expires_at = $data["expires_at"];
+              $this->expires_at = $data["expires_at"];
             } else {
-                $this->expires_at = null;
+              $this->expires_at = null;
             }
             if (isset($data["payment_id"])) {
-                $this->payment_id = $data["payment_id"];
+              $this->payment_id = $data["payment_id"];
             } else {
-                $this->payment_id = null;
+              $this->payment_id = null;
             }
             if (isset($data["buyer_note"])) {
-                $this->buyer_note = $data["buyer_note"];
+              $this->buyer_note = $data["buyer_note"];
             } else {
-                $this->buyer_note = null;
+              $this->buyer_note = null;
             }
             if (isset($data["completed_note"])) {
-                $this->completed_note = $data["completed_note"];
+              $this->completed_note = $data["completed_note"];
             } else {
-                $this->completed_note = null;
+              $this->completed_note = null;
             }
             if (isset($data["refunded_note"])) {
-                $this->refunded_note = $data["refunded_note"];
+              $this->refunded_note = $data["refunded_note"];
             } else {
-                $this->refunded_note = null;
+              $this->refunded_note = null;
             }
             if (isset($data["canceled_note"])) {
-                $this->canceled_note = $data["canceled_note"];
+              $this->canceled_note = $data["canceled_note"];
             } else {
-                $this->canceled_note = null;
+              $this->canceled_note = null;
             }
             if (isset($data["tender"])) {
-                $this->tender = $data["tender"];
+              $this->tender = $data["tender"];
             } else {
-                $this->tender = null;
+              $this->tender = null;
             }
             if (isset($data["order_history"])) {
-                $this->order_history = $data["order_history"];
+              $this->order_history = $data["order_history"];
             } else {
-                $this->order_history = null;
+              $this->order_history = null;
             }
             if (isset($data["promo_code"])) {
-                $this->promo_code = $data["promo_code"];
+              $this->promo_code = $data["promo_code"];
             } else {
-                $this->promo_code = null;
+              $this->promo_code = null;
             }
             if (isset($data["btc_receive_address"])) {
-                $this->btc_receive_address = $data["btc_receive_address"];
+              $this->btc_receive_address = $data["btc_receive_address"];
             } else {
-                $this->btc_receive_address = null;
+              $this->btc_receive_address = null;
             }
             if (isset($data["btc_price_satoshi"])) {
-                $this->btc_price_satoshi = $data["btc_price_satoshi"];
+              $this->btc_price_satoshi = $data["btc_price_satoshi"];
             } else {
-                $this->btc_price_satoshi = null;
+              $this->btc_price_satoshi = null;
             }
         }
     }
-
     /**
      * Gets errors
      * @return \SquareConnect\Model\Error[]
@@ -418,7 +415,7 @@ class V1Order implements ArrayAccess
     {
         return $this->errors;
     }
-
+  
     /**
      * Sets errors
      * @param \SquareConnect\Model\Error[] $errors Any errors that occurred during the request.
@@ -429,7 +426,6 @@ class V1Order implements ArrayAccess
         $this->errors = $errors;
         return $this;
     }
-
     /**
      * Gets id
      * @return string
@@ -438,7 +434,7 @@ class V1Order implements ArrayAccess
     {
         return $this->id;
     }
-
+  
     /**
      * Sets id
      * @param string $id The order's unique identifier.
@@ -449,7 +445,6 @@ class V1Order implements ArrayAccess
         $this->id = $id;
         return $this;
     }
-
     /**
      * Gets buyer_email
      * @return string
@@ -458,7 +453,7 @@ class V1Order implements ArrayAccess
     {
         return $this->buyer_email;
     }
-
+  
     /**
      * Sets buyer_email
      * @param string $buyer_email The email address of the order's buyer.
@@ -469,7 +464,6 @@ class V1Order implements ArrayAccess
         $this->buyer_email = $buyer_email;
         return $this;
     }
-
     /**
      * Gets recipient_name
      * @return string
@@ -478,7 +472,7 @@ class V1Order implements ArrayAccess
     {
         return $this->recipient_name;
     }
-
+  
     /**
      * Sets recipient_name
      * @param string $recipient_name The name of the order's buyer.
@@ -489,7 +483,6 @@ class V1Order implements ArrayAccess
         $this->recipient_name = $recipient_name;
         return $this;
     }
-
     /**
      * Gets recipient_phone_number
      * @return string
@@ -498,7 +491,7 @@ class V1Order implements ArrayAccess
     {
         return $this->recipient_phone_number;
     }
-
+  
     /**
      * Sets recipient_phone_number
      * @param string $recipient_phone_number The phone number to use for the order's delivery.
@@ -509,7 +502,6 @@ class V1Order implements ArrayAccess
         $this->recipient_phone_number = $recipient_phone_number;
         return $this;
     }
-
     /**
      * Gets state
      * @return string
@@ -518,10 +510,10 @@ class V1Order implements ArrayAccess
     {
         return $this->state;
     }
-
+  
     /**
      * Sets state
-     * @param string $state Whether the tax is an ADDITIVE tax or an INCLUSIVE tax.
+     * @param string $state Whether the tax is an ADDITIVE tax or an INCLUSIVE tax. See [V1OrderState](#type-v1orderstate) for possible values
      * @return $this
      */
     public function setState($state)
@@ -529,7 +521,6 @@ class V1Order implements ArrayAccess
         $this->state = $state;
         return $this;
     }
-
     /**
      * Gets shipping_address
      * @return \SquareConnect\Model\Address
@@ -538,7 +529,7 @@ class V1Order implements ArrayAccess
     {
         return $this->shipping_address;
     }
-
+  
     /**
      * Sets shipping_address
      * @param \SquareConnect\Model\Address $shipping_address The address to ship the order to.
@@ -549,7 +540,6 @@ class V1Order implements ArrayAccess
         $this->shipping_address = $shipping_address;
         return $this;
     }
-
     /**
      * Gets subtotal_money
      * @return \SquareConnect\Model\V1Money
@@ -558,11 +548,10 @@ class V1Order implements ArrayAccess
     {
         return $this->subtotal_money;
     }
-
+  
     /**
      * Sets subtotal_money
-     * @param \SquareConnect\Model\V1Money $subtotal_money The amount of all items purchased in the order, before taxes
-     * and shipping.
+     * @param \SquareConnect\Model\V1Money $subtotal_money The amount of all items purchased in the order, before taxes and shipping.
      * @return $this
      */
     public function setSubtotalMoney($subtotal_money)
@@ -570,7 +559,6 @@ class V1Order implements ArrayAccess
         $this->subtotal_money = $subtotal_money;
         return $this;
     }
-
     /**
      * Gets total_shipping_money
      * @return \SquareConnect\Model\V1Money
@@ -579,7 +567,7 @@ class V1Order implements ArrayAccess
     {
         return $this->total_shipping_money;
     }
-
+  
     /**
      * Sets total_shipping_money
      * @param \SquareConnect\Model\V1Money $total_shipping_money The shipping cost for the order.
@@ -590,7 +578,6 @@ class V1Order implements ArrayAccess
         $this->total_shipping_money = $total_shipping_money;
         return $this;
     }
-
     /**
      * Gets total_tax_money
      * @return \SquareConnect\Model\V1Money
@@ -599,7 +586,7 @@ class V1Order implements ArrayAccess
     {
         return $this->total_tax_money;
     }
-
+  
     /**
      * Sets total_tax_money
      * @param \SquareConnect\Model\V1Money $total_tax_money The total of all taxes applied to the order.
@@ -610,7 +597,6 @@ class V1Order implements ArrayAccess
         $this->total_tax_money = $total_tax_money;
         return $this;
     }
-
     /**
      * Gets total_price_money
      * @return \SquareConnect\Model\V1Money
@@ -619,7 +605,7 @@ class V1Order implements ArrayAccess
     {
         return $this->total_price_money;
     }
-
+  
     /**
      * Sets total_price_money
      * @param \SquareConnect\Model\V1Money $total_price_money The total cost of the order.
@@ -630,7 +616,6 @@ class V1Order implements ArrayAccess
         $this->total_price_money = $total_price_money;
         return $this;
     }
-
     /**
      * Gets total_discount_money
      * @return \SquareConnect\Model\V1Money
@@ -639,7 +624,7 @@ class V1Order implements ArrayAccess
     {
         return $this->total_discount_money;
     }
-
+  
     /**
      * Sets total_discount_money
      * @param \SquareConnect\Model\V1Money $total_discount_money The total of all discounts applied to the order.
@@ -650,7 +635,6 @@ class V1Order implements ArrayAccess
         $this->total_discount_money = $total_discount_money;
         return $this;
     }
-
     /**
      * Gets created_at
      * @return string
@@ -659,7 +643,7 @@ class V1Order implements ArrayAccess
     {
         return $this->created_at;
     }
-
+  
     /**
      * Sets created_at
      * @param string $created_at The time when the order was created, in ISO 8601 format.
@@ -670,7 +654,6 @@ class V1Order implements ArrayAccess
         $this->created_at = $created_at;
         return $this;
     }
-
     /**
      * Gets updated_at
      * @return string
@@ -679,7 +662,7 @@ class V1Order implements ArrayAccess
     {
         return $this->updated_at;
     }
-
+  
     /**
      * Sets updated_at
      * @param string $updated_at The time when the order was last modified, in ISO 8601 format.
@@ -690,7 +673,6 @@ class V1Order implements ArrayAccess
         $this->updated_at = $updated_at;
         return $this;
     }
-
     /**
      * Gets expires_at
      * @return string
@@ -699,7 +681,7 @@ class V1Order implements ArrayAccess
     {
         return $this->expires_at;
     }
-
+  
     /**
      * Sets expires_at
      * @param string $expires_at The time when the order expires if no action is taken, in ISO 8601 format.
@@ -710,7 +692,6 @@ class V1Order implements ArrayAccess
         $this->expires_at = $expires_at;
         return $this;
     }
-
     /**
      * Gets payment_id
      * @return string
@@ -719,7 +700,7 @@ class V1Order implements ArrayAccess
     {
         return $this->payment_id;
     }
-
+  
     /**
      * Sets payment_id
      * @param string $payment_id The unique identifier of the payment associated with the order.
@@ -730,7 +711,6 @@ class V1Order implements ArrayAccess
         $this->payment_id = $payment_id;
         return $this;
     }
-
     /**
      * Gets buyer_note
      * @return string
@@ -739,7 +719,7 @@ class V1Order implements ArrayAccess
     {
         return $this->buyer_note;
     }
-
+  
     /**
      * Sets buyer_note
      * @param string $buyer_note A note provided by the buyer when the order was created, if any.
@@ -750,7 +730,6 @@ class V1Order implements ArrayAccess
         $this->buyer_note = $buyer_note;
         return $this;
     }
-
     /**
      * Gets completed_note
      * @return string
@@ -759,7 +738,7 @@ class V1Order implements ArrayAccess
     {
         return $this->completed_note;
     }
-
+  
     /**
      * Sets completed_note
      * @param string $completed_note A note provided by the merchant when the order's state was set to COMPLETED, if any
@@ -770,7 +749,6 @@ class V1Order implements ArrayAccess
         $this->completed_note = $completed_note;
         return $this;
     }
-
     /**
      * Gets refunded_note
      * @return string
@@ -779,7 +757,7 @@ class V1Order implements ArrayAccess
     {
         return $this->refunded_note;
     }
-
+  
     /**
      * Sets refunded_note
      * @param string $refunded_note A note provided by the merchant when the order's state was set to REFUNDED, if any.
@@ -790,7 +768,6 @@ class V1Order implements ArrayAccess
         $this->refunded_note = $refunded_note;
         return $this;
     }
-
     /**
      * Gets canceled_note
      * @return string
@@ -799,7 +776,7 @@ class V1Order implements ArrayAccess
     {
         return $this->canceled_note;
     }
-
+  
     /**
      * Sets canceled_note
      * @param string $canceled_note A note provided by the merchant when the order's state was set to CANCELED, if any.
@@ -810,7 +787,6 @@ class V1Order implements ArrayAccess
         $this->canceled_note = $canceled_note;
         return $this;
     }
-
     /**
      * Gets tender
      * @return \SquareConnect\Model\V1Tender
@@ -819,7 +795,7 @@ class V1Order implements ArrayAccess
     {
         return $this->tender;
     }
-
+  
     /**
      * Sets tender
      * @param \SquareConnect\Model\V1Tender $tender The tender used to pay for the order.
@@ -830,7 +806,6 @@ class V1Order implements ArrayAccess
         $this->tender = $tender;
         return $this;
     }
-
     /**
      * Gets order_history
      * @return \SquareConnect\Model\V1OrderHistoryEntry[]
@@ -839,11 +814,10 @@ class V1Order implements ArrayAccess
     {
         return $this->order_history;
     }
-
+  
     /**
      * Sets order_history
-     * @param \SquareConnect\Model\V1OrderHistoryEntry[] $order_history The history of actions associated with
-     * the order.
+     * @param \SquareConnect\Model\V1OrderHistoryEntry[] $order_history The history of actions associated with the order.
      * @return $this
      */
     public function setOrderHistory($order_history)
@@ -851,7 +825,6 @@ class V1Order implements ArrayAccess
         $this->order_history = $order_history;
         return $this;
     }
-
     /**
      * Gets promo_code
      * @return string
@@ -860,7 +833,7 @@ class V1Order implements ArrayAccess
     {
         return $this->promo_code;
     }
-
+  
     /**
      * Sets promo_code
      * @param string $promo_code The promo code provided by the buyer, if any.
@@ -871,7 +844,6 @@ class V1Order implements ArrayAccess
         $this->promo_code = $promo_code;
         return $this;
     }
-
     /**
      * Gets btc_receive_address
      * @return string
@@ -880,7 +852,7 @@ class V1Order implements ArrayAccess
     {
         return $this->btc_receive_address;
     }
-
+  
     /**
      * Sets btc_receive_address
      * @param string $btc_receive_address For Bitcoin transactions, the address that the buyer sent Bitcoin to.
@@ -891,7 +863,6 @@ class V1Order implements ArrayAccess
         $this->btc_receive_address = $btc_receive_address;
         return $this;
     }
-
     /**
      * Gets btc_price_satoshi
      * @return float
@@ -900,11 +871,10 @@ class V1Order implements ArrayAccess
     {
         return $this->btc_price_satoshi;
     }
-
+  
     /**
      * Sets btc_price_satoshi
-     * @param float $btc_price_satoshi For Bitcoin transactions, the price of the buyer's order in satoshi
-     * (100 million satoshi equals 1 BTC).
+     * @param float $btc_price_satoshi For Bitcoin transactions, the price of the buyer's order in satoshi (100 million satoshi equals 1 BTC).
      * @return $this
      */
     public function setBtcPriceSatoshi($btc_price_satoshi)
@@ -912,48 +882,47 @@ class V1Order implements ArrayAccess
         $this->btc_price_satoshi = $btc_price_satoshi;
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string
