@@ -4,7 +4,7 @@
 
 lib/ApiClient.php
 lib/Api/CustomersApi.php
-lib/Api/OrdersApi.php *Changed API version number to 2020-02-12 for backward compatibility 
+lib/Api/OrdersApi.php
 lib/Api/PaymentsApi.php
 lib/Api/RefundsApi.php
 

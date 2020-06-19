@@ -9,7 +9,7 @@ namespace SquareConnect\Model;
 
 use \ArrayAccess;
 /**
- * LocationType Class Doc Comment
+ * BusinessHours Class Doc Comment
  *
  * @category Class
  * @package  SquareConnect
@@ -17,14 +17,14 @@ use \ArrayAccess;
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link     https://squareup.com/developers
  */
-class LocationType implements ArrayAccess
+class BusinessHours implements ArrayAccess
 {
     /**
       * Array of property to type mappings. Used for (de)serialization 
       * @var string[]
       */
     static $swaggerTypes = array(
-        
+        'periods' => '\SquareConnect\Model\BusinessHoursPeriod[]'
     );
   
     /** 
@@ -32,7 +32,7 @@ class LocationType implements ArrayAccess
       * @var string[] 
       */
     static $attributeMap = array(
-        
+        'periods' => 'periods'
     );
   
     /**
@@ -40,7 +40,7 @@ class LocationType implements ArrayAccess
       * @var string[]
       */
     static $setters = array(
-        
+        'periods' => 'setPeriods'
     );
   
     /**
@@ -48,9 +48,14 @@ class LocationType implements ArrayAccess
       * @var string[]
       */
     static $getters = array(
-        
+        'periods' => 'getPeriods'
     );
   
+    /**
+      * $periods The list of time periods during which the business is open. There may be at most 10 periods per day.
+      * @var \SquareConnect\Model\BusinessHoursPeriod[]
+      */
+    protected $periods;
 
     /**
      * Constructor
@@ -59,7 +64,31 @@ class LocationType implements ArrayAccess
     public function __construct(array $data = null)
     {
         if ($data != null) {
+            if (isset($data["periods"])) {
+              $this->periods = $data["periods"];
+            } else {
+              $this->periods = null;
+            }
         }
+    }
+    /**
+     * Gets periods
+     * @return \SquareConnect\Model\BusinessHoursPeriod[]
+     */
+    public function getPeriods()
+    {
+        return $this->periods;
+    }
+  
+    /**
+     * Sets periods
+     * @param \SquareConnect\Model\BusinessHoursPeriod[] $periods The list of time periods during which the business is open. There may be at most 10 periods per day.
+     * @return $this
+     */
+    public function setPeriods($periods)
+    {
+        $this->periods = $periods;
+        return $this;
     }
     /**
      * Returns true if offset exists. False otherwise.

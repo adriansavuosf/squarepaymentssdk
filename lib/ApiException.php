@@ -20,35 +20,35 @@ use \Exception;
  */
 class ApiException extends Exception
 {
+
     /**
      * The HTTP body of the server response either as Json or string.
      * @var mixed
      */
-    private $responseBody;
+    protected $responseBody;
 
     /**
      * The HTTP header of the server response.
      * @var string[]
      */
-    private $responseHeaders;
+    protected $responseHeaders;
 
     /**
      * The deserialized response object
-     * @var $responseObject ;
+     * @var $responseObject;
      */
-    private $responseObject;
+    protected $responseObject;
 
     /**
      * Constructor
-     * @param string $message Error message
-     * @param int $code HTTP status code
+     * @param string $message         Error message
+     * @param int    $code            HTTP status code
      * @param string $responseHeaders HTTP response header
-     * @param mixed $responseBody HTTP body of the server response either as Json or string
+     * @param mixed  $responseBody    HTTP body of the server response either as Json or string
      */
-    public function __construct($message = "", $code = 0, $responseHeaders = null, $responseBody = null)
+    public function __construct($message="", $code=0, $responseHeaders=null, $responseBody=null)
     {
         parent::__construct($message, $code);
-
         $this->responseHeaders = $responseHeaders;
         $this->responseBody = $responseBody;
     }

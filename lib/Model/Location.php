@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * Location Class Doc Comment
  *
@@ -21,13 +20,13 @@ use \ArrayAccess;
 class Location implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
         'id' => 'string',
         'name' => 'string',
-        'address' => \SquareConnect\Model\Address::class,
+        'address' => '\SquareConnect\Model\Address',
         'timezone' => 'string',
         'capabilities' => 'string[]',
         'status' => 'string',
@@ -39,14 +38,24 @@ class Location implements ArrayAccess
         'phone_number' => 'string',
         'business_name' => 'string',
         'type' => 'string',
-        'website_url' => 'string'
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+        'website_url' => 'string',
+        'business_hours' => '\SquareConnect\Model\BusinessHours',
+        'business_email' => 'string',
+        'description' => 'string',
+        'twitter_username' => 'string',
+        'instagram_username' => 'string',
+        'facebook_url' => 'string',
+        'coordinates' => '\SquareConnect\Model\Coordinates',
+        'logo_url' => 'string',
+        'pos_background_url' => 'string',
+        'mcc' => 'string'
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'id' => 'id',
         'name' => 'name',
         'address' => 'address',
@@ -61,14 +70,24 @@ class Location implements ArrayAccess
         'phone_number' => 'phone_number',
         'business_name' => 'business_name',
         'type' => 'type',
-        'website_url' => 'website_url'
-    ];
-
+        'website_url' => 'website_url',
+        'business_hours' => 'business_hours',
+        'business_email' => 'business_email',
+        'description' => 'description',
+        'twitter_username' => 'twitter_username',
+        'instagram_username' => 'instagram_username',
+        'facebook_url' => 'facebook_url',
+        'coordinates' => 'coordinates',
+        'logo_url' => 'logo_url',
+        'pos_background_url' => 'pos_background_url',
+        'mcc' => 'mcc'
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'id' => 'setId',
         'name' => 'setName',
         'address' => 'setAddress',
@@ -83,14 +102,24 @@ class Location implements ArrayAccess
         'phone_number' => 'setPhoneNumber',
         'business_name' => 'setBusinessName',
         'type' => 'setType',
-        'website_url' => 'setWebsiteUrl'
-    ];
-
+        'website_url' => 'setWebsiteUrl',
+        'business_hours' => 'setBusinessHours',
+        'business_email' => 'setBusinessEmail',
+        'description' => 'setDescription',
+        'twitter_username' => 'setTwitterUsername',
+        'instagram_username' => 'setInstagramUsername',
+        'facebook_url' => 'setFacebookUrl',
+        'coordinates' => 'setCoordinates',
+        'logo_url' => 'setLogoUrl',
+        'pos_background_url' => 'setPosBackgroundUrl',
+        'mcc' => 'setMcc'
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'id' => 'getId',
         'name' => 'getName',
         'address' => 'getAddress',
@@ -105,93 +134,144 @@ class Location implements ArrayAccess
         'phone_number' => 'getPhoneNumber',
         'business_name' => 'getBusinessName',
         'type' => 'getType',
-        'website_url' => 'getWebsiteUrl'
-    ];
-
+        'website_url' => 'getWebsiteUrl',
+        'business_hours' => 'getBusinessHours',
+        'business_email' => 'getBusinessEmail',
+        'description' => 'getDescription',
+        'twitter_username' => 'getTwitterUsername',
+        'instagram_username' => 'getInstagramUsername',
+        'facebook_url' => 'getFacebookUrl',
+        'coordinates' => 'getCoordinates',
+        'logo_url' => 'getLogoUrl',
+        'pos_background_url' => 'getPosBackgroundUrl',
+        'mcc' => 'getMcc'
+    );
+  
     /**
-     * $id The location's unique ID.
-     * @var string
-     */
-    private $id;
+      * $id The Square-issued ID of the location.
+      * @var string
+      */
+    protected $id;
     /**
-     * $name The location's name. Location names are set by the account owner and displayed in the dashboard as the
-     * location's nickname
-     * @var string
-     */
-    private $name;
+      * $name The name of the location. This information appears in the dashboard as the nickname.
+      * @var string
+      */
+    protected $name;
     /**
-     * $address The location's physical address.
-     * @var \SquareConnect\Model\Address
-     */
-    private $address;
+      * $address The physical address of the location.
+      * @var \SquareConnect\Model\Address
+      */
+    protected $address;
     /**
-     * $timezone The [IANA Timezone Database](https://www.iana.org/time-zones) identifier for the location's timezone.
-     * @var string
-     */
-    private $timezone;
+      * $timezone The [IANA Timezone](https://www.iana.org/time-zones) identifier for the timezone of the location.
+      * @var string
+      */
+    protected $timezone;
     /**
-     * $capabilities Indicates which Square features are enabled for the location.
-     * See [LocationCapability](#type-locationcapability) for possible values.
-     * @var string[]
-     */
-    private $capabilities;
+      * $capabilities The Square features that are enabled for the location. See `LocationCapability` for possible values. See [LocationCapability](#type-locationcapability) for possible values
+      * @var string[]
+      */
+    protected $capabilities;
     /**
-     * $status The location's status  See [LocationStatus](#type-locationstatus) for possible values.
-     * @var string
-     */
-    private $status;
+      * $status The status of the location, either active or inactive. See [LocationStatus](#type-locationstatus) for possible values
+      * @var string
+      */
+    protected $status;
     /**
-     * $created_at The time when the location was created, in RFC 3339 format.
-     * @var string
-     */
-    private $created_at;
+      * $created_at The time when the location was created, in RFC 3339 format.
+      * @var string
+      */
+    protected $created_at;
     /**
-     * $merchant_id The identifier of the merchant that owns the location.
-     * @var string
-     */
-    private $merchant_id;
+      * $merchant_id The ID of the merchant that owns the location.
+      * @var string
+      */
+    protected $merchant_id;
     /**
-     * $country The location's country, in ISO 3166-1-alpha-2 format.  See [Country](#type-country) for possible values.
-     * @var string
-     */
-    private $country;
+      * $country The country of the location, in ISO 3166-1-alpha-2 format.  See `Country` for possible values. See [Country](#type-country) for possible values
+      * @var string
+      */
+    protected $country;
     /**
-     * $language_code The language associated with the location in
-     * [BCP 47 format](https://tools.ietf.org/html/bcp47#appendix-A).
-     * @var string
-     */
-    private $language_code;
+      * $language_code The language associated with the location, in [BCP 47 format](https://tools.ietf.org/html/bcp47#appendix-A).
+      * @var string
+      */
+    protected $language_code;
     /**
-     * $currency The currency used for all transactions at this location, specified in __ISO 4217 format__.
-     * For example, the currency for a location processing transactions in the United States is 'USD'.
-     * See [Currency](#type-currency) for possible values.
-     * @var string
-     */
-    private $currency;
+      * $currency The currency used for all transactions at this location, in ISO 4217 format. See `Currency` for possible values. See [Currency](#type-currency) for possible values
+      * @var string
+      */
+    protected $currency;
     /**
-     * $phone_number The location's phone_number.
-     * @var string
-     */
-    private $phone_number;
+      * $phone_number The phone number of the location in human readable format.
+      * @var string
+      */
+    protected $phone_number;
     /**
-     * $business_name The location's business_name which is shown to its customers.
-     * For example, this is the name printed on its customer's receipts.
-     * @var string
-     */
-    private $business_name;
+      * $business_name The business name of the location This is the name visible to the customers of the location. For example, this name appears on customer receipts.
+      * @var string
+      */
+    protected $business_name;
     /**
-     * $type The location's type, as set by the account owner in the Square dashboard.
-     * Typically used to indicate whether or not the location object represents a physical space like a building or
-     * mall space.  See [LocationType](#type-locationtype) for possible values.
-     * @var string
-     */
-    private $type;
+      * $type The type of the location, either physical or mobile. See [LocationType](#type-locationtype) for possible values
+      * @var string
+      */
+    protected $type;
     /**
-     * $website_url The location's website, as set by the account owner in the Square dashboard.
-     * Default: none; only exists if explicitly set.
-     * @var string
-     */
-    private $website_url;
+      * $website_url The website URL of the location.
+      * @var string
+      */
+    protected $website_url;
+    /**
+      * $business_hours Represents the hours of operation for the location.
+      * @var \SquareConnect\Model\BusinessHours
+      */
+    protected $business_hours;
+    /**
+      * $business_email The email of the location. This email is visible to the customers of the location. For example, the email appears on customer receipts.
+      * @var string
+      */
+    protected $business_email;
+    /**
+      * $description The description of the location.
+      * @var string
+      */
+    protected $description;
+    /**
+      * $twitter_username The Twitter username of the location without the '&#64;' symbol.
+      * @var string
+      */
+    protected $twitter_username;
+    /**
+      * $instagram_username The Instagram username of the location without the '&#64;' symbol.
+      * @var string
+      */
+    protected $instagram_username;
+    /**
+      * $facebook_url The Facebook profile URL of the location. The URL should begin with 'facebook.com/'.
+      * @var string
+      */
+    protected $facebook_url;
+    /**
+      * $coordinates The physical coordinates (latitude and longitude) of the location.
+      * @var \SquareConnect\Model\Coordinates
+      */
+    protected $coordinates;
+    /**
+      * $logo_url The URL of the logo image for the location.
+      * @var string
+      */
+    protected $logo_url;
+    /**
+      * $pos_background_url The URL of the Point of Sale background image for the location.
+      * @var string
+      */
+    protected $pos_background_url;
+    /**
+      * $mcc The merchant category code (MCC) of the location, as standardized by ISO 18245. The MCC describes the kind of goods or services sold at the location.
+      * @var string
+      */
+    protected $mcc;
 
     /**
      * Constructor
@@ -201,83 +281,132 @@ class Location implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["id"])) {
-                $this->id = $data["id"];
+              $this->id = $data["id"];
             } else {
-                $this->id = null;
+              $this->id = null;
             }
             if (isset($data["name"])) {
-                $this->name = $data["name"];
+              $this->name = $data["name"];
             } else {
-                $this->name = null;
+              $this->name = null;
             }
             if (isset($data["address"])) {
-                $this->address = $data["address"];
+              $this->address = $data["address"];
             } else {
-                $this->address = null;
+              $this->address = null;
             }
             if (isset($data["timezone"])) {
-                $this->timezone = $data["timezone"];
+              $this->timezone = $data["timezone"];
             } else {
-                $this->timezone = null;
+              $this->timezone = null;
             }
             if (isset($data["capabilities"])) {
-                $this->capabilities = $data["capabilities"];
+              $this->capabilities = $data["capabilities"];
             } else {
-                $this->capabilities = null;
+              $this->capabilities = null;
             }
             if (isset($data["status"])) {
-                $this->status = $data["status"];
+              $this->status = $data["status"];
             } else {
-                $this->status = null;
+              $this->status = null;
             }
             if (isset($data["created_at"])) {
-                $this->created_at = $data["created_at"];
+              $this->created_at = $data["created_at"];
             } else {
-                $this->created_at = null;
+              $this->created_at = null;
             }
             if (isset($data["merchant_id"])) {
-                $this->merchant_id = $data["merchant_id"];
+              $this->merchant_id = $data["merchant_id"];
             } else {
-                $this->merchant_id = null;
+              $this->merchant_id = null;
             }
             if (isset($data["country"])) {
-                $this->country = $data["country"];
+              $this->country = $data["country"];
             } else {
-                $this->country = null;
+              $this->country = null;
             }
             if (isset($data["language_code"])) {
-                $this->language_code = $data["language_code"];
+              $this->language_code = $data["language_code"];
             } else {
-                $this->language_code = null;
+              $this->language_code = null;
             }
             if (isset($data["currency"])) {
-                $this->currency = $data["currency"];
+              $this->currency = $data["currency"];
             } else {
-                $this->currency = null;
+              $this->currency = null;
             }
             if (isset($data["phone_number"])) {
-                $this->phone_number = $data["phone_number"];
+              $this->phone_number = $data["phone_number"];
             } else {
-                $this->phone_number = null;
+              $this->phone_number = null;
             }
             if (isset($data["business_name"])) {
-                $this->business_name = $data["business_name"];
+              $this->business_name = $data["business_name"];
             } else {
-                $this->business_name = null;
+              $this->business_name = null;
             }
             if (isset($data["type"])) {
-                $this->type = $data["type"];
+              $this->type = $data["type"];
             } else {
-                $this->type = null;
+              $this->type = null;
             }
             if (isset($data["website_url"])) {
-                $this->website_url = $data["website_url"];
+              $this->website_url = $data["website_url"];
             } else {
-                $this->website_url = null;
+              $this->website_url = null;
+            }
+            if (isset($data["business_hours"])) {
+              $this->business_hours = $data["business_hours"];
+            } else {
+              $this->business_hours = null;
+            }
+            if (isset($data["business_email"])) {
+              $this->business_email = $data["business_email"];
+            } else {
+              $this->business_email = null;
+            }
+            if (isset($data["description"])) {
+              $this->description = $data["description"];
+            } else {
+              $this->description = null;
+            }
+            if (isset($data["twitter_username"])) {
+              $this->twitter_username = $data["twitter_username"];
+            } else {
+              $this->twitter_username = null;
+            }
+            if (isset($data["instagram_username"])) {
+              $this->instagram_username = $data["instagram_username"];
+            } else {
+              $this->instagram_username = null;
+            }
+            if (isset($data["facebook_url"])) {
+              $this->facebook_url = $data["facebook_url"];
+            } else {
+              $this->facebook_url = null;
+            }
+            if (isset($data["coordinates"])) {
+              $this->coordinates = $data["coordinates"];
+            } else {
+              $this->coordinates = null;
+            }
+            if (isset($data["logo_url"])) {
+              $this->logo_url = $data["logo_url"];
+            } else {
+              $this->logo_url = null;
+            }
+            if (isset($data["pos_background_url"])) {
+              $this->pos_background_url = $data["pos_background_url"];
+            } else {
+              $this->pos_background_url = null;
+            }
+            if (isset($data["mcc"])) {
+              $this->mcc = $data["mcc"];
+            } else {
+              $this->mcc = null;
             }
         }
     }
-
     /**
      * Gets id
      * @return string
@@ -286,10 +415,10 @@ class Location implements ArrayAccess
     {
         return $this->id;
     }
-
+  
     /**
      * Sets id
-     * @param string $id The location's unique ID.
+     * @param string $id The Square-issued ID of the location.
      * @return $this
      */
     public function setId($id)
@@ -297,7 +426,6 @@ class Location implements ArrayAccess
         $this->id = $id;
         return $this;
     }
-
     /**
      * Gets name
      * @return string
@@ -306,11 +434,10 @@ class Location implements ArrayAccess
     {
         return $this->name;
     }
-
+  
     /**
      * Sets name
-     * @param string $name The location's name. Location names are set by the account owner and displayed in the
-     * dashboard as the location's nickname
+     * @param string $name The name of the location. This information appears in the dashboard as the nickname.
      * @return $this
      */
     public function setName($name)
@@ -318,7 +445,6 @@ class Location implements ArrayAccess
         $this->name = $name;
         return $this;
     }
-
     /**
      * Gets address
      * @return \SquareConnect\Model\Address
@@ -327,10 +453,10 @@ class Location implements ArrayAccess
     {
         return $this->address;
     }
-
+  
     /**
      * Sets address
-     * @param \SquareConnect\Model\Address $address The location's physical address.
+     * @param \SquareConnect\Model\Address $address The physical address of the location.
      * @return $this
      */
     public function setAddress($address)
@@ -338,7 +464,6 @@ class Location implements ArrayAccess
         $this->address = $address;
         return $this;
     }
-
     /**
      * Gets timezone
      * @return string
@@ -347,11 +472,10 @@ class Location implements ArrayAccess
     {
         return $this->timezone;
     }
-
+  
     /**
      * Sets timezone
-     * @param string $timezone The [IANA Timezone Database](https://www.iana.org/time-zones) identifier for the
-     * location's timezone.
+     * @param string $timezone The [IANA Timezone](https://www.iana.org/time-zones) identifier for the timezone of the location.
      * @return $this
      */
     public function setTimezone($timezone)
@@ -359,7 +483,6 @@ class Location implements ArrayAccess
         $this->timezone = $timezone;
         return $this;
     }
-
     /**
      * Gets capabilities
      * @return string[]
@@ -368,11 +491,10 @@ class Location implements ArrayAccess
     {
         return $this->capabilities;
     }
-
+  
     /**
      * Sets capabilities
-     * @param string[] $capabilities Indicates which Square features are enabled for the location.
-     * See [LocationCapability](#type-locationcapability) for possible values.
+     * @param string[] $capabilities The Square features that are enabled for the location. See `LocationCapability` for possible values. See [LocationCapability](#type-locationcapability) for possible values
      * @return $this
      */
     public function setCapabilities($capabilities)
@@ -380,7 +502,6 @@ class Location implements ArrayAccess
         $this->capabilities = $capabilities;
         return $this;
     }
-
     /**
      * Gets status
      * @return string
@@ -389,10 +510,10 @@ class Location implements ArrayAccess
     {
         return $this->status;
     }
-
+  
     /**
      * Sets status
-     * @param string $status The location's status  See [LocationStatus](#type-locationstatus) for possible values.
+     * @param string $status The status of the location, either active or inactive. See [LocationStatus](#type-locationstatus) for possible values
      * @return $this
      */
     public function setStatus($status)
@@ -400,7 +521,6 @@ class Location implements ArrayAccess
         $this->status = $status;
         return $this;
     }
-
     /**
      * Gets created_at
      * @return string
@@ -409,7 +529,7 @@ class Location implements ArrayAccess
     {
         return $this->created_at;
     }
-
+  
     /**
      * Sets created_at
      * @param string $created_at The time when the location was created, in RFC 3339 format.
@@ -420,7 +540,6 @@ class Location implements ArrayAccess
         $this->created_at = $created_at;
         return $this;
     }
-
     /**
      * Gets merchant_id
      * @return string
@@ -429,10 +548,10 @@ class Location implements ArrayAccess
     {
         return $this->merchant_id;
     }
-
+  
     /**
      * Sets merchant_id
-     * @param string $merchant_id The identifier of the merchant that owns the location.
+     * @param string $merchant_id The ID of the merchant that owns the location.
      * @return $this
      */
     public function setMerchantId($merchant_id)
@@ -440,7 +559,6 @@ class Location implements ArrayAccess
         $this->merchant_id = $merchant_id;
         return $this;
     }
-
     /**
      * Gets country
      * @return string
@@ -449,11 +567,10 @@ class Location implements ArrayAccess
     {
         return $this->country;
     }
-
+  
     /**
      * Sets country
-     * @param string $country The location's country, in ISO 3166-1-alpha-2 format.
-     * See [Country](#type-country) for possible values.
+     * @param string $country The country of the location, in ISO 3166-1-alpha-2 format.  See `Country` for possible values. See [Country](#type-country) for possible values
      * @return $this
      */
     public function setCountry($country)
@@ -461,7 +578,6 @@ class Location implements ArrayAccess
         $this->country = $country;
         return $this;
     }
-
     /**
      * Gets language_code
      * @return string
@@ -470,11 +586,10 @@ class Location implements ArrayAccess
     {
         return $this->language_code;
     }
-
+  
     /**
      * Sets language_code
-     * @param string $language_code The language associated with the location in
-     * [BCP 47 format](https://tools.ietf.org/html/bcp47#appendix-A).
+     * @param string $language_code The language associated with the location, in [BCP 47 format](https://tools.ietf.org/html/bcp47#appendix-A).
      * @return $this
      */
     public function setLanguageCode($language_code)
@@ -482,7 +597,6 @@ class Location implements ArrayAccess
         $this->language_code = $language_code;
         return $this;
     }
-
     /**
      * Gets currency
      * @return string
@@ -491,13 +605,10 @@ class Location implements ArrayAccess
     {
         return $this->currency;
     }
-
+  
     /**
      * Sets currency
-     * @param string $currency The currency used for all transactions at this location,
-     * specified in __ISO 4217 format__.
-     * For example, the currency for a location processing transactions in the United States is 'USD'.
-     * See [Currency](#type-currency) for possible values.
+     * @param string $currency The currency used for all transactions at this location, in ISO 4217 format. See `Currency` for possible values. See [Currency](#type-currency) for possible values
      * @return $this
      */
     public function setCurrency($currency)
@@ -505,7 +616,6 @@ class Location implements ArrayAccess
         $this->currency = $currency;
         return $this;
     }
-
     /**
      * Gets phone_number
      * @return string
@@ -514,10 +624,10 @@ class Location implements ArrayAccess
     {
         return $this->phone_number;
     }
-
+  
     /**
      * Sets phone_number
-     * @param string $phone_number The location's phone_number.
+     * @param string $phone_number The phone number of the location in human readable format.
      * @return $this
      */
     public function setPhoneNumber($phone_number)
@@ -525,7 +635,6 @@ class Location implements ArrayAccess
         $this->phone_number = $phone_number;
         return $this;
     }
-
     /**
      * Gets business_name
      * @return string
@@ -534,11 +643,10 @@ class Location implements ArrayAccess
     {
         return $this->business_name;
     }
-
+  
     /**
      * Sets business_name
-     * @param string $business_name The location's business_name which is shown to its customers.
-     * For example, this is the name printed on its customer's receipts.
+     * @param string $business_name The business name of the location This is the name visible to the customers of the location. For example, this name appears on customer receipts.
      * @return $this
      */
     public function setBusinessName($business_name)
@@ -546,7 +654,6 @@ class Location implements ArrayAccess
         $this->business_name = $business_name;
         return $this;
     }
-
     /**
      * Gets type
      * @return string
@@ -555,12 +662,10 @@ class Location implements ArrayAccess
     {
         return $this->type;
     }
-
+  
     /**
      * Sets type
-     * @param string $type The location's type, as set by the account owner in the Square dashboard.
-     * Typically used to indicate whether or not the location object represents a physical space like a building or
-     * mall space.  See [LocationType](#type-locationtype) for possible values.
+     * @param string $type The type of the location, either physical or mobile. See [LocationType](#type-locationtype) for possible values
      * @return $this
      */
     public function setType($type)
@@ -568,7 +673,6 @@ class Location implements ArrayAccess
         $this->type = $type;
         return $this;
     }
-
     /**
      * Gets website_url
      * @return string
@@ -577,11 +681,10 @@ class Location implements ArrayAccess
     {
         return $this->website_url;
     }
-
+  
     /**
      * Sets website_url
-     * @param string $website_url The location's website, as set by the account owner in the Square dashboard.
-     * Default: none; only exists if explicitly set.
+     * @param string $website_url The website URL of the location.
      * @return $this
      */
     public function setWebsiteUrl($website_url)
@@ -589,48 +692,237 @@ class Location implements ArrayAccess
         $this->website_url = $website_url;
         return $this;
     }
-
+    /**
+     * Gets business_hours
+     * @return \SquareConnect\Model\BusinessHours
+     */
+    public function getBusinessHours()
+    {
+        return $this->business_hours;
+    }
+  
+    /**
+     * Sets business_hours
+     * @param \SquareConnect\Model\BusinessHours $business_hours Represents the hours of operation for the location.
+     * @return $this
+     */
+    public function setBusinessHours($business_hours)
+    {
+        $this->business_hours = $business_hours;
+        return $this;
+    }
+    /**
+     * Gets business_email
+     * @return string
+     */
+    public function getBusinessEmail()
+    {
+        return $this->business_email;
+    }
+  
+    /**
+     * Sets business_email
+     * @param string $business_email The email of the location. This email is visible to the customers of the location. For example, the email appears on customer receipts.
+     * @return $this
+     */
+    public function setBusinessEmail($business_email)
+    {
+        $this->business_email = $business_email;
+        return $this;
+    }
+    /**
+     * Gets description
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+  
+    /**
+     * Sets description
+     * @param string $description The description of the location.
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        return $this;
+    }
+    /**
+     * Gets twitter_username
+     * @return string
+     */
+    public function getTwitterUsername()
+    {
+        return $this->twitter_username;
+    }
+  
+    /**
+     * Sets twitter_username
+     * @param string $twitter_username The Twitter username of the location without the '&#64;' symbol.
+     * @return $this
+     */
+    public function setTwitterUsername($twitter_username)
+    {
+        $this->twitter_username = $twitter_username;
+        return $this;
+    }
+    /**
+     * Gets instagram_username
+     * @return string
+     */
+    public function getInstagramUsername()
+    {
+        return $this->instagram_username;
+    }
+  
+    /**
+     * Sets instagram_username
+     * @param string $instagram_username The Instagram username of the location without the '&#64;' symbol.
+     * @return $this
+     */
+    public function setInstagramUsername($instagram_username)
+    {
+        $this->instagram_username = $instagram_username;
+        return $this;
+    }
+    /**
+     * Gets facebook_url
+     * @return string
+     */
+    public function getFacebookUrl()
+    {
+        return $this->facebook_url;
+    }
+  
+    /**
+     * Sets facebook_url
+     * @param string $facebook_url The Facebook profile URL of the location. The URL should begin with 'facebook.com/'.
+     * @return $this
+     */
+    public function setFacebookUrl($facebook_url)
+    {
+        $this->facebook_url = $facebook_url;
+        return $this;
+    }
+    /**
+     * Gets coordinates
+     * @return \SquareConnect\Model\Coordinates
+     */
+    public function getCoordinates()
+    {
+        return $this->coordinates;
+    }
+  
+    /**
+     * Sets coordinates
+     * @param \SquareConnect\Model\Coordinates $coordinates The physical coordinates (latitude and longitude) of the location.
+     * @return $this
+     */
+    public function setCoordinates($coordinates)
+    {
+        $this->coordinates = $coordinates;
+        return $this;
+    }
+    /**
+     * Gets logo_url
+     * @return string
+     */
+    public function getLogoUrl()
+    {
+        return $this->logo_url;
+    }
+  
+    /**
+     * Sets logo_url
+     * @param string $logo_url The URL of the logo image for the location.
+     * @return $this
+     */
+    public function setLogoUrl($logo_url)
+    {
+        $this->logo_url = $logo_url;
+        return $this;
+    }
+    /**
+     * Gets pos_background_url
+     * @return string
+     */
+    public function getPosBackgroundUrl()
+    {
+        return $this->pos_background_url;
+    }
+  
+    /**
+     * Sets pos_background_url
+     * @param string $pos_background_url The URL of the Point of Sale background image for the location.
+     * @return $this
+     */
+    public function setPosBackgroundUrl($pos_background_url)
+    {
+        $this->pos_background_url = $pos_background_url;
+        return $this;
+    }
+    /**
+     * Gets mcc
+     * @return string
+     */
+    public function getMcc()
+    {
+        return $this->mcc;
+    }
+  
+    /**
+     * Sets mcc
+     * @param string $mcc The merchant category code (MCC) of the location, as standardized by ISO 18245. The MCC describes the kind of goods or services sold at the location.
+     * @return $this
+     */
+    public function setMcc($mcc)
+    {
+        $this->mcc = $mcc;
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string

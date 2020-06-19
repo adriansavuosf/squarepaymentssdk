@@ -9,7 +9,7 @@ namespace SquareConnect\Model;
 
 use \ArrayAccess;
 /**
- * LocationType Class Doc Comment
+ * Coordinates Class Doc Comment
  *
  * @category Class
  * @package  SquareConnect
@@ -17,14 +17,15 @@ use \ArrayAccess;
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  * @link     https://squareup.com/developers
  */
-class LocationType implements ArrayAccess
+class Coordinates implements ArrayAccess
 {
     /**
       * Array of property to type mappings. Used for (de)serialization 
       * @var string[]
       */
     static $swaggerTypes = array(
-        
+        'latitude' => 'float',
+        'longitude' => 'float'
     );
   
     /** 
@@ -32,7 +33,8 @@ class LocationType implements ArrayAccess
       * @var string[] 
       */
     static $attributeMap = array(
-        
+        'latitude' => 'latitude',
+        'longitude' => 'longitude'
     );
   
     /**
@@ -40,7 +42,8 @@ class LocationType implements ArrayAccess
       * @var string[]
       */
     static $setters = array(
-        
+        'latitude' => 'setLatitude',
+        'longitude' => 'setLongitude'
     );
   
     /**
@@ -48,9 +51,20 @@ class LocationType implements ArrayAccess
       * @var string[]
       */
     static $getters = array(
-        
+        'latitude' => 'getLatitude',
+        'longitude' => 'getLongitude'
     );
   
+    /**
+      * $latitude The latitude of the coordinate expressed in degrees.
+      * @var float
+      */
+    protected $latitude;
+    /**
+      * $longitude The longitude of the coordinate expressed in degrees.
+      * @var float
+      */
+    protected $longitude;
 
     /**
      * Constructor
@@ -59,7 +73,55 @@ class LocationType implements ArrayAccess
     public function __construct(array $data = null)
     {
         if ($data != null) {
+            if (isset($data["latitude"])) {
+              $this->latitude = $data["latitude"];
+            } else {
+              $this->latitude = null;
+            }
+            if (isset($data["longitude"])) {
+              $this->longitude = $data["longitude"];
+            } else {
+              $this->longitude = null;
+            }
         }
+    }
+    /**
+     * Gets latitude
+     * @return float
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+  
+    /**
+     * Sets latitude
+     * @param float $latitude The latitude of the coordinate expressed in degrees.
+     * @return $this
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+        return $this;
+    }
+    /**
+     * Gets longitude
+     * @return float
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+  
+    /**
+     * Sets longitude
+     * @param float $longitude The longitude of the coordinate expressed in degrees.
+     * @return $this
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+        return $this;
     }
     /**
      * Returns true if offset exists. False otherwise.

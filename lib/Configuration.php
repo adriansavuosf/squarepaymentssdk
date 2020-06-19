@@ -30,91 +30,109 @@ namespace SquareConnect;
  */
 class Configuration
 {
-    private static $defaultConfiguration = null;
+
+    private static $_defaultConfiguration = null;
 
     /**
      * Associate array to store API key(s)
      *
      * @var string[]
      */
-    private $apiKeys = [];
+    protected $apiKeys = array();
 
     /**
      * Associate array to store API prefix (e.g. Bearer)
      *
      * @var string[]
      */
-    private $apiKeyPrefixes = [];
+    protected $apiKeyPrefixes = array();
 
     /**
      * Access token for OAuth
      *
      * @var string
      */
-    private $accessToken = '';
+    protected $accessToken = '';
 
     /**
      * Username for HTTP basic authentication
      *
      * @var string
      */
-    private $username = '';
+    protected $username = '';
 
     /**
      * Password for HTTP basic authentication
      *
      * @var string
      */
-    private $password = '';
+    protected $password = '';
 
     /**
      * The default instance of ApiClient
      *
      * @var \SquareConnect\ApiClient
      */
-    private $defaultHeaders = [];
+    protected $defaultHeaders = array();
 
     /**
      * The host
      *
      * @var string
      */
-    private $host = 'https://connect.squareup.com';
+    protected $host = 'https://connect.squareup.com';
+
+    /**
+     * Possible hosts values
+     *
+     * @var string[]
+     */
+    protected $hosts = [
+        'production' => 'https://connect.squareup.com',
+        'sandbox' => 'https://connect.squareupsandbox.com'
+    ];
+
+    /**
+     * Environment to use
+     *
+     * @var string
+     */
+    protected $environment = 'production';
 
     /**
      * Timeout (second) of the HTTP request, by default set to 0, no timeout
      *
      * @var string
      */
-    private $curlTimeout = 0;
+    protected $curlTimeout = 0;
 
     /**
      * User agent of the HTTP request.
      *
      * @var string
      */
-    private $userAgent = "Square-Connect-PHP/2.7.0";
+    protected $userAgent = "Square-Connect-PHP/3.20200325.0";
 
     /**
      * Debug switch (default set to false)
      *
      * @var bool
      */
-    private $debug = false;
+    protected $debug = false;
 
     /**
      * Debug file location (log to STDOUT by default)
      *
      * @var string
      */
-    private $debugFile = 'php://output';
+    protected $debugFile = 'php://output';
 
     /**
      * Debug file location (log to STDOUT by default)
      *
      * @var string
      */
-    private $tempFolderPath;
+    protected $tempFolderPath;
 
     /**
      * Indicates if SSL verification should be enabled or disabled.
@@ -123,7 +141,7 @@ class Configuration
      *
      * @var boolean True if the certificate should be validated, false otherwise.
      */
-    private $sslVerification = true;
+    protected $sslVerification = true;
 
     /**
      * Constructor
@@ -137,7 +155,7 @@ class Configuration
      * Sets API key
      *
      * @param string $apiKeyIdentifier API key identifier (authentication scheme)
-     * @param string $key API key or token
+     * @param string $key              API key or token
      *
      * @return Configuration
      */
@@ -163,7 +181,7 @@ class Configuration
      * Sets the prefix for API key (e.g. Bearer)
      *
      * @param string $apiKeyIdentifier API key identifier (authentication scheme)
-     * @param string $prefix API key prefix, e.g. Bearer
+     * @param string $prefix           API key prefix, e.g. Bearer
      *
      * @return Configuration
      */
@@ -257,7 +275,7 @@ class Configuration
     /**
      * Adds a default header
      *
-     * @param string $headerName header name (e.g. Token)
+     * @param string $headerName  header name (e.g. Token)
      * @param string $headerValue header value (e.g. 1z8wp3)
      *
      * @return ApiClient
@@ -268,7 +286,7 @@ class Configuration
             throw new \InvalidArgumentException('Header name must be a string.');
         }
 
-        $this->defaultHeaders[$headerName] = $headerValue;
+        $this->defaultHeaders[$headerName] =  $headerValue;
         return $this;
     }
 
@@ -314,7 +332,25 @@ class Configuration
      */
     public function getHost()
     {
-        return $this->host;
+        $environment = $this->getEnvironment();
+
+        return $this->hosts[$environment];
+    }
+
+    public function setEnvironment($environment)
+    {
+        if (in_array($environment, array_keys($this->hosts))) {
+            $this->environment = $environment;
+        } else {
+            throw new \InvalidArgumentException('Invalid environment provided.');
+        }
+
+        return $this;
+    }
+
+    public function getEnvironment()
+    {
+        return $this->environment;
     }
 
     /**
@@ -470,11 +506,11 @@ class Configuration
      */
     public static function getDefaultConfiguration()
     {
-        if (self::$defaultConfiguration == null) {
-            self::$defaultConfiguration = new Configuration();
+        if (self::$_defaultConfiguration == null) {
+            self::$_defaultConfiguration = new Configuration();
         }
 
-        return self::$defaultConfiguration;
+        return self::$_defaultConfiguration;
     }
 
     /**
@@ -486,7 +522,7 @@ class Configuration
      */
     public static function setDefaultConfiguration(Configuration $config)
     {
-        self::$defaultConfiguration = $config;
+        self::$_defaultConfiguration = $config;
     }
 
     /**
@@ -496,14 +532,14 @@ class Configuration
      */
     public static function toDebugReport()
     {
-        $report = "PHP SDK (SquareConnect) Debug Report:\n";
-        $report .= "    OS: " . php_uname() . "\n";
-        $report .= "    PHP Version: " . phpversion() . "\n";
+        $report  = "PHP SDK (SquareConnect) Debug Report:\n";
+        $report .= "    OS: ".php_uname()."\n";
+        $report .= "    PHP Version: ".phpversion()."\n";
         $report .= "    OpenAPI Spec Version: 2.0\n";
-        $report .= "    SDK Package Version: 2.7.0\n";
-        $report .= "    Temp Folder Path: " . self::getDefaultConfiguration()
-                ->getTempFolderPath() . "\n";
+        $report .= "    SDK Package Version: 3.20200325.0\n";
+        $report .= "    Temp Folder Path: ".self::getDefaultConfiguration()->getTempFolderPath()."\n";
 
         return $report;
     }
+
 }
