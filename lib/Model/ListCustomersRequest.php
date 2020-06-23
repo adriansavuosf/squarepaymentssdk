@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * ListCustomersRequest Class Doc Comment
  *
@@ -21,44 +20,60 @@ use \ArrayAccess;
 class ListCustomersRequest implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
-        'cursor' => 'string'
-    ];
-
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
+        'cursor' => 'string',
+        'sort_field' => 'string',
+        'sort_order' => 'string'
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
+        'cursor' => 'cursor',
+        'sort_field' => 'sort_field',
+        'sort_order' => 'sort_order'
+    );
+  
     /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
-        'cursor' => 'cursor'
-    ];
-
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
+        'cursor' => 'setCursor',
+        'sort_field' => 'setSortField',
+        'sort_order' => 'setSortOrder'
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
-        'cursor' => 'setCursor'
-    ];
-
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
+        'cursor' => 'getCursor',
+        'sort_field' => 'getSortField',
+        'sort_order' => 'getSortOrder'
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
-        'cursor' => 'getCursor'
-    ];
-
+      * $cursor A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.  See the [Pagination guide](https://developer.squareup.com/docs/working-with-apis/pagination) for more information.
+      * @var string
+      */
+    protected $cursor;
     /**
-     * $cursor A pagination cursor returned by a previous call to this endpoint.
-     * Provide this to retrieve the next set of results for your original query.
-     * See [Paginating results](#paginatingresults) for more information.
-     * @var string
-     */
-    private $cursor;
+      * $sort_field Indicates how Customers should be sorted.  Default: `DEFAULT`. See [CustomerSortField](#type-customersortfield) for possible values
+      * @var string
+      */
+    protected $sort_field;
+    /**
+      * $sort_order Indicates whether Customers should be sorted in ascending (`ASC`) or descending (`DESC`) order.  Default: `ASC`. See [SortOrder](#type-sortorder) for possible values
+      * @var string
+      */
+    protected $sort_order;
 
     /**
      * Constructor
@@ -68,13 +83,22 @@ class ListCustomersRequest implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["cursor"])) {
-                $this->cursor = $data["cursor"];
+              $this->cursor = $data["cursor"];
             } else {
-                $this->cursor = null;
+              $this->cursor = null;
+            }
+            if (isset($data["sort_field"])) {
+              $this->sort_field = $data["sort_field"];
+            } else {
+              $this->sort_field = null;
+            }
+            if (isset($data["sort_order"])) {
+              $this->sort_order = $data["sort_order"];
+            } else {
+              $this->sort_order = null;
             }
         }
     }
-
     /**
      * Gets cursor
      * @return string
@@ -83,12 +107,10 @@ class ListCustomersRequest implements ArrayAccess
     {
         return $this->cursor;
     }
-
+  
     /**
      * Sets cursor
-     * @param string $cursor A pagination cursor returned by a previous call to this endpoint.
-     * Provide this to retrieve the next set of results for your original query.
-     * See [Paginating results](#paginatingresults) for more information.
+     * @param string $cursor A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.  See the [Pagination guide](https://developer.squareup.com/docs/working-with-apis/pagination) for more information.
      * @return $this
      */
     public function setCursor($cursor)
@@ -96,48 +118,85 @@ class ListCustomersRequest implements ArrayAccess
         $this->cursor = $cursor;
         return $this;
     }
-
+    /**
+     * Gets sort_field
+     * @return string
+     */
+    public function getSortField()
+    {
+        return $this->sort_field;
+    }
+  
+    /**
+     * Sets sort_field
+     * @param string $sort_field Indicates how Customers should be sorted.  Default: `DEFAULT`. See [CustomerSortField](#type-customersortfield) for possible values
+     * @return $this
+     */
+    public function setSortField($sort_field)
+    {
+        $this->sort_field = $sort_field;
+        return $this;
+    }
+    /**
+     * Gets sort_order
+     * @return string
+     */
+    public function getSortOrder()
+    {
+        return $this->sort_order;
+    }
+  
+    /**
+     * Sets sort_order
+     * @param string $sort_order Indicates whether Customers should be sorted in ascending (`ASC`) or descending (`DESC`) order.  Default: `ASC`. See [SortOrder](#type-sortorder) for possible values
+     * @return $this
+     */
+    public function setSortOrder($sort_order)
+    {
+        $this->sort_order = $sort_order;
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string

@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * BatchChangeInventoryRequest Class Doc Comment
  *
@@ -21,68 +20,60 @@ use \ArrayAccess;
 class BatchChangeInventoryRequest implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
         'idempotency_key' => 'string',
         'changes' => '\SquareConnect\Model\InventoryChange[]',
         'ignore_unchanged_counts' => 'bool'
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'idempotency_key' => 'idempotency_key',
         'changes' => 'changes',
         'ignore_unchanged_counts' => 'ignore_unchanged_counts'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'idempotency_key' => 'setIdempotencyKey',
         'changes' => 'setChanges',
         'ignore_unchanged_counts' => 'setIgnoreUnchangedCounts'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'idempotency_key' => 'getIdempotencyKey',
         'changes' => 'getChanges',
         'ignore_unchanged_counts' => 'getIgnoreUnchangedCounts'
-    ];
-
+    );
+  
     /**
-     * $idempotency_key A value you specify that uniquely identifies this request among all your requests.
-     * A common way to create a valid idempotency key is to use a Universally unique identifier (UUID).
-     * If you're unsure whether a particular request was successful, you can reattempt it with the same idempotency key
-     * without worrying about creating duplicate objects.
-     * See [Idempotency keys](#idempotencykeys)for more information.
-     * @var string
-     */
-    private $idempotency_key;
+      * $idempotency_key A client-supplied, universally unique identifier (UUID) for the request.  See [Idempotency](https://developer.squareup.com/docs/basics/api101/idempotency) in the [API Development 101](https://developer.squareup.com/docs/basics/api101/overview) section for more information.
+      * @var string
+      */
+    protected $idempotency_key;
     /**
-     * $changes A set of new physical counts and adjustments to inventory to be added to the database.
-     * The changes are inserted based on the client supplied timestamp and can be inserted in the past and/or sent out
-     * of order. It may contain up to 100 changes.
-     * @var \SquareConnect\Model\InventoryChange[]
-     */
-    private $changes;
+      * $changes The set of physical counts and inventory adjustments to be made. Changes are applied based on the client-supplied timestamp and may be sent out of order. Max size is 100 changes.
+      * @var \SquareConnect\Model\InventoryChange[]
+      */
+    protected $changes;
     /**
-     * $ignore_unchanged_counts If `true`, when a physical count for an item variation has the same quantity
-     * as the most recent physical count for that variation, and there are no intervening adjustments
-     * for that variation, the incoming physical count is ignored.
-     * @var bool
-     */
-    private $ignore_unchanged_counts;
+      * $ignore_unchanged_counts Indicates whether the current physical count should be ignored if the quantity is unchanged since the last physical count. Default: `true`.
+      * @var bool
+      */
+    protected $ignore_unchanged_counts;
 
     /**
      * Constructor
@@ -92,23 +83,22 @@ class BatchChangeInventoryRequest implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["idempotency_key"])) {
-                $this->idempotency_key = $data["idempotency_key"];
+              $this->idempotency_key = $data["idempotency_key"];
             } else {
-                $this->idempotency_key = null;
+              $this->idempotency_key = null;
             }
             if (isset($data["changes"])) {
-                $this->changes = $data["changes"];
+              $this->changes = $data["changes"];
             } else {
-                $this->changes = null;
+              $this->changes = null;
             }
             if (isset($data["ignore_unchanged_counts"])) {
-                $this->ignore_unchanged_counts = $data["ignore_unchanged_counts"];
+              $this->ignore_unchanged_counts = $data["ignore_unchanged_counts"];
             } else {
-                $this->ignore_unchanged_counts = null;
+              $this->ignore_unchanged_counts = null;
             }
         }
     }
-
     /**
      * Gets idempotency_key
      * @return string
@@ -117,14 +107,10 @@ class BatchChangeInventoryRequest implements ArrayAccess
     {
         return $this->idempotency_key;
     }
-
+  
     /**
      * Sets idempotency_key
-     * @param string $idempotency_key A value you specify that uniquely identifies this request
-     * among all your requests. A common way to create a valid idempotency key is to use
-     * a Universally unique identifier (UUID).  If you're unsure whether a particular request was successful,
-     * you can reattempt it with the same idempotency key without worrying about creating duplicate objects.
-     * See [Idempotency keys](#idempotencykeys) for more information.
+     * @param string $idempotency_key A client-supplied, universally unique identifier (UUID) for the request.  See [Idempotency](https://developer.squareup.com/docs/basics/api101/idempotency) in the [API Development 101](https://developer.squareup.com/docs/basics/api101/overview) section for more information.
      * @return $this
      */
     public function setIdempotencyKey($idempotency_key)
@@ -132,7 +118,6 @@ class BatchChangeInventoryRequest implements ArrayAccess
         $this->idempotency_key = $idempotency_key;
         return $this;
     }
-
     /**
      * Gets changes
      * @return \SquareConnect\Model\InventoryChange[]
@@ -141,12 +126,10 @@ class BatchChangeInventoryRequest implements ArrayAccess
     {
         return $this->changes;
     }
-
+  
     /**
      * Sets changes
-     * @param \SquareConnect\Model\InventoryChange[] $changes A set of new physical counts and adjustments
-     * to inventory to be added to the database. The changes are inserted based on the client supplied timestamp
-     * and can be inserted in the past and/or sent out of order. It may contain up to 100 changes.
+     * @param \SquareConnect\Model\InventoryChange[] $changes The set of physical counts and inventory adjustments to be made. Changes are applied based on the client-supplied timestamp and may be sent out of order. Max size is 100 changes.
      * @return $this
      */
     public function setChanges($changes)
@@ -154,7 +137,6 @@ class BatchChangeInventoryRequest implements ArrayAccess
         $this->changes = $changes;
         return $this;
     }
-
     /**
      * Gets ignore_unchanged_counts
      * @return bool
@@ -163,12 +145,10 @@ class BatchChangeInventoryRequest implements ArrayAccess
     {
         return $this->ignore_unchanged_counts;
     }
-
+  
     /**
      * Sets ignore_unchanged_counts
-     * @param bool $ignore_unchanged_counts If `true`, when a physical count for an item variation
-     * has the same quantity as the most recent physical count for that variation, and there are
-     * no intervening adjustments for that variation, the incoming physical count is ignored.
+     * @param bool $ignore_unchanged_counts Indicates whether the current physical count should be ignored if the quantity is unchanged since the last physical count. Default: `true`.
      * @return $this
      */
     public function setIgnoreUnchangedCounts($ignore_unchanged_counts)
@@ -176,48 +156,47 @@ class BatchChangeInventoryRequest implements ArrayAccess
         $this->ignore_unchanged_counts = $ignore_unchanged_counts;
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string
@@ -225,10 +204,7 @@ class BatchChangeInventoryRequest implements ArrayAccess
     public function __toString()
     {
         if (defined('JSON_PRETTY_PRINT')) {
-            return json_encode(
-                \SquareConnect\ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
+            return json_encode(\SquareConnect\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
         } else {
             return json_encode(\SquareConnect\ObjectSerializer::sanitizeForSerialization($this));
         }

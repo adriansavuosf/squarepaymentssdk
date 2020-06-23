@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * RetrieveInventoryChangesRequest Class Doc Comment
  *
@@ -21,53 +20,51 @@ use \ArrayAccess;
 class RetrieveInventoryChangesRequest implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
         'location_ids' => 'string',
         'cursor' => 'string'
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'location_ids' => 'location_ids',
         'cursor' => 'cursor'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'location_ids' => 'setLocationIds',
         'cursor' => 'setCursor'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'location_ids' => 'getLocationIds',
         'cursor' => 'getCursor'
-    ];
-
+    );
+  
     /**
-     * $location_ids The [Location](#type-location) ids to look up, as a comma-separated list. An empty list queries
-     * all locations.
-     * @var string
-     */
-    private $location_ids;
+      * $location_ids The `Location` IDs to look up as a comma-separated list. An empty list queries all locations.
+      * @var string
+      */
+    protected $location_ids;
     /**
-     * $cursor A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set
-     * of results for your original query.  See [Paginating results](#paginatingresults) for more information.
-     * @var string
-     */
-    private $cursor;
+      * $cursor A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for the original query.  See the [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pagination) guide for more information.
+      * @var string
+      */
+    protected $cursor;
 
     /**
      * Constructor
@@ -77,18 +74,17 @@ class RetrieveInventoryChangesRequest implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["location_ids"])) {
-                $this->location_ids = $data["location_ids"];
+              $this->location_ids = $data["location_ids"];
             } else {
-                $this->location_ids = null;
+              $this->location_ids = null;
             }
             if (isset($data["cursor"])) {
-                $this->cursor = $data["cursor"];
+              $this->cursor = $data["cursor"];
             } else {
-                $this->cursor = null;
+              $this->cursor = null;
             }
         }
     }
-
     /**
      * Gets location_ids
      * @return string
@@ -97,11 +93,10 @@ class RetrieveInventoryChangesRequest implements ArrayAccess
     {
         return $this->location_ids;
     }
-
+  
     /**
      * Sets location_ids
-     * @param string $location_ids The [Location](#type-location) ids to look up, as a comma-separated list.
-     * An empty list queries all locations.
+     * @param string $location_ids The `Location` IDs to look up as a comma-separated list. An empty list queries all locations.
      * @return $this
      */
     public function setLocationIds($location_ids)
@@ -109,7 +104,6 @@ class RetrieveInventoryChangesRequest implements ArrayAccess
         $this->location_ids = $location_ids;
         return $this;
     }
-
     /**
      * Gets cursor
      * @return string
@@ -118,12 +112,10 @@ class RetrieveInventoryChangesRequest implements ArrayAccess
     {
         return $this->cursor;
     }
-
+  
     /**
      * Sets cursor
-     * @param string $cursor A pagination cursor returned by a previous call to this endpoint.
-     * Provide this to retrieve the next set of results for your original query.
-     * See [Paginating results](#paginatingresults) for more information.
+     * @param string $cursor A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for the original query.  See the [Pagination](https://developer.squareup.com/docs/docs/working-with-apis/pagination) guide for more information.
      * @return $this
      */
     public function setCursor($cursor)
@@ -131,48 +123,47 @@ class RetrieveInventoryChangesRequest implements ArrayAccess
         $this->cursor = $cursor;
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string

@@ -8,8 +8,8 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
+ * @deprecated
  * V1InventoryEntry Class Doc Comment
  *
  * @category Class
@@ -21,51 +21,51 @@ use \ArrayAccess;
 class V1InventoryEntry implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
         'variation_id' => 'string',
         'quantity_on_hand' => 'float'
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'variation_id' => 'variation_id',
         'quantity_on_hand' => 'quantity_on_hand'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'variation_id' => 'setVariationId',
         'quantity_on_hand' => 'setQuantityOnHand'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'variation_id' => 'getVariationId',
         'quantity_on_hand' => 'getQuantityOnHand'
-    ];
-
+    );
+  
     /**
-     * $variation_id The variation that the entry corresponds to.
-     * @var string
-     */
-    private $variation_id;
+      * $variation_id The variation that the entry corresponds to.
+      * @var string
+      */
+    protected $variation_id;
     /**
-     * $quantity_on_hand The current available quantity of the item variation.
-     * @var float
-     */
-    private $quantity_on_hand;
+      * $quantity_on_hand The current available quantity of the item variation.
+      * @var float
+      */
+    protected $quantity_on_hand;
 
     /**
      * Constructor
@@ -75,18 +75,17 @@ class V1InventoryEntry implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["variation_id"])) {
-                $this->variation_id = $data["variation_id"];
+              $this->variation_id = $data["variation_id"];
             } else {
-                $this->variation_id = null;
+              $this->variation_id = null;
             }
             if (isset($data["quantity_on_hand"])) {
-                $this->quantity_on_hand = $data["quantity_on_hand"];
+              $this->quantity_on_hand = $data["quantity_on_hand"];
             } else {
-                $this->quantity_on_hand = null;
+              $this->quantity_on_hand = null;
             }
         }
     }
-
     /**
      * Gets variation_id
      * @return string
@@ -95,7 +94,7 @@ class V1InventoryEntry implements ArrayAccess
     {
         return $this->variation_id;
     }
-
+  
     /**
      * Sets variation_id
      * @param string $variation_id The variation that the entry corresponds to.
@@ -106,7 +105,6 @@ class V1InventoryEntry implements ArrayAccess
         $this->variation_id = $variation_id;
         return $this;
     }
-
     /**
      * Gets quantity_on_hand
      * @return float
@@ -115,7 +113,7 @@ class V1InventoryEntry implements ArrayAccess
     {
         return $this->quantity_on_hand;
     }
-
+  
     /**
      * Sets quantity_on_hand
      * @param float $quantity_on_hand The current available quantity of the item variation.
@@ -126,48 +124,47 @@ class V1InventoryEntry implements ArrayAccess
         $this->quantity_on_hand = $quantity_on_hand;
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string

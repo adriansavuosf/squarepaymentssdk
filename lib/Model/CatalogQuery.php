@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * CatalogQuery Class Doc Comment
  *
@@ -21,104 +20,114 @@ use \ArrayAccess;
 class CatalogQuery implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
-        'sorted_attribute_query' => \SquareConnect\Model\CatalogQuerySortedAttribute::class,
-        'exact_query' => \SquareConnect\Model\CatalogQueryExact::class,
-        'prefix_query' => \SquareConnect\Model\CatalogQueryPrefix::class,
-        'range_query' => \SquareConnect\Model\CatalogQueryRange::class,
-        'text_query' => \SquareConnect\Model\CatalogQueryText::class,
-        'items_for_tax_query' => \SquareConnect\Model\CatalogQueryItemsForTax::class,
-        'items_for_modifier_list_query' => \SquareConnect\Model\CatalogQueryItemsForModifierList::class
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
+        'sorted_attribute_query' => '\SquareConnect\Model\CatalogQuerySortedAttribute',
+        'exact_query' => '\SquareConnect\Model\CatalogQueryExact',
+        'prefix_query' => '\SquareConnect\Model\CatalogQueryPrefix',
+        'range_query' => '\SquareConnect\Model\CatalogQueryRange',
+        'text_query' => '\SquareConnect\Model\CatalogQueryText',
+        'items_for_tax_query' => '\SquareConnect\Model\CatalogQueryItemsForTax',
+        'items_for_modifier_list_query' => '\SquareConnect\Model\CatalogQueryItemsForModifierList',
+        'items_for_item_options_query' => '\SquareConnect\Model\CatalogQueryItemsForItemOptions',
+        'item_variations_for_item_option_values_query' => '\SquareConnect\Model\CatalogQueryItemVariationsForItemOptionValues'
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'sorted_attribute_query' => 'sorted_attribute_query',
         'exact_query' => 'exact_query',
         'prefix_query' => 'prefix_query',
         'range_query' => 'range_query',
         'text_query' => 'text_query',
         'items_for_tax_query' => 'items_for_tax_query',
-        'items_for_modifier_list_query' => 'items_for_modifier_list_query'
-    ];
-
+        'items_for_modifier_list_query' => 'items_for_modifier_list_query',
+        'items_for_item_options_query' => 'items_for_item_options_query',
+        'item_variations_for_item_option_values_query' => 'item_variations_for_item_option_values_query'
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'sorted_attribute_query' => 'setSortedAttributeQuery',
         'exact_query' => 'setExactQuery',
         'prefix_query' => 'setPrefixQuery',
         'range_query' => 'setRangeQuery',
         'text_query' => 'setTextQuery',
         'items_for_tax_query' => 'setItemsForTaxQuery',
-        'items_for_modifier_list_query' => 'setItemsForModifierListQuery'
-    ];
-
+        'items_for_modifier_list_query' => 'setItemsForModifierListQuery',
+        'items_for_item_options_query' => 'setItemsForItemOptionsQuery',
+        'item_variations_for_item_option_values_query' => 'setItemVariationsForItemOptionValuesQuery'
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'sorted_attribute_query' => 'getSortedAttributeQuery',
         'exact_query' => 'getExactQuery',
         'prefix_query' => 'getPrefixQuery',
         'range_query' => 'getRangeQuery',
         'text_query' => 'getTextQuery',
         'items_for_tax_query' => 'getItemsForTaxQuery',
-        'items_for_modifier_list_query' => 'getItemsForModifierListQuery'
-    ];
-
+        'items_for_modifier_list_query' => 'getItemsForModifierListQuery',
+        'items_for_item_options_query' => 'getItemsForItemOptionsQuery',
+        'item_variations_for_item_option_values_query' => 'getItemVariationsForItemOptionValuesQuery'
+    );
+  
     /**
-     * $sorted_attribute_query A query that returns all objects, sorted by the given attribute.
-     * @var \SquareConnect\Model\CatalogQuerySortedAttribute
-     */
-    private $sorted_attribute_query;
+      * $sorted_attribute_query A query that returns all objects, sorted by the given attribute.
+      * @var \SquareConnect\Model\CatalogQuerySortedAttribute
+      */
+    protected $sorted_attribute_query;
     /**
-     * $exact_query A query that returns only objects for which the given (string-valued) attribute has the given
-     * case-insensitive value.
-     * @var \SquareConnect\Model\CatalogQueryExact
-     */
-    private $exact_query;
+      * $exact_query A query that returns only objects for which the given (string-valued) attribute has the given case-insensitive value.
+      * @var \SquareConnect\Model\CatalogQueryExact
+      */
+    protected $exact_query;
     /**
-     * $prefix_query A query that returns only objects for which the given (string-valued) attribute has the given
-     * case-insensitive prefix.
-     * @var \SquareConnect\Model\CatalogQueryPrefix
-     */
-    private $prefix_query;
+      * $prefix_query A query that returns only objects for which the given (string-valued) attribute has the given case-insensitive prefix.
+      * @var \SquareConnect\Model\CatalogQueryPrefix
+      */
+    protected $prefix_query;
     /**
-     * $range_query A query that returns only objects for which the given (integer-valued) attribute lies in the given
-     * range.
-     * @var \SquareConnect\Model\CatalogQueryRange
-     */
-    private $range_query;
+      * $range_query A query that returns only objects for which the given (integer-valued) attribute lies in the given range.
+      * @var \SquareConnect\Model\CatalogQueryRange
+      */
+    protected $range_query;
     /**
-     * $text_query A query that returns only objects whose searchable attributes contain all of the given keywords
-     * as prefixes. For example, if a [CatalogItem](#type-catalogitem) contains attributes `{\"name\": \"t-shirt\"}`
-     * and `{\"description\": \"Small, Purple\"}`, it will be matched by the query
-     * `{\"keywords\": [\"shirt\", \"sma\", \"purp\"]}`.
-     * @var \SquareConnect\Model\CatalogQueryText
-     */
-    private $text_query;
+      * $text_query A query that returns only objects whose searchable attributes contain all of the given keywords as prefixes. For example, if a `CatalogItem` contains attributes `{\"name\": \"t-shirt\"}` and `{\"description\": \"Small, Purple\"}`, it will be matched by the query `{\"keywords\": [\"shirt\", \"sma\", \"purp\"]}`.
+      * @var \SquareConnect\Model\CatalogQueryText
+      */
+    protected $text_query;
     /**
-     * $items_for_tax_query A query that returns all [CatalogItem](#type-catalogitem)s that have any of the given
-     * [CatalogTax](#type-catalogtax)es enabled.
-     * @var \SquareConnect\Model\CatalogQueryItemsForTax
-     */
-    private $items_for_tax_query;
+      * $items_for_tax_query A query that returns all `CatalogItem`s that have any of the given `CatalogTax`es enabled.
+      * @var \SquareConnect\Model\CatalogQueryItemsForTax
+      */
+    protected $items_for_tax_query;
     /**
-     * $items_for_modifier_list_query A query that returns all [CatalogItem](#type-catalogitem)s that have any of the
-     * given [CatalogModifierList](#type-catalogmodifierlist)s enabled.
-     * @var \SquareConnect\Model\CatalogQueryItemsForModifierList
-     */
-    private $items_for_modifier_list_query;
+      * $items_for_modifier_list_query A query that returns all `CatalogItem`s that have any of the given `CatalogModifierList`s enabled.
+      * @var \SquareConnect\Model\CatalogQueryItemsForModifierList
+      */
+    protected $items_for_modifier_list_query;
+    /**
+      * $items_for_item_options_query A query that returns all `CatalogItem`s that have all of the given `CatalogItemOption`s.
+      * @var \SquareConnect\Model\CatalogQueryItemsForItemOptions
+      */
+    protected $items_for_item_options_query;
+    /**
+      * $item_variations_for_item_option_values_query A query that returns all `CatalogItemVariation`s that have all of the given `CatalogItemOption` values.
+      * @var \SquareConnect\Model\CatalogQueryItemVariationsForItemOptionValues
+      */
+    protected $item_variations_for_item_option_values_query;
 
     /**
      * Constructor
@@ -128,43 +137,52 @@ class CatalogQuery implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["sorted_attribute_query"])) {
-                $this->sorted_attribute_query = $data["sorted_attribute_query"];
+              $this->sorted_attribute_query = $data["sorted_attribute_query"];
             } else {
-                $this->sorted_attribute_query = null;
+              $this->sorted_attribute_query = null;
             }
             if (isset($data["exact_query"])) {
-                $this->exact_query = $data["exact_query"];
+              $this->exact_query = $data["exact_query"];
             } else {
-                $this->exact_query = null;
+              $this->exact_query = null;
             }
             if (isset($data["prefix_query"])) {
-                $this->prefix_query = $data["prefix_query"];
+              $this->prefix_query = $data["prefix_query"];
             } else {
-                $this->prefix_query = null;
+              $this->prefix_query = null;
             }
             if (isset($data["range_query"])) {
-                $this->range_query = $data["range_query"];
+              $this->range_query = $data["range_query"];
             } else {
-                $this->range_query = null;
+              $this->range_query = null;
             }
             if (isset($data["text_query"])) {
-                $this->text_query = $data["text_query"];
+              $this->text_query = $data["text_query"];
             } else {
-                $this->text_query = null;
+              $this->text_query = null;
             }
             if (isset($data["items_for_tax_query"])) {
-                $this->items_for_tax_query = $data["items_for_tax_query"];
+              $this->items_for_tax_query = $data["items_for_tax_query"];
             } else {
-                $this->items_for_tax_query = null;
+              $this->items_for_tax_query = null;
             }
             if (isset($data["items_for_modifier_list_query"])) {
-                $this->items_for_modifier_list_query = $data["items_for_modifier_list_query"];
+              $this->items_for_modifier_list_query = $data["items_for_modifier_list_query"];
             } else {
-                $this->items_for_modifier_list_query = null;
+              $this->items_for_modifier_list_query = null;
+            }
+            if (isset($data["items_for_item_options_query"])) {
+              $this->items_for_item_options_query = $data["items_for_item_options_query"];
+            } else {
+              $this->items_for_item_options_query = null;
+            }
+            if (isset($data["item_variations_for_item_option_values_query"])) {
+              $this->item_variations_for_item_option_values_query = $data["item_variations_for_item_option_values_query"];
+            } else {
+              $this->item_variations_for_item_option_values_query = null;
             }
         }
     }
-
     /**
      * Gets sorted_attribute_query
      * @return \SquareConnect\Model\CatalogQuerySortedAttribute
@@ -173,11 +191,10 @@ class CatalogQuery implements ArrayAccess
     {
         return $this->sorted_attribute_query;
     }
-
+  
     /**
      * Sets sorted_attribute_query
-     * @param \SquareConnect\Model\CatalogQuerySortedAttribute $sorted_attribute_query A query that returns all objects,
-     * sorted by the given attribute.
+     * @param \SquareConnect\Model\CatalogQuerySortedAttribute $sorted_attribute_query A query that returns all objects, sorted by the given attribute.
      * @return $this
      */
     public function setSortedAttributeQuery($sorted_attribute_query)
@@ -185,7 +202,6 @@ class CatalogQuery implements ArrayAccess
         $this->sorted_attribute_query = $sorted_attribute_query;
         return $this;
     }
-
     /**
      * Gets exact_query
      * @return \SquareConnect\Model\CatalogQueryExact
@@ -194,11 +210,10 @@ class CatalogQuery implements ArrayAccess
     {
         return $this->exact_query;
     }
-
+  
     /**
      * Sets exact_query
-     * @param \SquareConnect\Model\CatalogQueryExact $exact_query A query that returns only objects for which the given
-     * (string-valued) attribute has the given case-insensitive value.
+     * @param \SquareConnect\Model\CatalogQueryExact $exact_query A query that returns only objects for which the given (string-valued) attribute has the given case-insensitive value.
      * @return $this
      */
     public function setExactQuery($exact_query)
@@ -206,7 +221,6 @@ class CatalogQuery implements ArrayAccess
         $this->exact_query = $exact_query;
         return $this;
     }
-
     /**
      * Gets prefix_query
      * @return \SquareConnect\Model\CatalogQueryPrefix
@@ -215,11 +229,10 @@ class CatalogQuery implements ArrayAccess
     {
         return $this->prefix_query;
     }
-
+  
     /**
      * Sets prefix_query
-     * @param \SquareConnect\Model\CatalogQueryPrefix $prefix_query A query that returns only objects for which the
-     * given (string-valued) attribute has the given case-insensitive prefix.
+     * @param \SquareConnect\Model\CatalogQueryPrefix $prefix_query A query that returns only objects for which the given (string-valued) attribute has the given case-insensitive prefix.
      * @return $this
      */
     public function setPrefixQuery($prefix_query)
@@ -227,7 +240,6 @@ class CatalogQuery implements ArrayAccess
         $this->prefix_query = $prefix_query;
         return $this;
     }
-
     /**
      * Gets range_query
      * @return \SquareConnect\Model\CatalogQueryRange
@@ -236,11 +248,10 @@ class CatalogQuery implements ArrayAccess
     {
         return $this->range_query;
     }
-
+  
     /**
      * Sets range_query
-     * @param \SquareConnect\Model\CatalogQueryRange $range_query A query that returns only objects for which the given
-     * (integer-valued) attribute lies in the given range.
+     * @param \SquareConnect\Model\CatalogQueryRange $range_query A query that returns only objects for which the given (integer-valued) attribute lies in the given range.
      * @return $this
      */
     public function setRangeQuery($range_query)
@@ -248,7 +259,6 @@ class CatalogQuery implements ArrayAccess
         $this->range_query = $range_query;
         return $this;
     }
-
     /**
      * Gets text_query
      * @return \SquareConnect\Model\CatalogQueryText
@@ -257,13 +267,10 @@ class CatalogQuery implements ArrayAccess
     {
         return $this->text_query;
     }
-
+  
     /**
      * Sets text_query
-     * @param \SquareConnect\Model\CatalogQueryText $text_query A query that returns only objects whose searchable
-     * attributes contain all of the given keywords as prefixes. For example, if a [CatalogItem](#type-catalogitem)
-     * contains attributes `{\"name\": \"t-shirt\"}` and `{\"description\": \"Small, Purple\"}`, it will be matched by
-     * the query `{\"keywords\": [\"shirt\", \"sma\", \"purp\"]}`.
+     * @param \SquareConnect\Model\CatalogQueryText $text_query A query that returns only objects whose searchable attributes contain all of the given keywords as prefixes. For example, if a `CatalogItem` contains attributes `{\"name\": \"t-shirt\"}` and `{\"description\": \"Small, Purple\"}`, it will be matched by the query `{\"keywords\": [\"shirt\", \"sma\", \"purp\"]}`.
      * @return $this
      */
     public function setTextQuery($text_query)
@@ -271,7 +278,6 @@ class CatalogQuery implements ArrayAccess
         $this->text_query = $text_query;
         return $this;
     }
-
     /**
      * Gets items_for_tax_query
      * @return \SquareConnect\Model\CatalogQueryItemsForTax
@@ -280,11 +286,10 @@ class CatalogQuery implements ArrayAccess
     {
         return $this->items_for_tax_query;
     }
-
+  
     /**
      * Sets items_for_tax_query
-     * @param \SquareConnect\Model\CatalogQueryItemsForTax $items_for_tax_query A query that returns all
-     * [CatalogItem](#type-catalogitem)s that have any of the given [CatalogTax](#type-catalogtax)es enabled.
+     * @param \SquareConnect\Model\CatalogQueryItemsForTax $items_for_tax_query A query that returns all `CatalogItem`s that have any of the given `CatalogTax`es enabled.
      * @return $this
      */
     public function setItemsForTaxQuery($items_for_tax_query)
@@ -292,7 +297,6 @@ class CatalogQuery implements ArrayAccess
         $this->items_for_tax_query = $items_for_tax_query;
         return $this;
     }
-
     /**
      * Gets items_for_modifier_list_query
      * @return \SquareConnect\Model\CatalogQueryItemsForModifierList
@@ -301,12 +305,10 @@ class CatalogQuery implements ArrayAccess
     {
         return $this->items_for_modifier_list_query;
     }
-
+  
     /**
      * Sets items_for_modifier_list_query
-     * @param \SquareConnect\Model\CatalogQueryItemsForModifierList $items_for_modifier_list_query A query that returns
-     * all [CatalogItem](#type-catalogitem)s that have any of the given
-     * [CatalogModifierList](#type-catalogmodifierlist)s enabled.
+     * @param \SquareConnect\Model\CatalogQueryItemsForModifierList $items_for_modifier_list_query A query that returns all `CatalogItem`s that have any of the given `CatalogModifierList`s enabled.
      * @return $this
      */
     public function setItemsForModifierListQuery($items_for_modifier_list_query)
@@ -314,48 +316,85 @@ class CatalogQuery implements ArrayAccess
         $this->items_for_modifier_list_query = $items_for_modifier_list_query;
         return $this;
     }
-
+    /**
+     * Gets items_for_item_options_query
+     * @return \SquareConnect\Model\CatalogQueryItemsForItemOptions
+     */
+    public function getItemsForItemOptionsQuery()
+    {
+        return $this->items_for_item_options_query;
+    }
+  
+    /**
+     * Sets items_for_item_options_query
+     * @param \SquareConnect\Model\CatalogQueryItemsForItemOptions $items_for_item_options_query A query that returns all `CatalogItem`s that have all of the given `CatalogItemOption`s.
+     * @return $this
+     */
+    public function setItemsForItemOptionsQuery($items_for_item_options_query)
+    {
+        $this->items_for_item_options_query = $items_for_item_options_query;
+        return $this;
+    }
+    /**
+     * Gets item_variations_for_item_option_values_query
+     * @return \SquareConnect\Model\CatalogQueryItemVariationsForItemOptionValues
+     */
+    public function getItemVariationsForItemOptionValuesQuery()
+    {
+        return $this->item_variations_for_item_option_values_query;
+    }
+  
+    /**
+     * Sets item_variations_for_item_option_values_query
+     * @param \SquareConnect\Model\CatalogQueryItemVariationsForItemOptionValues $item_variations_for_item_option_values_query A query that returns all `CatalogItemVariation`s that have all of the given `CatalogItemOption` values.
+     * @return $this
+     */
+    public function setItemVariationsForItemOptionValuesQuery($item_variations_for_item_option_values_query)
+    {
+        $this->item_variations_for_item_option_values_query = $item_variations_for_item_option_values_query;
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string
@@ -363,10 +402,7 @@ class CatalogQuery implements ArrayAccess
     public function __toString()
     {
         if (defined('JSON_PRETTY_PRINT')) {
-            return json_encode(
-                \SquareConnect\ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
+            return json_encode(\SquareConnect\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
         } else {
             return json_encode(\SquareConnect\ObjectSerializer::sanitizeForSerialization($this));
         }

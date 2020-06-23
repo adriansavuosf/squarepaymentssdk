@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * CatalogModifier Class Doc Comment
  *
@@ -21,51 +20,69 @@ use \ArrayAccess;
 class CatalogModifier implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
         'name' => 'string',
-        'price_money' => \SquareConnect\Model\Money::class
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+        'price_money' => '\SquareConnect\Model\Money',
+        'ordinal' => 'int',
+        'modifier_list_id' => 'string'
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'name' => 'name',
-        'price_money' => 'price_money'
-    ];
-
+        'price_money' => 'price_money',
+        'ordinal' => 'ordinal',
+        'modifier_list_id' => 'modifier_list_id'
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'name' => 'setName',
-        'price_money' => 'setPriceMoney'
-    ];
-
+        'price_money' => 'setPriceMoney',
+        'ordinal' => 'setOrdinal',
+        'modifier_list_id' => 'setModifierListId'
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'name' => 'getName',
-        'price_money' => 'getPriceMoney'
-    ];
-
+        'price_money' => 'getPriceMoney',
+        'ordinal' => 'getOrdinal',
+        'modifier_list_id' => 'getModifierListId'
+    );
+  
     /**
-     * $name The modifier's name. Searchable.
-     * @var string
-     */
-    private $name;
+      * $name The modifier name. Searchable. This field has max length of 255 Unicode code points.
+      * @var string
+      */
+    protected $name;
     /**
-     * $price_money The modifier's price.
-     * @var \SquareConnect\Model\Money
-     */
-    private $price_money;
+      * $price_money The modifier price.
+      * @var \SquareConnect\Model\Money
+      */
+    protected $price_money;
+    /**
+      * $ordinal Determines where this `CatalogModifier` appears in the `CatalogModifierList`.
+      * @var int
+      */
+    protected $ordinal;
+    /**
+      * $modifier_list_id The ID of the `CatalogModifierList` associated with this modifier. Searchable.
+      * @var string
+      */
+    protected $modifier_list_id;
 
     /**
      * Constructor
@@ -75,18 +92,27 @@ class CatalogModifier implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["name"])) {
-                $this->name = $data["name"];
+              $this->name = $data["name"];
             } else {
-                $this->name = null;
+              $this->name = null;
             }
             if (isset($data["price_money"])) {
-                $this->price_money = $data["price_money"];
+              $this->price_money = $data["price_money"];
             } else {
-                $this->price_money = null;
+              $this->price_money = null;
+            }
+            if (isset($data["ordinal"])) {
+              $this->ordinal = $data["ordinal"];
+            } else {
+              $this->ordinal = null;
+            }
+            if (isset($data["modifier_list_id"])) {
+              $this->modifier_list_id = $data["modifier_list_id"];
+            } else {
+              $this->modifier_list_id = null;
             }
         }
     }
-
     /**
      * Gets name
      * @return string
@@ -95,10 +121,10 @@ class CatalogModifier implements ArrayAccess
     {
         return $this->name;
     }
-
+  
     /**
      * Sets name
-     * @param string $name The modifier's name. Searchable.
+     * @param string $name The modifier name. Searchable. This field has max length of 255 Unicode code points.
      * @return $this
      */
     public function setName($name)
@@ -106,7 +132,6 @@ class CatalogModifier implements ArrayAccess
         $this->name = $name;
         return $this;
     }
-
     /**
      * Gets price_money
      * @return \SquareConnect\Model\Money
@@ -115,10 +140,10 @@ class CatalogModifier implements ArrayAccess
     {
         return $this->price_money;
     }
-
+  
     /**
      * Sets price_money
-     * @param \SquareConnect\Model\Money $price_money The modifier's price.
+     * @param \SquareConnect\Model\Money $price_money The modifier price.
      * @return $this
      */
     public function setPriceMoney($price_money)
@@ -126,48 +151,85 @@ class CatalogModifier implements ArrayAccess
         $this->price_money = $price_money;
         return $this;
     }
-
+    /**
+     * Gets ordinal
+     * @return int
+     */
+    public function getOrdinal()
+    {
+        return $this->ordinal;
+    }
+  
+    /**
+     * Sets ordinal
+     * @param int $ordinal Determines where this `CatalogModifier` appears in the `CatalogModifierList`.
+     * @return $this
+     */
+    public function setOrdinal($ordinal)
+    {
+        $this->ordinal = $ordinal;
+        return $this;
+    }
+    /**
+     * Gets modifier_list_id
+     * @return string
+     */
+    public function getModifierListId()
+    {
+        return $this->modifier_list_id;
+    }
+  
+    /**
+     * Sets modifier_list_id
+     * @param string $modifier_list_id The ID of the `CatalogModifierList` associated with this modifier. Searchable.
+     * @return $this
+     */
+    public function setModifierListId($modifier_list_id)
+    {
+        $this->modifier_list_id = $modifier_list_id;
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string

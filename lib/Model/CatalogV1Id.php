@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * CatalogV1Id Class Doc Comment
  *
@@ -21,51 +20,51 @@ use \ArrayAccess;
 class CatalogV1Id implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
         'catalog_v1_id' => 'string',
         'location_id' => 'string'
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'catalog_v1_id' => 'catalog_v1_id',
         'location_id' => 'location_id'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'catalog_v1_id' => 'setCatalogV1Id',
         'location_id' => 'setLocationId'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'catalog_v1_id' => 'getCatalogV1Id',
         'location_id' => 'getLocationId'
-    ];
-
+    );
+  
     /**
-     * $catalog_v1_id The ID for an object in Connect V1, if different from its Connect V2 ID.
-     * @var string
-     */
-    private $catalog_v1_id;
+      * $catalog_v1_id The ID for an object in Connect V1, if different from its Connect V2 ID.
+      * @var string
+      */
+    protected $catalog_v1_id;
     /**
-     * $location_id The ID of the [location](#type-location) this Connect V1 ID is associated with.
-     * @var string
-     */
-    private $location_id;
+      * $location_id The ID of the `Location` this Connect V1 ID is associated with.
+      * @var string
+      */
+    protected $location_id;
 
     /**
      * Constructor
@@ -75,18 +74,17 @@ class CatalogV1Id implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["catalog_v1_id"])) {
-                $this->catalog_v1_id = $data["catalog_v1_id"];
+              $this->catalog_v1_id = $data["catalog_v1_id"];
             } else {
-                $this->catalog_v1_id = null;
+              $this->catalog_v1_id = null;
             }
             if (isset($data["location_id"])) {
-                $this->location_id = $data["location_id"];
+              $this->location_id = $data["location_id"];
             } else {
-                $this->location_id = null;
+              $this->location_id = null;
             }
         }
     }
-
     /**
      * Gets catalog_v1_id
      * @return string
@@ -95,7 +93,7 @@ class CatalogV1Id implements ArrayAccess
     {
         return $this->catalog_v1_id;
     }
-
+  
     /**
      * Sets catalog_v1_id
      * @param string $catalog_v1_id The ID for an object in Connect V1, if different from its Connect V2 ID.
@@ -106,7 +104,6 @@ class CatalogV1Id implements ArrayAccess
         $this->catalog_v1_id = $catalog_v1_id;
         return $this;
     }
-
     /**
      * Gets location_id
      * @return string
@@ -115,10 +112,10 @@ class CatalogV1Id implements ArrayAccess
     {
         return $this->location_id;
     }
-
+  
     /**
      * Sets location_id
-     * @param string $location_id The ID of the [location](#type-location) this Connect V1 ID is associated with.
+     * @param string $location_id The ID of the `Location` this Connect V1 ID is associated with.
      * @return $this
      */
     public function setLocationId($location_id)
@@ -126,48 +123,47 @@ class CatalogV1Id implements ArrayAccess
         $this->location_id = $location_id;
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string

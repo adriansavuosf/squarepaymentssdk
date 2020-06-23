@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * RetrieveCustomerResponse Class Doc Comment
  *
@@ -21,51 +20,51 @@ use \ArrayAccess;
 class RetrieveCustomerResponse implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
         'errors' => '\SquareConnect\Model\Error[]',
-        'customer' => \SquareConnect\Model\Customer::class
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+        'customer' => '\SquareConnect\Model\Customer'
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'errors' => 'errors',
         'customer' => 'customer'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'errors' => 'setErrors',
         'customer' => 'setCustomer'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'errors' => 'getErrors',
         'customer' => 'getCustomer'
-    ];
-
+    );
+  
     /**
-     * $errors Any errors that occurred during the request.
-     * @var \SquareConnect\Model\Error[]
-     */
-    private $errors;
+      * $errors Any errors that occurred during the request.
+      * @var \SquareConnect\Model\Error[]
+      */
+    protected $errors;
     /**
-     * $customer The requested customer.
-     * @var \SquareConnect\Model\Customer
-     */
-    private $customer;
+      * $customer The requested customer.
+      * @var \SquareConnect\Model\Customer
+      */
+    protected $customer;
 
     /**
      * Constructor
@@ -75,18 +74,17 @@ class RetrieveCustomerResponse implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["errors"])) {
-                $this->errors = $data["errors"];
+              $this->errors = $data["errors"];
             } else {
-                $this->errors = null;
+              $this->errors = null;
             }
             if (isset($data["customer"])) {
-                $this->customer = $data["customer"];
+              $this->customer = $data["customer"];
             } else {
-                $this->customer = null;
+              $this->customer = null;
             }
         }
     }
-
     /**
      * Gets errors
      * @return \SquareConnect\Model\Error[]
@@ -95,7 +93,7 @@ class RetrieveCustomerResponse implements ArrayAccess
     {
         return $this->errors;
     }
-
+  
     /**
      * Sets errors
      * @param \SquareConnect\Model\Error[] $errors Any errors that occurred during the request.
@@ -106,7 +104,6 @@ class RetrieveCustomerResponse implements ArrayAccess
         $this->errors = $errors;
         return $this;
     }
-
     /**
      * Gets customer
      * @return \SquareConnect\Model\Customer
@@ -115,7 +112,7 @@ class RetrieveCustomerResponse implements ArrayAccess
     {
         return $this->customer;
     }
-
+  
     /**
      * Sets customer
      * @param \SquareConnect\Model\Customer $customer The requested customer.
@@ -126,48 +123,47 @@ class RetrieveCustomerResponse implements ArrayAccess
         $this->customer = $customer;
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string

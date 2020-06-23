@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * BatchRetrieveInventoryCountsRequest Class Doc Comment
  *
@@ -21,71 +20,69 @@ use \ArrayAccess;
 class BatchRetrieveInventoryCountsRequest implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
         'catalog_object_ids' => 'string[]',
         'location_ids' => 'string[]',
         'updated_after' => 'string',
         'cursor' => 'string'
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'catalog_object_ids' => 'catalog_object_ids',
         'location_ids' => 'location_ids',
         'updated_after' => 'updated_after',
         'cursor' => 'cursor'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'catalog_object_ids' => 'setCatalogObjectIds',
         'location_ids' => 'setLocationIds',
         'updated_after' => 'setUpdatedAfter',
         'cursor' => 'setCursor'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'catalog_object_ids' => 'getCatalogObjectIds',
         'location_ids' => 'getLocationIds',
         'updated_after' => 'getUpdatedAfter',
         'cursor' => 'getCursor'
-    ];
-
+    );
+  
     /**
-     * $catalog_object_ids The set of [CatalogObject](#type-catalogobject) ids to look up.
-     * @var string[]
-     */
-    private $catalog_object_ids;
+      * $catalog_object_ids Filters results by `CatalogObject` ID. Only applied when set. Default: unset.
+      * @var string[]
+      */
+    protected $catalog_object_ids;
     /**
-     * $location_ids The [Location](#type-location) ids to look up.
-     * @var string[]
-     */
-    private $location_ids;
+      * $location_ids Filters results by `Location` ID. Only applied when set. Default: unset.
+      * @var string[]
+      */
+    protected $location_ids;
     /**
-     * $updated_after An RFC 3339 timestamp. Only counts whose `calculated_at` timestamp is later than the given
-     * time will be returned.
-     * @var string
-     */
-    private $updated_after;
+      * $updated_after Provided as an RFC 3339 timestamp. Returns results whose `calculated_at` value is after the given time. Default: UNIX epoch (`1970-01-01T00:00:00Z`).
+      * @var string
+      */
+    protected $updated_after;
     /**
-     * $cursor A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set
-     * of results for your original query.  See [Paginating results](#paginatingresults) for more information.
-     * @var string
-     */
-    private $cursor;
+      * $cursor A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for the original query.  See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information.
+      * @var string
+      */
+    protected $cursor;
 
     /**
      * Constructor
@@ -95,28 +92,27 @@ class BatchRetrieveInventoryCountsRequest implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["catalog_object_ids"])) {
-                $this->catalog_object_ids = $data["catalog_object_ids"];
+              $this->catalog_object_ids = $data["catalog_object_ids"];
             } else {
-                $this->catalog_object_ids = null;
+              $this->catalog_object_ids = null;
             }
             if (isset($data["location_ids"])) {
-                $this->location_ids = $data["location_ids"];
+              $this->location_ids = $data["location_ids"];
             } else {
-                $this->location_ids = null;
+              $this->location_ids = null;
             }
             if (isset($data["updated_after"])) {
-                $this->updated_after = $data["updated_after"];
+              $this->updated_after = $data["updated_after"];
             } else {
-                $this->updated_after = null;
+              $this->updated_after = null;
             }
             if (isset($data["cursor"])) {
-                $this->cursor = $data["cursor"];
+              $this->cursor = $data["cursor"];
             } else {
-                $this->cursor = null;
+              $this->cursor = null;
             }
         }
     }
-
     /**
      * Gets catalog_object_ids
      * @return string[]
@@ -125,10 +121,10 @@ class BatchRetrieveInventoryCountsRequest implements ArrayAccess
     {
         return $this->catalog_object_ids;
     }
-
+  
     /**
      * Sets catalog_object_ids
-     * @param string[] $catalog_object_ids The set of [CatalogObject](#type-catalogobject) ids to look up.
+     * @param string[] $catalog_object_ids Filters results by `CatalogObject` ID. Only applied when set. Default: unset.
      * @return $this
      */
     public function setCatalogObjectIds($catalog_object_ids)
@@ -136,7 +132,6 @@ class BatchRetrieveInventoryCountsRequest implements ArrayAccess
         $this->catalog_object_ids = $catalog_object_ids;
         return $this;
     }
-
     /**
      * Gets location_ids
      * @return string[]
@@ -145,10 +140,10 @@ class BatchRetrieveInventoryCountsRequest implements ArrayAccess
     {
         return $this->location_ids;
     }
-
+  
     /**
      * Sets location_ids
-     * @param string[] $location_ids The [Location](#type-location) ids to look up.
+     * @param string[] $location_ids Filters results by `Location` ID. Only applied when set. Default: unset.
      * @return $this
      */
     public function setLocationIds($location_ids)
@@ -156,7 +151,6 @@ class BatchRetrieveInventoryCountsRequest implements ArrayAccess
         $this->location_ids = $location_ids;
         return $this;
     }
-
     /**
      * Gets updated_after
      * @return string
@@ -165,11 +159,10 @@ class BatchRetrieveInventoryCountsRequest implements ArrayAccess
     {
         return $this->updated_after;
     }
-
+  
     /**
      * Sets updated_after
-     * @param string $updated_after An RFC 3339 timestamp. Only counts whose `calculated_at` timestamp is later than
-     * the given time will be returned.
+     * @param string $updated_after Provided as an RFC 3339 timestamp. Returns results whose `calculated_at` value is after the given time. Default: UNIX epoch (`1970-01-01T00:00:00Z`).
      * @return $this
      */
     public function setUpdatedAfter($updated_after)
@@ -177,7 +170,6 @@ class BatchRetrieveInventoryCountsRequest implements ArrayAccess
         $this->updated_after = $updated_after;
         return $this;
     }
-
     /**
      * Gets cursor
      * @return string
@@ -186,12 +178,10 @@ class BatchRetrieveInventoryCountsRequest implements ArrayAccess
     {
         return $this->cursor;
     }
-
+  
     /**
      * Sets cursor
-     * @param string $cursor A pagination cursor returned by a previous call to this endpoint.
-     * Provide this to retrieve the next set of results for your original query.
-     * See [Paginating results](#paginatingresults) for more information.
+     * @param string $cursor A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for the original query.  See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information.
      * @return $this
      */
     public function setCursor($cursor)
@@ -199,48 +189,47 @@ class BatchRetrieveInventoryCountsRequest implements ArrayAccess
         $this->cursor = $cursor;
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string
@@ -248,10 +237,7 @@ class BatchRetrieveInventoryCountsRequest implements ArrayAccess
     public function __toString()
     {
         if (defined('JSON_PRETTY_PRINT')) {
-            return json_encode(
-                \SquareConnect\ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
+            return json_encode(\SquareConnect\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
         } else {
             return json_encode(\SquareConnect\ObjectSerializer::sanitizeForSerialization($this));
         }

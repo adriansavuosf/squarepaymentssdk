@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * CatalogItemModifierListInfo Class Doc Comment
  *
@@ -21,82 +20,78 @@ use \ArrayAccess;
 class CatalogItemModifierListInfo implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
         'modifier_list_id' => 'string',
         'modifier_overrides' => '\SquareConnect\Model\CatalogModifierOverride[]',
         'min_selected_modifiers' => 'int',
         'max_selected_modifiers' => 'int',
         'enabled' => 'bool'
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'modifier_list_id' => 'modifier_list_id',
         'modifier_overrides' => 'modifier_overrides',
         'min_selected_modifiers' => 'min_selected_modifiers',
         'max_selected_modifiers' => 'max_selected_modifiers',
         'enabled' => 'enabled'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'modifier_list_id' => 'setModifierListId',
         'modifier_overrides' => 'setModifierOverrides',
         'min_selected_modifiers' => 'setMinSelectedModifiers',
         'max_selected_modifiers' => 'setMaxSelectedModifiers',
         'enabled' => 'setEnabled'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'modifier_list_id' => 'getModifierListId',
         'modifier_overrides' => 'getModifierOverrides',
         'min_selected_modifiers' => 'getMinSelectedModifiers',
         'max_selected_modifiers' => 'getMaxSelectedModifiers',
         'enabled' => 'getEnabled'
-    ];
-
+    );
+  
     /**
-     * $modifier_list_id The ID of the [CatalogModifierList](#type-catalogmodifierlist) controlled by this
-     * [CatalogModifierListInfo](#type-catalogmodifierlistinfo).
-     * @var string
-     */
-    private $modifier_list_id;
+      * $modifier_list_id The ID of the `CatalogModifierList` controlled by this `CatalogModifierListInfo`.
+      * @var string
+      */
+    protected $modifier_list_id;
     /**
-     * $modifier_overrides A set of [CatalogModifierOverride](#type-catalogmodifieroverride) objects that override
-     * whether a given [CatalogModifier](#type-catalogmodifier) is enabled by default.
-     * @var \SquareConnect\Model\CatalogModifierOverride[]
-     */
-    private $modifier_overrides;
+      * $modifier_overrides A set of `CatalogModifierOverride` objects that override whether a given `CatalogModifier` is enabled by default.
+      * @var \SquareConnect\Model\CatalogModifierOverride[]
+      */
+    protected $modifier_overrides;
     /**
-     * $min_selected_modifiers If zero or larger, the smallest number of [CatalogModifier](#type-catalogmodifier)s
-     * that must be selected from this [CatalogModifierList](#type-catalogmodifierlist).
-     * @var int
-     */
-    private $min_selected_modifiers;
+      * $min_selected_modifiers If 0 or larger, the smallest number of `CatalogModifier`s that must be selected from this `CatalogModifierList`.
+      * @var int
+      */
+    protected $min_selected_modifiers;
     /**
-     * $max_selected_modifiers If zero or larger, the largest number of [CatalogModifier](#type-catalogmodifier)s
-     * that can be selected from this [CatalogModifierList](#type-catalogmodifierlist).
-     * @var int
-     */
-    private $max_selected_modifiers;
+      * $max_selected_modifiers If 0 or larger, the largest number of `CatalogModifier`s that can be selected from this `CatalogModifierList`.
+      * @var int
+      */
+    protected $max_selected_modifiers;
     /**
-     * $enabled If `true`, enable this [CatalogModifierList](#type-catalogmodifierlist).
-     * @var bool
-     */
-    private $enabled;
+      * $enabled If `true`, enable this `CatalogModifierList`. The default value is `true`.
+      * @var bool
+      */
+    protected $enabled;
 
     /**
      * Constructor
@@ -106,33 +101,32 @@ class CatalogItemModifierListInfo implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["modifier_list_id"])) {
-                $this->modifier_list_id = $data["modifier_list_id"];
+              $this->modifier_list_id = $data["modifier_list_id"];
             } else {
-                $this->modifier_list_id = null;
+              $this->modifier_list_id = null;
             }
             if (isset($data["modifier_overrides"])) {
-                $this->modifier_overrides = $data["modifier_overrides"];
+              $this->modifier_overrides = $data["modifier_overrides"];
             } else {
-                $this->modifier_overrides = null;
+              $this->modifier_overrides = null;
             }
             if (isset($data["min_selected_modifiers"])) {
-                $this->min_selected_modifiers = $data["min_selected_modifiers"];
+              $this->min_selected_modifiers = $data["min_selected_modifiers"];
             } else {
-                $this->min_selected_modifiers = null;
+              $this->min_selected_modifiers = null;
             }
             if (isset($data["max_selected_modifiers"])) {
-                $this->max_selected_modifiers = $data["max_selected_modifiers"];
+              $this->max_selected_modifiers = $data["max_selected_modifiers"];
             } else {
-                $this->max_selected_modifiers = null;
+              $this->max_selected_modifiers = null;
             }
             if (isset($data["enabled"])) {
-                $this->enabled = $data["enabled"];
+              $this->enabled = $data["enabled"];
             } else {
-                $this->enabled = null;
+              $this->enabled = null;
             }
         }
     }
-
     /**
      * Gets modifier_list_id
      * @return string
@@ -141,11 +135,10 @@ class CatalogItemModifierListInfo implements ArrayAccess
     {
         return $this->modifier_list_id;
     }
-
+  
     /**
      * Sets modifier_list_id
-     * @param string $modifier_list_id The ID of the [CatalogModifierList](#type-catalogmodifierlist) controlled by
-     * this [CatalogModifierListInfo](#type-catalogmodifierlistinfo).
+     * @param string $modifier_list_id The ID of the `CatalogModifierList` controlled by this `CatalogModifierListInfo`.
      * @return $this
      */
     public function setModifierListId($modifier_list_id)
@@ -153,7 +146,6 @@ class CatalogItemModifierListInfo implements ArrayAccess
         $this->modifier_list_id = $modifier_list_id;
         return $this;
     }
-
     /**
      * Gets modifier_overrides
      * @return \SquareConnect\Model\CatalogModifierOverride[]
@@ -162,12 +154,10 @@ class CatalogItemModifierListInfo implements ArrayAccess
     {
         return $this->modifier_overrides;
     }
-
+  
     /**
      * Sets modifier_overrides
-     * @param \SquareConnect\Model\CatalogModifierOverride[] $modifier_overrides A set of
-     * [CatalogModifierOverride](#type-catalogmodifieroverride) objects that override whether a given
-     * [CatalogModifier](#type-catalogmodifier) is enabled by default.
+     * @param \SquareConnect\Model\CatalogModifierOverride[] $modifier_overrides A set of `CatalogModifierOverride` objects that override whether a given `CatalogModifier` is enabled by default.
      * @return $this
      */
     public function setModifierOverrides($modifier_overrides)
@@ -175,7 +165,6 @@ class CatalogItemModifierListInfo implements ArrayAccess
         $this->modifier_overrides = $modifier_overrides;
         return $this;
     }
-
     /**
      * Gets min_selected_modifiers
      * @return int
@@ -184,12 +173,10 @@ class CatalogItemModifierListInfo implements ArrayAccess
     {
         return $this->min_selected_modifiers;
     }
-
+  
     /**
      * Sets min_selected_modifiers
-     * @param int $min_selected_modifiers If zero or larger, the smallest number of
-     * [CatalogModifier](#type-catalogmodifier)s that must be selected from this
-     * [CatalogModifierList](#type-catalogmodifierlist).
+     * @param int $min_selected_modifiers If 0 or larger, the smallest number of `CatalogModifier`s that must be selected from this `CatalogModifierList`.
      * @return $this
      */
     public function setMinSelectedModifiers($min_selected_modifiers)
@@ -197,7 +184,6 @@ class CatalogItemModifierListInfo implements ArrayAccess
         $this->min_selected_modifiers = $min_selected_modifiers;
         return $this;
     }
-
     /**
      * Gets max_selected_modifiers
      * @return int
@@ -206,12 +192,10 @@ class CatalogItemModifierListInfo implements ArrayAccess
     {
         return $this->max_selected_modifiers;
     }
-
+  
     /**
      * Sets max_selected_modifiers
-     * @param int $max_selected_modifiers If zero or larger, the largest number of
-     * [CatalogModifier](#type-catalogmodifier)s that can be selected from this
-     * [CatalogModifierList](#type-catalogmodifierlist).
+     * @param int $max_selected_modifiers If 0 or larger, the largest number of `CatalogModifier`s that can be selected from this `CatalogModifierList`.
      * @return $this
      */
     public function setMaxSelectedModifiers($max_selected_modifiers)
@@ -219,7 +203,6 @@ class CatalogItemModifierListInfo implements ArrayAccess
         $this->max_selected_modifiers = $max_selected_modifiers;
         return $this;
     }
-
     /**
      * Gets enabled
      * @return bool
@@ -228,10 +211,10 @@ class CatalogItemModifierListInfo implements ArrayAccess
     {
         return $this->enabled;
     }
-
+  
     /**
      * Sets enabled
-     * @param bool $enabled If `true`, enable this [CatalogModifierList](#type-catalogmodifierlist).
+     * @param bool $enabled If `true`, enable this `CatalogModifierList`. The default value is `true`.
      * @return $this
      */
     public function setEnabled($enabled)
@@ -239,48 +222,47 @@ class CatalogItemModifierListInfo implements ArrayAccess
         $this->enabled = $enabled;
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string
@@ -288,10 +270,7 @@ class CatalogItemModifierListInfo implements ArrayAccess
     public function __toString()
     {
         if (defined('JSON_PRETTY_PRINT')) {
-            return json_encode(
-                \SquareConnect\ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
+            return json_encode(\SquareConnect\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
         } else {
             return json_encode(\SquareConnect\ObjectSerializer::sanitizeForSerialization($this));
         }

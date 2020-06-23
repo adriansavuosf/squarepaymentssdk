@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * UpdateCustomerRequest Class Doc Comment
  *
@@ -21,26 +20,27 @@ use \ArrayAccess;
 class UpdateCustomerRequest implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
         'given_name' => 'string',
         'family_name' => 'string',
         'company_name' => 'string',
         'nickname' => 'string',
         'email_address' => 'string',
-        'address' => \SquareConnect\Model\Address::class,
+        'address' => '\SquareConnect\Model\Address',
         'phone_number' => 'string',
         'reference_id' => 'string',
-        'note' => 'string'
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+        'note' => 'string',
+        'birthday' => 'string'
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'given_name' => 'given_name',
         'family_name' => 'family_name',
         'company_name' => 'company_name',
@@ -49,14 +49,15 @@ class UpdateCustomerRequest implements ArrayAccess
         'address' => 'address',
         'phone_number' => 'phone_number',
         'reference_id' => 'reference_id',
-        'note' => 'note'
-    ];
-
+        'note' => 'note',
+        'birthday' => 'birthday'
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'given_name' => 'setGivenName',
         'family_name' => 'setFamilyName',
         'company_name' => 'setCompanyName',
@@ -65,14 +66,15 @@ class UpdateCustomerRequest implements ArrayAccess
         'address' => 'setAddress',
         'phone_number' => 'setPhoneNumber',
         'reference_id' => 'setReferenceId',
-        'note' => 'setNote'
-    ];
-
+        'note' => 'setNote',
+        'birthday' => 'setBirthday'
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'given_name' => 'getGivenName',
         'family_name' => 'getFamilyName',
         'company_name' => 'getCompanyName',
@@ -81,54 +83,60 @@ class UpdateCustomerRequest implements ArrayAccess
         'address' => 'getAddress',
         'phone_number' => 'getPhoneNumber',
         'reference_id' => 'getReferenceId',
-        'note' => 'getNote'
-    ];
-
+        'note' => 'getNote',
+        'birthday' => 'getBirthday'
+    );
+  
     /**
-     * $given_name The customer's given (i.e., first) name.
-     * @var string
-     */
-    private $given_name;
+      * $given_name The given (i.e., first) name associated with the customer profile.
+      * @var string
+      */
+    protected $given_name;
     /**
-     * $family_name The customer's family (i.e., last) name.
-     * @var string
-     */
-    private $family_name;
+      * $family_name The family (i.e., last) name associated with the customer profile.
+      * @var string
+      */
+    protected $family_name;
     /**
-     * $company_name The name of the customer's company.
-     * @var string
-     */
-    private $company_name;
+      * $company_name A business name associated with the customer profile.
+      * @var string
+      */
+    protected $company_name;
     /**
-     * $nickname A nickname for the customer.
-     * @var string
-     */
-    private $nickname;
+      * $nickname A nickname for the customer profile.
+      * @var string
+      */
+    protected $nickname;
     /**
-     * $email_address The customer's email address.
-     * @var string
-     */
-    private $email_address;
+      * $email_address The email address associated with the customer profile.
+      * @var string
+      */
+    protected $email_address;
     /**
-     * $address The customer's physical address.
-     * @var \SquareConnect\Model\Address
-     */
-    private $address;
+      * $address The physical address associated with the customer profile.
+      * @var \SquareConnect\Model\Address
+      */
+    protected $address;
     /**
-     * $phone_number The customer's phone number.
-     * @var string
-     */
-    private $phone_number;
+      * $phone_number The 11-digit phone number associated with the customer profile.
+      * @var string
+      */
+    protected $phone_number;
     /**
-     * $reference_id An optional second ID you can set to associate the customer with an entity in another system.
-     * @var string
-     */
-    private $reference_id;
+      * $reference_id An optional, second ID used to associate the customer profile with an entity in another system.
+      * @var string
+      */
+    protected $reference_id;
     /**
-     * $note An optional note to associate with the customer.
-     * @var string
-     */
-    private $note;
+      * $note A custom note associated with the customer profile.
+      * @var string
+      */
+    protected $note;
+    /**
+      * $birthday The birthday associated with the customer profile, in RFC-3339 format. Year is optional, timezone and times are not allowed. For example: `0000-09-01T00:00:00-00:00` indicates a birthday on September 1st. `1998-09-01T00:00:00-00:00` indications a birthday on September 1st __1998__.
+      * @var string
+      */
+    protected $birthday;
 
     /**
      * Constructor
@@ -138,53 +146,57 @@ class UpdateCustomerRequest implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["given_name"])) {
-                $this->given_name = $data["given_name"];
+              $this->given_name = $data["given_name"];
             } else {
-                $this->given_name = null;
+              $this->given_name = null;
             }
             if (isset($data["family_name"])) {
-                $this->family_name = $data["family_name"];
+              $this->family_name = $data["family_name"];
             } else {
-                $this->family_name = null;
+              $this->family_name = null;
             }
             if (isset($data["company_name"])) {
-                $this->company_name = $data["company_name"];
+              $this->company_name = $data["company_name"];
             } else {
-                $this->company_name = null;
+              $this->company_name = null;
             }
             if (isset($data["nickname"])) {
-                $this->nickname = $data["nickname"];
+              $this->nickname = $data["nickname"];
             } else {
-                $this->nickname = null;
+              $this->nickname = null;
             }
             if (isset($data["email_address"])) {
-                $this->email_address = $data["email_address"];
+              $this->email_address = $data["email_address"];
             } else {
-                $this->email_address = null;
+              $this->email_address = null;
             }
             if (isset($data["address"])) {
-                $this->address = $data["address"];
+              $this->address = $data["address"];
             } else {
-                $this->address = null;
+              $this->address = null;
             }
             if (isset($data["phone_number"])) {
-                $this->phone_number = $data["phone_number"];
+              $this->phone_number = $data["phone_number"];
             } else {
-                $this->phone_number = null;
+              $this->phone_number = null;
             }
             if (isset($data["reference_id"])) {
-                $this->reference_id = $data["reference_id"];
+              $this->reference_id = $data["reference_id"];
             } else {
-                $this->reference_id = null;
+              $this->reference_id = null;
             }
             if (isset($data["note"])) {
-                $this->note = $data["note"];
+              $this->note = $data["note"];
             } else {
-                $this->note = null;
+              $this->note = null;
+            }
+            if (isset($data["birthday"])) {
+              $this->birthday = $data["birthday"];
+            } else {
+              $this->birthday = null;
             }
         }
     }
-
     /**
      * Gets given_name
      * @return string
@@ -193,10 +205,10 @@ class UpdateCustomerRequest implements ArrayAccess
     {
         return $this->given_name;
     }
-
+  
     /**
      * Sets given_name
-     * @param string $given_name The customer's given (i.e., first) name.
+     * @param string $given_name The given (i.e., first) name associated with the customer profile.
      * @return $this
      */
     public function setGivenName($given_name)
@@ -204,7 +216,6 @@ class UpdateCustomerRequest implements ArrayAccess
         $this->given_name = $given_name;
         return $this;
     }
-
     /**
      * Gets family_name
      * @return string
@@ -213,10 +224,10 @@ class UpdateCustomerRequest implements ArrayAccess
     {
         return $this->family_name;
     }
-
+  
     /**
      * Sets family_name
-     * @param string $family_name The customer's family (i.e., last) name.
+     * @param string $family_name The family (i.e., last) name associated with the customer profile.
      * @return $this
      */
     public function setFamilyName($family_name)
@@ -224,7 +235,6 @@ class UpdateCustomerRequest implements ArrayAccess
         $this->family_name = $family_name;
         return $this;
     }
-
     /**
      * Gets company_name
      * @return string
@@ -233,10 +243,10 @@ class UpdateCustomerRequest implements ArrayAccess
     {
         return $this->company_name;
     }
-
+  
     /**
      * Sets company_name
-     * @param string $company_name The name of the customer's company.
+     * @param string $company_name A business name associated with the customer profile.
      * @return $this
      */
     public function setCompanyName($company_name)
@@ -244,7 +254,6 @@ class UpdateCustomerRequest implements ArrayAccess
         $this->company_name = $company_name;
         return $this;
     }
-
     /**
      * Gets nickname
      * @return string
@@ -253,10 +262,10 @@ class UpdateCustomerRequest implements ArrayAccess
     {
         return $this->nickname;
     }
-
+  
     /**
      * Sets nickname
-     * @param string $nickname A nickname for the customer.
+     * @param string $nickname A nickname for the customer profile.
      * @return $this
      */
     public function setNickname($nickname)
@@ -264,7 +273,6 @@ class UpdateCustomerRequest implements ArrayAccess
         $this->nickname = $nickname;
         return $this;
     }
-
     /**
      * Gets email_address
      * @return string
@@ -273,10 +281,10 @@ class UpdateCustomerRequest implements ArrayAccess
     {
         return $this->email_address;
     }
-
+  
     /**
      * Sets email_address
-     * @param string $email_address The customer's email address.
+     * @param string $email_address The email address associated with the customer profile.
      * @return $this
      */
     public function setEmailAddress($email_address)
@@ -284,7 +292,6 @@ class UpdateCustomerRequest implements ArrayAccess
         $this->email_address = $email_address;
         return $this;
     }
-
     /**
      * Gets address
      * @return \SquareConnect\Model\Address
@@ -293,10 +300,10 @@ class UpdateCustomerRequest implements ArrayAccess
     {
         return $this->address;
     }
-
+  
     /**
      * Sets address
-     * @param \SquareConnect\Model\Address $address The customer's physical address.
+     * @param \SquareConnect\Model\Address $address The physical address associated with the customer profile.
      * @return $this
      */
     public function setAddress($address)
@@ -304,7 +311,6 @@ class UpdateCustomerRequest implements ArrayAccess
         $this->address = $address;
         return $this;
     }
-
     /**
      * Gets phone_number
      * @return string
@@ -313,10 +319,10 @@ class UpdateCustomerRequest implements ArrayAccess
     {
         return $this->phone_number;
     }
-
+  
     /**
      * Sets phone_number
-     * @param string $phone_number The customer's phone number.
+     * @param string $phone_number The 11-digit phone number associated with the customer profile.
      * @return $this
      */
     public function setPhoneNumber($phone_number)
@@ -324,7 +330,6 @@ class UpdateCustomerRequest implements ArrayAccess
         $this->phone_number = $phone_number;
         return $this;
     }
-
     /**
      * Gets reference_id
      * @return string
@@ -333,11 +338,10 @@ class UpdateCustomerRequest implements ArrayAccess
     {
         return $this->reference_id;
     }
-
+  
     /**
      * Sets reference_id
-     * @param string $reference_id An optional second ID you can set to associate the customer with an entity in
-     * another system.
+     * @param string $reference_id An optional, second ID used to associate the customer profile with an entity in another system.
      * @return $this
      */
     public function setReferenceId($reference_id)
@@ -345,7 +349,6 @@ class UpdateCustomerRequest implements ArrayAccess
         $this->reference_id = $reference_id;
         return $this;
     }
-
     /**
      * Gets note
      * @return string
@@ -354,10 +357,10 @@ class UpdateCustomerRequest implements ArrayAccess
     {
         return $this->note;
     }
-
+  
     /**
      * Sets note
-     * @param string $note An optional note to associate with the customer.
+     * @param string $note A custom note associated with the customer profile.
      * @return $this
      */
     public function setNote($note)
@@ -365,48 +368,66 @@ class UpdateCustomerRequest implements ArrayAccess
         $this->note = $note;
         return $this;
     }
-
+    /**
+     * Gets birthday
+     * @return string
+     */
+    public function getBirthday()
+    {
+        return $this->birthday;
+    }
+  
+    /**
+     * Sets birthday
+     * @param string $birthday The birthday associated with the customer profile, in RFC-3339 format. Year is optional, timezone and times are not allowed. For example: `0000-09-01T00:00:00-00:00` indicates a birthday on September 1st. `1998-09-01T00:00:00-00:00` indications a birthday on September 1st __1998__.
+     * @return $this
+     */
+    public function setBirthday($birthday)
+    {
+        $this->birthday = $birthday;
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string

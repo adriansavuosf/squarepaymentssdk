@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * UpsertCatalogObjectResponse Class Doc Comment
  *
@@ -21,60 +20,60 @@ use \ArrayAccess;
 class UpsertCatalogObjectResponse implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
         'errors' => '\SquareConnect\Model\Error[]',
-        'catalog_object' => \SquareConnect\Model\CatalogObject::class,
+        'catalog_object' => '\SquareConnect\Model\CatalogObject',
         'id_mappings' => '\SquareConnect\Model\CatalogIdMapping[]'
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'errors' => 'errors',
         'catalog_object' => 'catalog_object',
         'id_mappings' => 'id_mappings'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'errors' => 'setErrors',
         'catalog_object' => 'setCatalogObject',
         'id_mappings' => 'setIdMappings'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'errors' => 'getErrors',
         'catalog_object' => 'getCatalogObject',
         'id_mappings' => 'getIdMappings'
-    ];
-
+    );
+  
     /**
-     * $errors The set of [Error](#type-error)s encountered.
-     * @var \SquareConnect\Model\Error[]
-     */
-    private $errors;
+      * $errors Information on any errors encountered.
+      * @var \SquareConnect\Model\Error[]
+      */
+    protected $errors;
     /**
-     * $catalog_object The created [CatalogObject](#type-catalogobject).
-     * @var \SquareConnect\Model\CatalogObject
-     */
-    private $catalog_object;
+      * $catalog_object The successfully created or updated CatalogObject.
+      * @var \SquareConnect\Model\CatalogObject
+      */
+    protected $catalog_object;
     /**
-     * $id_mappings The mapping between client and server IDs for this Upsert.
-     * @var \SquareConnect\Model\CatalogIdMapping[]
-     */
-    private $id_mappings;
+      * $id_mappings The mapping between client and server IDs for this upsert.
+      * @var \SquareConnect\Model\CatalogIdMapping[]
+      */
+    protected $id_mappings;
 
     /**
      * Constructor
@@ -84,23 +83,22 @@ class UpsertCatalogObjectResponse implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["errors"])) {
-                $this->errors = $data["errors"];
+              $this->errors = $data["errors"];
             } else {
-                $this->errors = null;
+              $this->errors = null;
             }
             if (isset($data["catalog_object"])) {
-                $this->catalog_object = $data["catalog_object"];
+              $this->catalog_object = $data["catalog_object"];
             } else {
-                $this->catalog_object = null;
+              $this->catalog_object = null;
             }
             if (isset($data["id_mappings"])) {
-                $this->id_mappings = $data["id_mappings"];
+              $this->id_mappings = $data["id_mappings"];
             } else {
-                $this->id_mappings = null;
+              $this->id_mappings = null;
             }
         }
     }
-
     /**
      * Gets errors
      * @return \SquareConnect\Model\Error[]
@@ -109,10 +107,10 @@ class UpsertCatalogObjectResponse implements ArrayAccess
     {
         return $this->errors;
     }
-
+  
     /**
      * Sets errors
-     * @param \SquareConnect\Model\Error[] $errors The set of [Error](#type-error)s encountered.
+     * @param \SquareConnect\Model\Error[] $errors Information on any errors encountered.
      * @return $this
      */
     public function setErrors($errors)
@@ -120,7 +118,6 @@ class UpsertCatalogObjectResponse implements ArrayAccess
         $this->errors = $errors;
         return $this;
     }
-
     /**
      * Gets catalog_object
      * @return \SquareConnect\Model\CatalogObject
@@ -129,10 +126,10 @@ class UpsertCatalogObjectResponse implements ArrayAccess
     {
         return $this->catalog_object;
     }
-
+  
     /**
      * Sets catalog_object
-     * @param \SquareConnect\Model\CatalogObject $catalog_object The created [CatalogObject](#type-catalogobject).
+     * @param \SquareConnect\Model\CatalogObject $catalog_object The successfully created or updated CatalogObject.
      * @return $this
      */
     public function setCatalogObject($catalog_object)
@@ -140,7 +137,6 @@ class UpsertCatalogObjectResponse implements ArrayAccess
         $this->catalog_object = $catalog_object;
         return $this;
     }
-
     /**
      * Gets id_mappings
      * @return \SquareConnect\Model\CatalogIdMapping[]
@@ -149,11 +145,10 @@ class UpsertCatalogObjectResponse implements ArrayAccess
     {
         return $this->id_mappings;
     }
-
+  
     /**
      * Sets id_mappings
-     * @param \SquareConnect\Model\CatalogIdMapping[] $id_mappings The mapping between client and server IDs for this
-     * Upsert.
+     * @param \SquareConnect\Model\CatalogIdMapping[] $id_mappings The mapping between client and server IDs for this upsert.
      * @return $this
      */
     public function setIdMappings($id_mappings)
@@ -161,48 +156,47 @@ class UpsertCatalogObjectResponse implements ArrayAccess
         $this->id_mappings = $id_mappings;
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string

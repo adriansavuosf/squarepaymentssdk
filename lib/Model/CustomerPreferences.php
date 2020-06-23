@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * CustomerPreferences Class Doc Comment
  *
@@ -21,42 +20,42 @@ use \ArrayAccess;
 class CustomerPreferences implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
         'email_unsubscribed' => 'bool'
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'email_unsubscribed' => 'email_unsubscribed'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'email_unsubscribed' => 'setEmailUnsubscribed'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'email_unsubscribed' => 'getEmailUnsubscribed'
-    ];
-
+    );
+  
     /**
-     * $email_unsubscribed The customer has unsubscribed from receiving marketing campaign emails.
-     * @var bool
-     */
-    private $email_unsubscribed;
+      * $email_unsubscribed The customer has unsubscribed from receiving marketing campaign emails.
+      * @var bool
+      */
+    protected $email_unsubscribed;
 
     /**
      * Constructor
@@ -66,13 +65,12 @@ class CustomerPreferences implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["email_unsubscribed"])) {
-                $this->email_unsubscribed = $data["email_unsubscribed"];
+              $this->email_unsubscribed = $data["email_unsubscribed"];
             } else {
-                $this->email_unsubscribed = null;
+              $this->email_unsubscribed = null;
             }
         }
     }
-
     /**
      * Gets email_unsubscribed
      * @return bool
@@ -81,7 +79,7 @@ class CustomerPreferences implements ArrayAccess
     {
         return $this->email_unsubscribed;
     }
-
+  
     /**
      * Sets email_unsubscribed
      * @param bool $email_unsubscribed The customer has unsubscribed from receiving marketing campaign emails.
@@ -92,48 +90,47 @@ class CustomerPreferences implements ArrayAccess
         $this->email_unsubscribed = $email_unsubscribed;
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string

@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * ListCatalogResponse Class Doc Comment
  *
@@ -21,61 +20,60 @@ use \ArrayAccess;
 class ListCatalogResponse implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
         'errors' => '\SquareConnect\Model\Error[]',
         'cursor' => 'string',
         'objects' => '\SquareConnect\Model\CatalogObject[]'
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'errors' => 'errors',
         'cursor' => 'cursor',
         'objects' => 'objects'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'errors' => 'setErrors',
         'cursor' => 'setCursor',
         'objects' => 'setObjects'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'errors' => 'getErrors',
         'cursor' => 'getCursor',
         'objects' => 'getObjects'
-    ];
-
+    );
+  
     /**
-     * $errors The set of [Error](#type-error)s encountered.
-     * @var \SquareConnect\Model\Error[]
-     */
-    private $errors;
+      * $errors Information on any errors encountered.
+      * @var \SquareConnect\Model\Error[]
+      */
+    protected $errors;
     /**
-     * $cursor The pagination cursor to be used in a subsequent request.
-     * If unset, this is the final response. See [Paginating results](#paginatingresults) for more information.
-     * @var string
-     */
-    private $cursor;
+      * $cursor The pagination cursor to be used in a subsequent request. If unset, this is the final response. See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.
+      * @var string
+      */
+    protected $cursor;
     /**
-     * $objects The [CatalogObject](#type-catalogobject)s returned.
-     * @var \SquareConnect\Model\CatalogObject[]
-     */
-    private $objects;
+      * $objects The CatalogObjects returned.
+      * @var \SquareConnect\Model\CatalogObject[]
+      */
+    protected $objects;
 
     /**
      * Constructor
@@ -85,23 +83,22 @@ class ListCatalogResponse implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["errors"])) {
-                $this->errors = $data["errors"];
+              $this->errors = $data["errors"];
             } else {
-                $this->errors = null;
+              $this->errors = null;
             }
             if (isset($data["cursor"])) {
-                $this->cursor = $data["cursor"];
+              $this->cursor = $data["cursor"];
             } else {
-                $this->cursor = null;
+              $this->cursor = null;
             }
             if (isset($data["objects"])) {
-                $this->objects = $data["objects"];
+              $this->objects = $data["objects"];
             } else {
-                $this->objects = null;
+              $this->objects = null;
             }
         }
     }
-
     /**
      * Gets errors
      * @return \SquareConnect\Model\Error[]
@@ -110,10 +107,10 @@ class ListCatalogResponse implements ArrayAccess
     {
         return $this->errors;
     }
-
+  
     /**
      * Sets errors
-     * @param \SquareConnect\Model\Error[] $errors The set of [Error](#type-error)s encountered.
+     * @param \SquareConnect\Model\Error[] $errors Information on any errors encountered.
      * @return $this
      */
     public function setErrors($errors)
@@ -121,7 +118,6 @@ class ListCatalogResponse implements ArrayAccess
         $this->errors = $errors;
         return $this;
     }
-
     /**
      * Gets cursor
      * @return string
@@ -130,11 +126,10 @@ class ListCatalogResponse implements ArrayAccess
     {
         return $this->cursor;
     }
-
+  
     /**
      * Sets cursor
-     * @param string $cursor The pagination cursor to be used in a subsequent request.
-     * If unset, this is the final response. See [Paginating results](#paginatingresults) for more information.
+     * @param string $cursor The pagination cursor to be used in a subsequent request. If unset, this is the final response. See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.
      * @return $this
      */
     public function setCursor($cursor)
@@ -142,7 +137,6 @@ class ListCatalogResponse implements ArrayAccess
         $this->cursor = $cursor;
         return $this;
     }
-
     /**
      * Gets objects
      * @return \SquareConnect\Model\CatalogObject[]
@@ -151,10 +145,10 @@ class ListCatalogResponse implements ArrayAccess
     {
         return $this->objects;
     }
-
+  
     /**
      * Sets objects
-     * @param \SquareConnect\Model\CatalogObject[] $objects The [CatalogObject](#type-catalogobject)s returned.
+     * @param \SquareConnect\Model\CatalogObject[] $objects The CatalogObjects returned.
      * @return $this
      */
     public function setObjects($objects)
@@ -162,48 +156,47 @@ class ListCatalogResponse implements ArrayAccess
         $this->objects = $objects;
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string

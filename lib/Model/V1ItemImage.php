@@ -8,8 +8,8 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
+ * @deprecated
  * V1ItemImage Class Doc Comment
  *
  * @category Class
@@ -21,51 +21,51 @@ use \ArrayAccess;
 class V1ItemImage implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
         'id' => 'string',
         'url' => 'string'
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'id' => 'id',
         'url' => 'url'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'id' => 'setId',
         'url' => 'setUrl'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'id' => 'getId',
         'url' => 'getUrl'
-    ];
-
+    );
+  
     /**
-     * $id The image's unique ID.
-     * @var string
-     */
-    private $id;
+      * $id The image's unique ID.
+      * @var string
+      */
+    protected $id;
     /**
-     * $url The image's publicly accessible URL.
-     * @var string
-     */
-    private $url;
+      * $url The image's publicly accessible URL.
+      * @var string
+      */
+    protected $url;
 
     /**
      * Constructor
@@ -75,18 +75,17 @@ class V1ItemImage implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["id"])) {
-                $this->id = $data["id"];
+              $this->id = $data["id"];
             } else {
-                $this->id = null;
+              $this->id = null;
             }
             if (isset($data["url"])) {
-                $this->url = $data["url"];
+              $this->url = $data["url"];
             } else {
-                $this->url = null;
+              $this->url = null;
             }
         }
     }
-
     /**
      * Gets id
      * @return string
@@ -95,7 +94,7 @@ class V1ItemImage implements ArrayAccess
     {
         return $this->id;
     }
-
+  
     /**
      * Sets id
      * @param string $id The image's unique ID.
@@ -106,7 +105,6 @@ class V1ItemImage implements ArrayAccess
         $this->id = $id;
         return $this;
     }
-
     /**
      * Gets url
      * @return string
@@ -115,7 +113,7 @@ class V1ItemImage implements ArrayAccess
     {
         return $this->url;
     }
-
+  
     /**
      * Sets url
      * @param string $url The image's publicly accessible URL.
@@ -126,48 +124,47 @@ class V1ItemImage implements ArrayAccess
         $this->url = $url;
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string

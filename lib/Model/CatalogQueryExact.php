@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * CatalogQueryExact Class Doc Comment
  *
@@ -21,51 +20,51 @@ use \ArrayAccess;
 class CatalogQueryExact implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
         'attribute_name' => 'string',
         'attribute_value' => 'string'
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'attribute_name' => 'attribute_name',
         'attribute_value' => 'attribute_value'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'attribute_name' => 'setAttributeName',
         'attribute_value' => 'setAttributeValue'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'attribute_name' => 'getAttributeName',
         'attribute_value' => 'getAttributeValue'
-    ];
-
+    );
+  
     /**
-     * $attribute_name The name of the attribute to be searched.
-     * @var string
-     */
-    private $attribute_name;
+      * $attribute_name The name of the attribute to be searched.
+      * @var string
+      */
+    protected $attribute_name;
     /**
-     * $attribute_value The desired value of the search attribute.
-     * @var string
-     */
-    private $attribute_value;
+      * $attribute_value The desired value of the search attribute.
+      * @var string
+      */
+    protected $attribute_value;
 
     /**
      * Constructor
@@ -75,18 +74,17 @@ class CatalogQueryExact implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["attribute_name"])) {
-                $this->attribute_name = $data["attribute_name"];
+              $this->attribute_name = $data["attribute_name"];
             } else {
-                $this->attribute_name = null;
+              $this->attribute_name = null;
             }
             if (isset($data["attribute_value"])) {
-                $this->attribute_value = $data["attribute_value"];
+              $this->attribute_value = $data["attribute_value"];
             } else {
-                $this->attribute_value = null;
+              $this->attribute_value = null;
             }
         }
     }
-
     /**
      * Gets attribute_name
      * @return string
@@ -95,7 +93,7 @@ class CatalogQueryExact implements ArrayAccess
     {
         return $this->attribute_name;
     }
-
+  
     /**
      * Sets attribute_name
      * @param string $attribute_name The name of the attribute to be searched.
@@ -106,7 +104,6 @@ class CatalogQueryExact implements ArrayAccess
         $this->attribute_name = $attribute_name;
         return $this;
     }
-
     /**
      * Gets attribute_value
      * @return string
@@ -115,7 +112,7 @@ class CatalogQueryExact implements ArrayAccess
     {
         return $this->attribute_value;
     }
-
+  
     /**
      * Sets attribute_value
      * @param string $attribute_value The desired value of the search attribute.
@@ -126,48 +123,47 @@ class CatalogQueryExact implements ArrayAccess
         $this->attribute_value = $attribute_value;
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string

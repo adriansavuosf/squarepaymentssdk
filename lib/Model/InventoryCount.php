@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * InventoryCount Class Doc Comment
  *
@@ -21,89 +20,87 @@ use \ArrayAccess;
 class InventoryCount implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
         'catalog_object_id' => 'string',
         'catalog_object_type' => 'string',
-        'status' => 'string',
+        'state' => 'string',
         'location_id' => 'string',
         'quantity' => 'string',
         'calculated_at' => 'string'
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'catalog_object_id' => 'catalog_object_id',
         'catalog_object_type' => 'catalog_object_type',
-        'status' => 'status',
+        'state' => 'state',
         'location_id' => 'location_id',
         'quantity' => 'quantity',
         'calculated_at' => 'calculated_at'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'catalog_object_id' => 'setCatalogObjectId',
         'catalog_object_type' => 'setCatalogObjectType',
-        'status' => 'setStatus',
+        'state' => 'setState',
         'location_id' => 'setLocationId',
         'quantity' => 'setQuantity',
         'calculated_at' => 'setCalculatedAt'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'catalog_object_id' => 'getCatalogObjectId',
         'catalog_object_type' => 'getCatalogObjectType',
-        'status' => 'getStatus',
+        'state' => 'getState',
         'location_id' => 'getLocationId',
         'quantity' => 'getQuantity',
         'calculated_at' => 'getCalculatedAt'
-    ];
-
+    );
+  
     /**
-     * $catalog_object_id The id of the [CatalogObject](#type-catalogobject) being tracked.
-     * @var string
-     */
-    private $catalog_object_id;
+      * $catalog_object_id The Square generated ID of the `CatalogObject` being tracked.
+      * @var string
+      */
+    protected $catalog_object_id;
     /**
-     * $catalog_object_type The type of the object being tracked, e.g., `\"ITEM_VARIATION\"`.
-     * @var string
-     */
-    private $catalog_object_type;
+      * $catalog_object_type The `CatalogObjectType` of the `CatalogObject` being tracked. Tracking is only supported for the `ITEM_VARIATION` type.
+      * @var string
+      */
+    protected $catalog_object_type;
     /**
-     * $status The current [InventoryStatus](#type-inventorystatus) of the object.
-     * @var string
-     */
-    private $status;
+      * $state The current `InventoryState` for the related quantity of items. See [InventoryState](#type-inventorystate) for possible values
+      * @var string
+      */
+    protected $state;
     /**
-     * $location_id The id of the [Location](#type-location) where the object is being tracked.
-     * @var string
-     */
-    private $location_id;
+      * $location_id The Square ID of the `Location` where the related quantity of items are being tracked.
+      * @var string
+      */
+    protected $location_id;
     /**
-     * $quantity The quantity of the object as a decimal string. Fractional quantities are not currently supported.
-     * The database will truncate fractional values smaller than 1/100,000 when fractional values are supported.
-     * @var string
-     */
-    private $quantity;
+      * $quantity The number of items affected by the estimated count as a decimal string. Can support up to 5 digits after the decimal point.  _Important_: The Point of Sale app and Dashboard do not currently support decimal quantities. If a Point of Sale app or Dashboard attempts to read a decimal quantity on inventory counts or adjustments, the quantity will be rounded down to the nearest integer. For example, `2.5` will become `2`, and `-2.5` will become `-3`. Read [Decimal Quantities (BETA)](https://developer.squareup.com/docs/docs/inventory-api/what-it-does#decimal-quantities-beta) for more information.
+      * @var string
+      */
+    protected $quantity;
     /**
-     * $calculated_at Read-only time of the most recent physical count or adjustment that had an affect on the given
-     * product/status/location/quantity tuple.
-     * @var string
-     */
-    private $calculated_at;
+      * $calculated_at A read-only timestamp in RFC 3339 format that indicates when Square received the most recent physical count or adjustment that had an affect on the estimated count.
+      * @var string
+      */
+    protected $calculated_at;
 
     /**
      * Constructor
@@ -113,38 +110,37 @@ class InventoryCount implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["catalog_object_id"])) {
-                $this->catalog_object_id = $data["catalog_object_id"];
+              $this->catalog_object_id = $data["catalog_object_id"];
             } else {
-                $this->catalog_object_id = null;
+              $this->catalog_object_id = null;
             }
             if (isset($data["catalog_object_type"])) {
-                $this->catalog_object_type = $data["catalog_object_type"];
+              $this->catalog_object_type = $data["catalog_object_type"];
             } else {
-                $this->catalog_object_type = null;
+              $this->catalog_object_type = null;
             }
-            if (isset($data["status"])) {
-                $this->status = $data["status"];
+            if (isset($data["state"])) {
+              $this->state = $data["state"];
             } else {
-                $this->status = null;
+              $this->state = null;
             }
             if (isset($data["location_id"])) {
-                $this->location_id = $data["location_id"];
+              $this->location_id = $data["location_id"];
             } else {
-                $this->location_id = null;
+              $this->location_id = null;
             }
             if (isset($data["quantity"])) {
-                $this->quantity = $data["quantity"];
+              $this->quantity = $data["quantity"];
             } else {
-                $this->quantity = null;
+              $this->quantity = null;
             }
             if (isset($data["calculated_at"])) {
-                $this->calculated_at = $data["calculated_at"];
+              $this->calculated_at = $data["calculated_at"];
             } else {
-                $this->calculated_at = null;
+              $this->calculated_at = null;
             }
         }
     }
-
     /**
      * Gets catalog_object_id
      * @return string
@@ -153,10 +149,10 @@ class InventoryCount implements ArrayAccess
     {
         return $this->catalog_object_id;
     }
-
+  
     /**
      * Sets catalog_object_id
-     * @param string $catalog_object_id The id of the [CatalogObject](#type-catalogobject) being tracked.
+     * @param string $catalog_object_id The Square generated ID of the `CatalogObject` being tracked.
      * @return $this
      */
     public function setCatalogObjectId($catalog_object_id)
@@ -164,7 +160,6 @@ class InventoryCount implements ArrayAccess
         $this->catalog_object_id = $catalog_object_id;
         return $this;
     }
-
     /**
      * Gets catalog_object_type
      * @return string
@@ -173,10 +168,10 @@ class InventoryCount implements ArrayAccess
     {
         return $this->catalog_object_type;
     }
-
+  
     /**
      * Sets catalog_object_type
-     * @param string $catalog_object_type The type of the object being tracked, e.g., `\"ITEM_VARIATION\"`.
+     * @param string $catalog_object_type The `CatalogObjectType` of the `CatalogObject` being tracked. Tracking is only supported for the `ITEM_VARIATION` type.
      * @return $this
      */
     public function setCatalogObjectType($catalog_object_type)
@@ -184,27 +179,25 @@ class InventoryCount implements ArrayAccess
         $this->catalog_object_type = $catalog_object_type;
         return $this;
     }
-
     /**
-     * Gets status
+     * Gets state
      * @return string
      */
-    public function getStatus()
+    public function getState()
     {
-        return $this->status;
+        return $this->state;
     }
-
+  
     /**
-     * Sets status
-     * @param string $status The current [InventoryStatus](#type-inventorystatus) of the object.
+     * Sets state
+     * @param string $state The current `InventoryState` for the related quantity of items. See [InventoryState](#type-inventorystate) for possible values
      * @return $this
      */
-    public function setStatus($status)
+    public function setState($state)
     {
-        $this->status = $status;
+        $this->state = $state;
         return $this;
     }
-
     /**
      * Gets location_id
      * @return string
@@ -213,10 +206,10 @@ class InventoryCount implements ArrayAccess
     {
         return $this->location_id;
     }
-
+  
     /**
      * Sets location_id
-     * @param string $location_id The id of the [Location](#type-location) where the object is being tracked.
+     * @param string $location_id The Square ID of the `Location` where the related quantity of items are being tracked.
      * @return $this
      */
     public function setLocationId($location_id)
@@ -224,7 +217,6 @@ class InventoryCount implements ArrayAccess
         $this->location_id = $location_id;
         return $this;
     }
-
     /**
      * Gets quantity
      * @return string
@@ -233,12 +225,10 @@ class InventoryCount implements ArrayAccess
     {
         return $this->quantity;
     }
-
+  
     /**
      * Sets quantity
-     * @param string $quantity The quantity of the object as a decimal string. Fractional quantities are not currently
-     * supported. The database will truncate fractional values smaller than 1/100,000 when fractional values are
-     * supported.
+     * @param string $quantity The number of items affected by the estimated count as a decimal string. Can support up to 5 digits after the decimal point.  _Important_: The Point of Sale app and Dashboard do not currently support decimal quantities. If a Point of Sale app or Dashboard attempts to read a decimal quantity on inventory counts or adjustments, the quantity will be rounded down to the nearest integer. For example, `2.5` will become `2`, and `-2.5` will become `-3`. Read [Decimal Quantities (BETA)](https://developer.squareup.com/docs/docs/inventory-api/what-it-does#decimal-quantities-beta) for more information.
      * @return $this
      */
     public function setQuantity($quantity)
@@ -246,7 +236,6 @@ class InventoryCount implements ArrayAccess
         $this->quantity = $quantity;
         return $this;
     }
-
     /**
      * Gets calculated_at
      * @return string
@@ -255,11 +244,10 @@ class InventoryCount implements ArrayAccess
     {
         return $this->calculated_at;
     }
-
+  
     /**
      * Sets calculated_at
-     * @param string $calculated_at Read-only time of the most recent physical count or adjustment that had an affect
-     * on the given product/status/location/quantity tuple.
+     * @param string $calculated_at A read-only timestamp in RFC 3339 format that indicates when Square received the most recent physical count or adjustment that had an affect on the estimated count.
      * @return $this
      */
     public function setCalculatedAt($calculated_at)
@@ -267,48 +255,47 @@ class InventoryCount implements ArrayAccess
         $this->calculated_at = $calculated_at;
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string

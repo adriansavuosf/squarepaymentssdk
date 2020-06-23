@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * InventoryChange Class Doc Comment
  *
@@ -21,60 +20,69 @@ use \ArrayAccess;
 class InventoryChange implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
         'type' => 'string',
-        'physical_count' => \SquareConnect\Model\InventoryPhysicalCount::class,
-        'adjustment' => \SquareConnect\Model\InventoryAdjustment::class
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+        'physical_count' => '\SquareConnect\Model\InventoryPhysicalCount',
+        'adjustment' => '\SquareConnect\Model\InventoryAdjustment',
+        'transfer' => '\SquareConnect\Model\InventoryTransfer'
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'type' => 'type',
         'physical_count' => 'physical_count',
-        'adjustment' => 'adjustment'
-    ];
-
+        'adjustment' => 'adjustment',
+        'transfer' => 'transfer'
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'type' => 'setType',
         'physical_count' => 'setPhysicalCount',
-        'adjustment' => 'setAdjustment'
-    ];
-
+        'adjustment' => 'setAdjustment',
+        'transfer' => 'setTransfer'
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'type' => 'getType',
         'physical_count' => 'getPhysicalCount',
-        'adjustment' => 'getAdjustment'
-    ];
-
+        'adjustment' => 'getAdjustment',
+        'transfer' => 'getTransfer'
+    );
+  
     /**
-     * $type The type of this change, `PHYSICAL_COUNT` or `ADJUSTMENT`.
-     * @var string
-     */
-    private $type;
+      * $type Indicates how the inventory change was applied. See `InventoryChangeType` for all possible values. See [InventoryChangeType](#type-inventorychangetype) for possible values
+      * @var string
+      */
+    protected $type;
     /**
-     * $physical_count A physical count. Present if and only if `type` is `PHYSICAL_COUNT`.
-     * @var \SquareConnect\Model\InventoryPhysicalCount
-     */
-    private $physical_count;
+      * $physical_count Contains details about the physical count when `type` is `PHYSICAL_COUNT` and unset for all other types.
+      * @var \SquareConnect\Model\InventoryPhysicalCount
+      */
+    protected $physical_count;
     /**
-     * $adjustment An adjustment. Present if and only if `type` is `ADJUSTMENT`.
-     * @var \SquareConnect\Model\InventoryAdjustment
-     */
-    private $adjustment;
+      * $adjustment Contains details about the inventory adjustment when `type` is `ADJUSTMENT` and unset for all other types.
+      * @var \SquareConnect\Model\InventoryAdjustment
+      */
+    protected $adjustment;
+    /**
+      * $transfer Contains details about the inventory transfer when `type` is `TRANSFER` and unset for all other types.
+      * @var \SquareConnect\Model\InventoryTransfer
+      */
+    protected $transfer;
 
     /**
      * Constructor
@@ -84,23 +92,27 @@ class InventoryChange implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["type"])) {
-                $this->type = $data["type"];
+              $this->type = $data["type"];
             } else {
-                $this->type = null;
+              $this->type = null;
             }
             if (isset($data["physical_count"])) {
-                $this->physical_count = $data["physical_count"];
+              $this->physical_count = $data["physical_count"];
             } else {
-                $this->physical_count = null;
+              $this->physical_count = null;
             }
             if (isset($data["adjustment"])) {
-                $this->adjustment = $data["adjustment"];
+              $this->adjustment = $data["adjustment"];
             } else {
-                $this->adjustment = null;
+              $this->adjustment = null;
+            }
+            if (isset($data["transfer"])) {
+              $this->transfer = $data["transfer"];
+            } else {
+              $this->transfer = null;
             }
         }
     }
-
     /**
      * Gets type
      * @return string
@@ -109,10 +121,10 @@ class InventoryChange implements ArrayAccess
     {
         return $this->type;
     }
-
+  
     /**
      * Sets type
-     * @param string $type The type of this change, `PHYSICAL_COUNT` or `ADJUSTMENT`.
+     * @param string $type Indicates how the inventory change was applied. See `InventoryChangeType` for all possible values. See [InventoryChangeType](#type-inventorychangetype) for possible values
      * @return $this
      */
     public function setType($type)
@@ -120,7 +132,6 @@ class InventoryChange implements ArrayAccess
         $this->type = $type;
         return $this;
     }
-
     /**
      * Gets physical_count
      * @return \SquareConnect\Model\InventoryPhysicalCount
@@ -129,11 +140,10 @@ class InventoryChange implements ArrayAccess
     {
         return $this->physical_count;
     }
-
+  
     /**
      * Sets physical_count
-     * @param \SquareConnect\Model\InventoryPhysicalCount $physical_count A physical count. Present if and only if
-     * `type` is `PHYSICAL_COUNT`.
+     * @param \SquareConnect\Model\InventoryPhysicalCount $physical_count Contains details about the physical count when `type` is `PHYSICAL_COUNT` and unset for all other types.
      * @return $this
      */
     public function setPhysicalCount($physical_count)
@@ -141,7 +151,6 @@ class InventoryChange implements ArrayAccess
         $this->physical_count = $physical_count;
         return $this;
     }
-
     /**
      * Gets adjustment
      * @return \SquareConnect\Model\InventoryAdjustment
@@ -150,11 +159,10 @@ class InventoryChange implements ArrayAccess
     {
         return $this->adjustment;
     }
-
+  
     /**
      * Sets adjustment
-     * @param \SquareConnect\Model\InventoryAdjustment $adjustment An adjustment. Present if and only if `type` is
-     * `ADJUSTMENT`.
+     * @param \SquareConnect\Model\InventoryAdjustment $adjustment Contains details about the inventory adjustment when `type` is `ADJUSTMENT` and unset for all other types.
      * @return $this
      */
     public function setAdjustment($adjustment)
@@ -162,48 +170,66 @@ class InventoryChange implements ArrayAccess
         $this->adjustment = $adjustment;
         return $this;
     }
-
+    /**
+     * Gets transfer
+     * @return \SquareConnect\Model\InventoryTransfer
+     */
+    public function getTransfer()
+    {
+        return $this->transfer;
+    }
+  
+    /**
+     * Sets transfer
+     * @param \SquareConnect\Model\InventoryTransfer $transfer Contains details about the inventory transfer when `type` is `TRANSFER` and unset for all other types.
+     * @return $this
+     */
+    public function setTransfer($transfer)
+    {
+        $this->transfer = $transfer;
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string

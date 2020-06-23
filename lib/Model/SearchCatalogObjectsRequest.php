@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * SearchCatalogObjectsRequest Class Doc Comment
  *
@@ -21,24 +20,24 @@ use \ArrayAccess;
 class SearchCatalogObjectsRequest implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
         'cursor' => 'string',
         'object_types' => 'string[]',
         'include_deleted_objects' => 'bool',
         'include_related_objects' => 'bool',
         'begin_time' => 'string',
-        'query' => \SquareConnect\Model\CatalogQuery::class,
+        'query' => '\SquareConnect\Model\CatalogQuery',
         'limit' => 'int'
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'cursor' => 'cursor',
         'object_types' => 'object_types',
         'include_deleted_objects' => 'include_deleted_objects',
@@ -46,13 +45,13 @@ class SearchCatalogObjectsRequest implements ArrayAccess
         'begin_time' => 'begin_time',
         'query' => 'query',
         'limit' => 'limit'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'cursor' => 'setCursor',
         'object_types' => 'setObjectTypes',
         'include_deleted_objects' => 'setIncludeDeletedObjects',
@@ -60,13 +59,13 @@ class SearchCatalogObjectsRequest implements ArrayAccess
         'begin_time' => 'setBeginTime',
         'query' => 'setQuery',
         'limit' => 'setLimit'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'cursor' => 'getCursor',
         'object_types' => 'getObjectTypes',
         'include_deleted_objects' => 'getIncludeDeletedObjects',
@@ -74,59 +73,43 @@ class SearchCatalogObjectsRequest implements ArrayAccess
         'begin_time' => 'getBeginTime',
         'query' => 'getQuery',
         'limit' => 'getLimit'
-    ];
-
+    );
+  
     /**
-     * $cursor The pagination cursor returned in the previous response. Leave unset for an initial request.
-     * See [Paginating results](#paginatingresults) for more information.
-     * @var string
-     */
-    private $cursor;
+      * $cursor The pagination cursor returned in the previous response. Leave unset for an initial request. See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.
+      * @var string
+      */
+    protected $cursor;
     /**
-     * $object_types The desired set of object types to appear in the search results.
-     * The legal values are taken from the [CatalogObjectType](#type-catalogobjecttype)
-     * enumeration, namely `\"ITEM\"`, `\"ITEM_VARIATION\"`, `\"CATEGORY\"`, `\"DISCOUNT\"`, `\"TAX\"`, `\"MODIFIER\"`,
-     * or `\"MODIFIER_LIST\"`.
-     * @var string[]
-     */
-    private $object_types;
+      * $object_types The desired set of object types to appear in the search results. The legal values are taken from the CatalogObjectType enum: `\"ITEM\"`, `\"ITEM_VARIATION\"`, `\"CATEGORY\"`, `\"DISCOUNT\"`, `\"TAX\"`, `\"MODIFIER\"`, or `\"MODIFIER_LIST\"`. See [CatalogObjectType](#type-catalogobjecttype) for possible values
+      * @var string[]
+      */
+    protected $object_types;
     /**
-     * $include_deleted_objects If `true`, deleted objects will be included in the results.
-     * Deleted objects will have their `is_deleted` field set to `true`.
-     * @var bool
-     */
-    private $include_deleted_objects;
+      * $include_deleted_objects If `true`, deleted objects will be included in the results. Deleted objects will have their `is_deleted` field set to `true`.
+      * @var bool
+      */
+    protected $include_deleted_objects;
     /**
-     * $include_related_objects If `true`, the response will include additional objects that are related to the
-     * requested object, as follows:  If a [CatalogItem](#type-catalogitem) is returned in the object field of the
-     * response, its associated [CatalogCategory](#type-catalogcategory), [CatalogTax](#type-catalogtax)es, and
-     * [CatalogModifierList](#type-catalogmodifierlist)s will be included in the `related_objects` field of the
-     * response.  If a [CatalogItemVariation](#type-catalogitemvariation) is returned in the object field of the
-     * response, its parent [CatalogItem](#type-catalogitem) will be included in the `related_objects` field of the
-     * response.
-     * @var bool
-     */
-    private $include_related_objects;
+      * $include_related_objects If `true`, the response will include additional objects that are related to the requested object, as follows:  If a CatalogItem is returned in the object field of the response, its associated CatalogCategory, CatalogTax objects, CatalogImage objects and CatalogModifierList objects will be included in the `related_objects` field of the response.  If a CatalogItemVariation is returned in the object field of the response, its parent CatalogItem will be included in the `related_objects` field of the response.
+      * @var bool
+      */
+    protected $include_related_objects;
     /**
-     * $begin_time Return objects modified after this [timestamp](#workingwithdates), in RFC 3339 format, e.g.,
-     * \"2016-09-04T23:59:33.123Z\". The timestamp is exclusive - objects with a timestamp equal to `begin_time` will
-     * not be included in the response.
-     * @var string
-     */
-    private $begin_time;
+      * $begin_time Return objects modified after this [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates), in RFC 3339 format, e.g., `2016-09-04T23:59:33.123Z`. The timestamp is exclusive - objects with a timestamp equal to `begin_time` will not be included in the response.
+      * @var string
+      */
+    protected $begin_time;
     /**
-     * $query A query to be used to filter or sort the results. If no query is specified, the entire catalog will be
-     * returned.
-     * @var \SquareConnect\Model\CatalogQuery
-     */
-    private $query;
+      * $query A query to be used to filter or sort the results. If no query is specified, the entire catalog will be returned.
+      * @var \SquareConnect\Model\CatalogQuery
+      */
+    protected $query;
     /**
-     * $limit A limit on the number of results to be returned in a single page. The limit is advisory - the
-     * implementation may return more or fewer results. If the supplied limit is negative, zero, or is higher than the
-     * maximum limit of 1,000, it will be ignored.
-     * @var int
-     */
-    private $limit;
+      * $limit A limit on the number of results to be returned in a single page. The limit is advisory - the implementation may return more or fewer results. If the supplied limit is negative, zero, or is higher than the maximum limit of 1,000, it will be ignored.
+      * @var int
+      */
+    protected $limit;
 
     /**
      * Constructor
@@ -136,43 +119,42 @@ class SearchCatalogObjectsRequest implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["cursor"])) {
-                $this->cursor = $data["cursor"];
+              $this->cursor = $data["cursor"];
             } else {
-                $this->cursor = null;
+              $this->cursor = null;
             }
             if (isset($data["object_types"])) {
-                $this->object_types = $data["object_types"];
+              $this->object_types = $data["object_types"];
             } else {
-                $this->object_types = null;
+              $this->object_types = null;
             }
             if (isset($data["include_deleted_objects"])) {
-                $this->include_deleted_objects = $data["include_deleted_objects"];
+              $this->include_deleted_objects = $data["include_deleted_objects"];
             } else {
-                $this->include_deleted_objects = null;
+              $this->include_deleted_objects = null;
             }
             if (isset($data["include_related_objects"])) {
-                $this->include_related_objects = $data["include_related_objects"];
+              $this->include_related_objects = $data["include_related_objects"];
             } else {
-                $this->include_related_objects = null;
+              $this->include_related_objects = null;
             }
             if (isset($data["begin_time"])) {
-                $this->begin_time = $data["begin_time"];
+              $this->begin_time = $data["begin_time"];
             } else {
-                $this->begin_time = null;
+              $this->begin_time = null;
             }
             if (isset($data["query"])) {
-                $this->query = $data["query"];
+              $this->query = $data["query"];
             } else {
-                $this->query = null;
+              $this->query = null;
             }
             if (isset($data["limit"])) {
-                $this->limit = $data["limit"];
+              $this->limit = $data["limit"];
             } else {
-                $this->limit = null;
+              $this->limit = null;
             }
         }
     }
-
     /**
      * Gets cursor
      * @return string
@@ -181,11 +163,10 @@ class SearchCatalogObjectsRequest implements ArrayAccess
     {
         return $this->cursor;
     }
-
+  
     /**
      * Sets cursor
-     * @param string $cursor The pagination cursor returned in the previous response. Leave unset for an initial
-     * request. See [Paginating results](#paginatingresults) for more information.
+     * @param string $cursor The pagination cursor returned in the previous response. Leave unset for an initial request. See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.
      * @return $this
      */
     public function setCursor($cursor)
@@ -193,7 +174,6 @@ class SearchCatalogObjectsRequest implements ArrayAccess
         $this->cursor = $cursor;
         return $this;
     }
-
     /**
      * Gets object_types
      * @return string[]
@@ -202,12 +182,10 @@ class SearchCatalogObjectsRequest implements ArrayAccess
     {
         return $this->object_types;
     }
-
+  
     /**
      * Sets object_types
-     * @param string[] $object_types The desired set of object types to appear in the search results.
-     * The legal values are taken from the [CatalogObjectType](#type-catalogobjecttype) enumeration, namely `\"ITEM\"`,
-     * `\"ITEM_VARIATION\"`, `\"CATEGORY\"`, `\"DISCOUNT\"`, `\"TAX\"`, `\"MODIFIER\"`, or `\"MODIFIER_LIST\"`.
+     * @param string[] $object_types The desired set of object types to appear in the search results. The legal values are taken from the CatalogObjectType enum: `\"ITEM\"`, `\"ITEM_VARIATION\"`, `\"CATEGORY\"`, `\"DISCOUNT\"`, `\"TAX\"`, `\"MODIFIER\"`, or `\"MODIFIER_LIST\"`. See [CatalogObjectType](#type-catalogobjecttype) for possible values
      * @return $this
      */
     public function setObjectTypes($object_types)
@@ -215,7 +193,6 @@ class SearchCatalogObjectsRequest implements ArrayAccess
         $this->object_types = $object_types;
         return $this;
     }
-
     /**
      * Gets include_deleted_objects
      * @return bool
@@ -224,11 +201,10 @@ class SearchCatalogObjectsRequest implements ArrayAccess
     {
         return $this->include_deleted_objects;
     }
-
+  
     /**
      * Sets include_deleted_objects
-     * @param bool $include_deleted_objects If `true`, deleted objects will be included in the results.
-     * Deleted objects will have their `is_deleted` field set to `true`.
+     * @param bool $include_deleted_objects If `true`, deleted objects will be included in the results. Deleted objects will have their `is_deleted` field set to `true`.
      * @return $this
      */
     public function setIncludeDeletedObjects($include_deleted_objects)
@@ -236,7 +212,6 @@ class SearchCatalogObjectsRequest implements ArrayAccess
         $this->include_deleted_objects = $include_deleted_objects;
         return $this;
     }
-
     /**
      * Gets include_related_objects
      * @return bool
@@ -245,16 +220,10 @@ class SearchCatalogObjectsRequest implements ArrayAccess
     {
         return $this->include_related_objects;
     }
-
+  
     /**
      * Sets include_related_objects
-     * @param bool $include_related_objects If `true`, the response will include additional objects that are related to
-     * the requested object, as follows:  If a [CatalogItem](#type-catalogitem) is returned in the object field of the
-     * response, its associated [CatalogCategory](#type-catalogcategory), [CatalogTax](#type-catalogtax)es, and
-     * [CatalogModifierList](#type-catalogmodifierlist)s will be included in the `related_objects` field of the
-     * response.  If a [CatalogItemVariation](#type-catalogitemvariation) is returned in the object field of the
-     * response, its parent [CatalogItem](#type-catalogitem) will be included in the `related_objects` field of the
-     * response.
+     * @param bool $include_related_objects If `true`, the response will include additional objects that are related to the requested object, as follows:  If a CatalogItem is returned in the object field of the response, its associated CatalogCategory, CatalogTax objects, CatalogImage objects and CatalogModifierList objects will be included in the `related_objects` field of the response.  If a CatalogItemVariation is returned in the object field of the response, its parent CatalogItem will be included in the `related_objects` field of the response.
      * @return $this
      */
     public function setIncludeRelatedObjects($include_related_objects)
@@ -262,7 +231,6 @@ class SearchCatalogObjectsRequest implements ArrayAccess
         $this->include_related_objects = $include_related_objects;
         return $this;
     }
-
     /**
      * Gets begin_time
      * @return string
@@ -271,12 +239,10 @@ class SearchCatalogObjectsRequest implements ArrayAccess
     {
         return $this->begin_time;
     }
-
+  
     /**
      * Sets begin_time
-     * @param string $begin_time Return objects modified after this [timestamp](#workingwithdates), in RFC 3339 format,
-     * e.g., \"2016-09-04T23:59:33.123Z\". The timestamp is exclusive - objects with a timestamp equal to `begin_time`
-     * will not be included in the response.
+     * @param string $begin_time Return objects modified after this [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates), in RFC 3339 format, e.g., `2016-09-04T23:59:33.123Z`. The timestamp is exclusive - objects with a timestamp equal to `begin_time` will not be included in the response.
      * @return $this
      */
     public function setBeginTime($begin_time)
@@ -284,7 +250,6 @@ class SearchCatalogObjectsRequest implements ArrayAccess
         $this->begin_time = $begin_time;
         return $this;
     }
-
     /**
      * Gets query
      * @return \SquareConnect\Model\CatalogQuery
@@ -293,11 +258,10 @@ class SearchCatalogObjectsRequest implements ArrayAccess
     {
         return $this->query;
     }
-
+  
     /**
      * Sets query
-     * @param \SquareConnect\Model\CatalogQuery $query A query to be used to filter or sort the results. If no query is
-     * specified, the entire catalog will be returned.
+     * @param \SquareConnect\Model\CatalogQuery $query A query to be used to filter or sort the results. If no query is specified, the entire catalog will be returned.
      * @return $this
      */
     public function setQuery($query)
@@ -305,7 +269,6 @@ class SearchCatalogObjectsRequest implements ArrayAccess
         $this->query = $query;
         return $this;
     }
-
     /**
      * Gets limit
      * @return int
@@ -314,12 +277,10 @@ class SearchCatalogObjectsRequest implements ArrayAccess
     {
         return $this->limit;
     }
-
+  
     /**
      * Sets limit
-     * @param int $limit A limit on the number of results to be returned in a single page. The limit is advisory - the
-     * implementation may return more or fewer results. If the supplied limit is negative, zero, or is higher than the
-     * maximum limit of 1,000, it will be ignored.
+     * @param int $limit A limit on the number of results to be returned in a single page. The limit is advisory - the implementation may return more or fewer results. If the supplied limit is negative, zero, or is higher than the maximum limit of 1,000, it will be ignored.
      * @return $this
      */
     public function setLimit($limit)
@@ -327,48 +288,47 @@ class SearchCatalogObjectsRequest implements ArrayAccess
         $this->limit = $limit;
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string

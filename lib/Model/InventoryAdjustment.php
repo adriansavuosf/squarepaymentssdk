@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * InventoryAdjustment Class Doc Comment
  *
@@ -21,46 +20,42 @@ use \ArrayAccess;
 class InventoryAdjustment implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
         'id' => 'string',
         'reference_id' => 'string',
-        'from_status' => 'string',
-        'to_status' => 'string',
-        'from_location_id' => 'string',
-        'to_location_id' => 'string',
+        'from_state' => 'string',
+        'to_state' => 'string',
+        'location_id' => 'string',
         'catalog_object_id' => 'string',
         'catalog_object_type' => 'string',
         'quantity' => 'string',
-        'total_cost_money' => \SquareConnect\Model\Money::class,
-        'total_price_money' => \SquareConnect\Model\Money::class,
+        'total_price_money' => '\SquareConnect\Model\Money',
         'occurred_at' => 'string',
         'created_at' => 'string',
-        'source' => \SquareConnect\Model\SourceApplication::class,
+        'source' => '\SquareConnect\Model\SourceApplication',
         'employee_id' => 'string',
         'transaction_id' => 'string',
         'refund_id' => 'string',
         'purchase_order_id' => 'string',
         'goods_receipt_id' => 'string'
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'id' => 'id',
         'reference_id' => 'reference_id',
-        'from_status' => 'from_status',
-        'to_status' => 'to_status',
-        'from_location_id' => 'from_location_id',
-        'to_location_id' => 'to_location_id',
+        'from_state' => 'from_state',
+        'to_state' => 'to_state',
+        'location_id' => 'location_id',
         'catalog_object_id' => 'catalog_object_id',
         'catalog_object_type' => 'catalog_object_type',
         'quantity' => 'quantity',
-        'total_cost_money' => 'total_cost_money',
         'total_price_money' => 'total_price_money',
         'occurred_at' => 'occurred_at',
         'created_at' => 'created_at',
@@ -70,23 +65,21 @@ class InventoryAdjustment implements ArrayAccess
         'refund_id' => 'refund_id',
         'purchase_order_id' => 'purchase_order_id',
         'goods_receipt_id' => 'goods_receipt_id'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'id' => 'setId',
         'reference_id' => 'setReferenceId',
-        'from_status' => 'setFromStatus',
-        'to_status' => 'setToStatus',
-        'from_location_id' => 'setFromLocationId',
-        'to_location_id' => 'setToLocationId',
+        'from_state' => 'setFromState',
+        'to_state' => 'setToState',
+        'location_id' => 'setLocationId',
         'catalog_object_id' => 'setCatalogObjectId',
         'catalog_object_type' => 'setCatalogObjectType',
         'quantity' => 'setQuantity',
-        'total_cost_money' => 'setTotalCostMoney',
         'total_price_money' => 'setTotalPriceMoney',
         'occurred_at' => 'setOccurredAt',
         'created_at' => 'setCreatedAt',
@@ -96,23 +89,21 @@ class InventoryAdjustment implements ArrayAccess
         'refund_id' => 'setRefundId',
         'purchase_order_id' => 'setPurchaseOrderId',
         'goods_receipt_id' => 'setGoodsReceiptId'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'id' => 'getId',
         'reference_id' => 'getReferenceId',
-        'from_status' => 'getFromStatus',
-        'to_status' => 'getToStatus',
-        'from_location_id' => 'getFromLocationId',
-        'to_location_id' => 'getToLocationId',
+        'from_state' => 'getFromState',
+        'to_state' => 'getToState',
+        'location_id' => 'getLocationId',
         'catalog_object_id' => 'getCatalogObjectId',
         'catalog_object_type' => 'getCatalogObjectType',
         'quantity' => 'getQuantity',
-        'total_cost_money' => 'getTotalCostMoney',
         'total_price_money' => 'getTotalPriceMoney',
         'occurred_at' => 'getOccurredAt',
         'created_at' => 'getCreatedAt',
@@ -122,110 +113,93 @@ class InventoryAdjustment implements ArrayAccess
         'refund_id' => 'getRefundId',
         'purchase_order_id' => 'getPurchaseOrderId',
         'goods_receipt_id' => 'getGoodsReceiptId'
-    ];
-
+    );
+  
     /**
-     * $id The unique ID generated by Square's servers for this [InventoryAdjustment](#type-inventoryadjustment).
-     * @var string
-     */
-    private $id;
+      * $id A unique ID generated by Square for the `InventoryAdjustment`.
+      * @var string
+      */
+    protected $id;
     /**
-     * $reference_id An optional id to tie this [InventoryAdjustment](#type-inventoryadjustment) to an external system.
-     * @var string
-     */
-    private $reference_id;
+      * $reference_id An optional ID provided by the application to tie the `InventoryAdjustment` to an external system.
+      * @var string
+      */
+    protected $reference_id;
     /**
-     * $from_status The [InventoryStatus](#type-inventorystatus) of the objects prior to this adjustment.
-     * @var string
-     */
-    private $from_status;
+      * $from_state The `InventoryState` of the related quantity of items before the adjustment. See [InventoryState](#type-inventorystate) for possible values
+      * @var string
+      */
+    protected $from_state;
     /**
-     * $to_status The [InventoryStatus](#type-inventorystatus) of the objects following this adjustment.
-     * @var string
-     */
-    private $to_status;
+      * $to_state The `InventoryState` of the related quantity of items after the adjustment. See [InventoryState](#type-inventorystate) for possible values
+      * @var string
+      */
+    protected $to_state;
     /**
-     * $from_location_id The id of the [Location](#type-location) of the objects prior to this adjustment.
-     * @var string
-     */
-    private $from_location_id;
+      * $location_id The Square ID of the `Location` where the related quantity of items are being tracked.
+      * @var string
+      */
+    protected $location_id;
     /**
-     * $to_location_id The id of the [Location](#type-location) of the objects following this adjustment.
-     * @var string
-     */
-    private $to_location_id;
+      * $catalog_object_id The Square generated ID of the `CatalogObject` being tracked.
+      * @var string
+      */
+    protected $catalog_object_id;
     /**
-     * $catalog_object_id The id of the [CatalogObject](#type-catalogobject) being tracked.
-     * @var string
-     */
-    private $catalog_object_id;
+      * $catalog_object_type The `CatalogObjectType` of the `CatalogObject` being tracked. Tracking is only supported for the `ITEM_VARIATION` type.
+      * @var string
+      */
+    protected $catalog_object_type;
     /**
-     * $catalog_object_type The type of the object being tracked generated by Square's servers, e.g.,
-     * `\"ITEM_VARIATION\"`.
-     * @var string
-     */
-    private $catalog_object_type;
+      * $quantity The number of items affected by the adjustment as a decimal string. Can support up to 5 digits after the decimal point.  _Important_: The Point of Sale app and Dashboard do not currently support decimal quantities. If a Point of Sale app or Dashboard attempts to read a decimal quantity on inventory counts or adjustments, the quantity will be rounded down to the nearest integer. For example, `2.5` will become `2`, and `-2.5` will become `-3`. Read [Decimal Quantities (BETA)](https://developer.squareup.com/docs/inventory-api/what-it-does#decimal-quantities-beta) for more information.
+      * @var string
+      */
+    protected $quantity;
     /**
-     * $quantity The quantity of the objects in this adjustment line as a decimal string. Fractional quantities are not
-     * currently supported. The database will truncate fractional values smaller than 1/100,000 when fractional values
-     * are supported.
-     * @var string
-     */
-    private $quantity;
+      * $total_price_money The read-only total price paid for goods associated with the adjustment. Present if and only if `to_state` is `SOLD`. Always non-negative.
+      * @var \SquareConnect\Model\Money
+      */
+    protected $total_price_money;
     /**
-     * $total_cost_money The total cost of the goods in this adjustment. Must be non-negative.
-     * @var \SquareConnect\Model\Money
-     */
-    private $total_cost_money;
+      * $occurred_at A client-generated timestamp in RFC 3339 format that indicates when the adjustment took place. For write actions, the `occurred_at` timestamp cannot be older than 24 hours or in the future relative to the time of the request.
+      * @var string
+      */
+    protected $occurred_at;
     /**
-     * $total_price_money Read-only total price paid for the goods in this adjustment. Present if and only if the
-     * `to_status` is `SOLD`. Always non-negative.
-     * @var \SquareConnect\Model\Money
-     */
-    private $total_price_money;
+      * $created_at A read-only timestamp in RFC 3339 format that indicates when Square received the adjustment.
+      * @var string
+      */
+    protected $created_at;
     /**
-     * $occurred_at User-settable RFC 3339 timestamp when the adjustment occurred. On writes, cannot be older than 24
-     * hours or in the future.
-     * @var string
-     */
-    private $occurred_at;
+      * $source Read-only information about the application that caused the inventory adjustment.
+      * @var \SquareConnect\Model\SourceApplication
+      */
+    protected $source;
     /**
-     * $created_at Read-only RFC 3339 timestamp when the server received the adjustment. Ignored on write.
-     * @var string
-     */
-    private $created_at;
+      * $employee_id The Square ID of the `Employee` responsible for the inventory adjustment.
+      * @var string
+      */
+    protected $employee_id;
     /**
-     * $source Read-only description of the software application that created the adjustment. Ignored on write.
-     * @var \SquareConnect\Model\SourceApplication
-     */
-    private $source;
+      * $transaction_id The read-only Square ID of the [Transaction][#type-transaction] that caused the adjustment. Only relevant for payment-related state transitions.
+      * @var string
+      */
+    protected $transaction_id;
     /**
-     * $employee_id Id of the [Employee](https://docs.connect.squareup.com/api/connect/v1#datatype-employee) who made
-     * the adjustment.
-     * @var string
-     */
-    private $employee_id;
+      * $refund_id The read-only Square ID of the [Refund][#type-refund] that caused the adjustment. Only relevant for refund-related state transitions.
+      * @var string
+      */
+    protected $refund_id;
     /**
-     * $transaction_id Read-only id of the Square [Transaction][#type-transaction] that caused this adjustment to take
-     * place, if any.
-     * @var string
-     */
-    private $transaction_id;
+      * $purchase_order_id The read-only Square ID of the purchase order that caused the adjustment. Only relevant for state transitions from the Square for Retail app.
+      * @var string
+      */
+    protected $purchase_order_id;
     /**
-     * $refund_id Read-only id of the Square [Refund][#type-refund] that caused this adjustment to take place, if any.
-     * @var string
-     */
-    private $refund_id;
-    /**
-     * $purchase_order_id Read-only id of the Square Purchase Order that caused this adjustment to take place, if any.
-     * @var string
-     */
-    private $purchase_order_id;
-    /**
-     * $goods_receipt_id Read-only id of the Square Goods Receipt that caused this adjustment to take place, if any.
-     * @var string
-     */
-    private $goods_receipt_id;
+      * $goods_receipt_id The read-only Square ID of the Square goods receipt that caused the adjustment. Only relevant for state transitions from the Square for Retail app.
+      * @var string
+      */
+    protected $goods_receipt_id;
 
     /**
      * Constructor
@@ -235,103 +209,92 @@ class InventoryAdjustment implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["id"])) {
-                $this->id = $data["id"];
+              $this->id = $data["id"];
             } else {
-                $this->id = null;
+              $this->id = null;
             }
             if (isset($data["reference_id"])) {
-                $this->reference_id = $data["reference_id"];
+              $this->reference_id = $data["reference_id"];
             } else {
-                $this->reference_id = null;
+              $this->reference_id = null;
             }
-            if (isset($data["from_status"])) {
-                $this->from_status = $data["from_status"];
+            if (isset($data["from_state"])) {
+              $this->from_state = $data["from_state"];
             } else {
-                $this->from_status = null;
+              $this->from_state = null;
             }
-            if (isset($data["to_status"])) {
-                $this->to_status = $data["to_status"];
+            if (isset($data["to_state"])) {
+              $this->to_state = $data["to_state"];
             } else {
-                $this->to_status = null;
+              $this->to_state = null;
             }
-            if (isset($data["from_location_id"])) {
-                $this->from_location_id = $data["from_location_id"];
+            if (isset($data["location_id"])) {
+              $this->location_id = $data["location_id"];
             } else {
-                $this->from_location_id = null;
-            }
-            if (isset($data["to_location_id"])) {
-                $this->to_location_id = $data["to_location_id"];
-            } else {
-                $this->to_location_id = null;
+              $this->location_id = null;
             }
             if (isset($data["catalog_object_id"])) {
-                $this->catalog_object_id = $data["catalog_object_id"];
+              $this->catalog_object_id = $data["catalog_object_id"];
             } else {
-                $this->catalog_object_id = null;
+              $this->catalog_object_id = null;
             }
             if (isset($data["catalog_object_type"])) {
-                $this->catalog_object_type = $data["catalog_object_type"];
+              $this->catalog_object_type = $data["catalog_object_type"];
             } else {
-                $this->catalog_object_type = null;
+              $this->catalog_object_type = null;
             }
             if (isset($data["quantity"])) {
-                $this->quantity = $data["quantity"];
+              $this->quantity = $data["quantity"];
             } else {
-                $this->quantity = null;
-            }
-            if (isset($data["total_cost_money"])) {
-                $this->total_cost_money = $data["total_cost_money"];
-            } else {
-                $this->total_cost_money = null;
+              $this->quantity = null;
             }
             if (isset($data["total_price_money"])) {
-                $this->total_price_money = $data["total_price_money"];
+              $this->total_price_money = $data["total_price_money"];
             } else {
-                $this->total_price_money = null;
+              $this->total_price_money = null;
             }
             if (isset($data["occurred_at"])) {
-                $this->occurred_at = $data["occurred_at"];
+              $this->occurred_at = $data["occurred_at"];
             } else {
-                $this->occurred_at = null;
+              $this->occurred_at = null;
             }
             if (isset($data["created_at"])) {
-                $this->created_at = $data["created_at"];
+              $this->created_at = $data["created_at"];
             } else {
-                $this->created_at = null;
+              $this->created_at = null;
             }
             if (isset($data["source"])) {
-                $this->source = $data["source"];
+              $this->source = $data["source"];
             } else {
-                $this->source = null;
+              $this->source = null;
             }
             if (isset($data["employee_id"])) {
-                $this->employee_id = $data["employee_id"];
+              $this->employee_id = $data["employee_id"];
             } else {
-                $this->employee_id = null;
+              $this->employee_id = null;
             }
             if (isset($data["transaction_id"])) {
-                $this->transaction_id = $data["transaction_id"];
+              $this->transaction_id = $data["transaction_id"];
             } else {
-                $this->transaction_id = null;
+              $this->transaction_id = null;
             }
             if (isset($data["refund_id"])) {
-                $this->refund_id = $data["refund_id"];
+              $this->refund_id = $data["refund_id"];
             } else {
-                $this->refund_id = null;
+              $this->refund_id = null;
             }
             if (isset($data["purchase_order_id"])) {
-                $this->purchase_order_id = $data["purchase_order_id"];
+              $this->purchase_order_id = $data["purchase_order_id"];
             } else {
-                $this->purchase_order_id = null;
+              $this->purchase_order_id = null;
             }
             if (isset($data["goods_receipt_id"])) {
-                $this->goods_receipt_id = $data["goods_receipt_id"];
+              $this->goods_receipt_id = $data["goods_receipt_id"];
             } else {
-                $this->goods_receipt_id = null;
+              $this->goods_receipt_id = null;
             }
         }
     }
-
     /**
      * Gets id
      * @return string
@@ -340,11 +303,10 @@ class InventoryAdjustment implements ArrayAccess
     {
         return $this->id;
     }
-
+  
     /**
      * Sets id
-     * @param string $id The unique ID generated by Square's servers for this
-     * [InventoryAdjustment](#type-inventoryadjustment).
+     * @param string $id A unique ID generated by Square for the `InventoryAdjustment`.
      * @return $this
      */
     public function setId($id)
@@ -352,7 +314,6 @@ class InventoryAdjustment implements ArrayAccess
         $this->id = $id;
         return $this;
     }
-
     /**
      * Gets reference_id
      * @return string
@@ -361,11 +322,10 @@ class InventoryAdjustment implements ArrayAccess
     {
         return $this->reference_id;
     }
-
+  
     /**
      * Sets reference_id
-     * @param string $reference_id An optional id to tie this [InventoryAdjustment](#type-inventoryadjustment) to an
-     * external system.
+     * @param string $reference_id An optional ID provided by the application to tie the `InventoryAdjustment` to an external system.
      * @return $this
      */
     public function setReferenceId($reference_id)
@@ -373,87 +333,63 @@ class InventoryAdjustment implements ArrayAccess
         $this->reference_id = $reference_id;
         return $this;
     }
-
     /**
-     * Gets from_status
+     * Gets from_state
      * @return string
      */
-    public function getFromStatus()
+    public function getFromState()
     {
-        return $this->from_status;
+        return $this->from_state;
     }
-
+  
     /**
-     * Sets from_status
-     * @param string $from_status The [InventoryStatus](#type-inventorystatus) of the objects prior to this adjustment.
+     * Sets from_state
+     * @param string $from_state The `InventoryState` of the related quantity of items before the adjustment. See [InventoryState](#type-inventorystate) for possible values
      * @return $this
      */
-    public function setFromStatus($from_status)
+    public function setFromState($from_state)
     {
-        $this->from_status = $from_status;
+        $this->from_state = $from_state;
         return $this;
     }
-
     /**
-     * Gets to_status
+     * Gets to_state
      * @return string
      */
-    public function getToStatus()
+    public function getToState()
     {
-        return $this->to_status;
+        return $this->to_state;
     }
-
+  
     /**
-     * Sets to_status
-     * @param string $to_status The [InventoryStatus](#type-inventorystatus) of the objects following this adjustment.
+     * Sets to_state
+     * @param string $to_state The `InventoryState` of the related quantity of items after the adjustment. See [InventoryState](#type-inventorystate) for possible values
      * @return $this
      */
-    public function setToStatus($to_status)
+    public function setToState($to_state)
     {
-        $this->to_status = $to_status;
+        $this->to_state = $to_state;
         return $this;
     }
-
     /**
-     * Gets from_location_id
+     * Gets location_id
      * @return string
      */
-    public function getFromLocationId()
+    public function getLocationId()
     {
-        return $this->from_location_id;
+        return $this->location_id;
     }
-
+  
     /**
-     * Sets from_location_id
-     * @param string $from_location_id The id of the [Location](#type-location) of the objects prior to this adjustment.
+     * Sets location_id
+     * @param string $location_id The Square ID of the `Location` where the related quantity of items are being tracked.
      * @return $this
      */
-    public function setFromLocationId($from_location_id)
+    public function setLocationId($location_id)
     {
-        $this->from_location_id = $from_location_id;
+        $this->location_id = $location_id;
         return $this;
     }
-
-    /**
-     * Gets to_location_id
-     * @return string
-     */
-    public function getToLocationId()
-    {
-        return $this->to_location_id;
-    }
-
-    /**
-     * Sets to_location_id
-     * @param string $to_location_id The id of the [Location](#type-location) of the objects following this adjustment.
-     * @return $this
-     */
-    public function setToLocationId($to_location_id)
-    {
-        $this->to_location_id = $to_location_id;
-        return $this;
-    }
-
     /**
      * Gets catalog_object_id
      * @return string
@@ -462,10 +398,10 @@ class InventoryAdjustment implements ArrayAccess
     {
         return $this->catalog_object_id;
     }
-
+  
     /**
      * Sets catalog_object_id
-     * @param string $catalog_object_id The id of the [CatalogObject](#type-catalogobject) being tracked.
+     * @param string $catalog_object_id The Square generated ID of the `CatalogObject` being tracked.
      * @return $this
      */
     public function setCatalogObjectId($catalog_object_id)
@@ -473,7 +409,6 @@ class InventoryAdjustment implements ArrayAccess
         $this->catalog_object_id = $catalog_object_id;
         return $this;
     }
-
     /**
      * Gets catalog_object_type
      * @return string
@@ -482,11 +417,10 @@ class InventoryAdjustment implements ArrayAccess
     {
         return $this->catalog_object_type;
     }
-
+  
     /**
      * Sets catalog_object_type
-     * @param string $catalog_object_type The type of the object being tracked generated by Square's servers,
-     * e.g., `\"ITEM_VARIATION\"`.
+     * @param string $catalog_object_type The `CatalogObjectType` of the `CatalogObject` being tracked. Tracking is only supported for the `ITEM_VARIATION` type.
      * @return $this
      */
     public function setCatalogObjectType($catalog_object_type)
@@ -494,7 +428,6 @@ class InventoryAdjustment implements ArrayAccess
         $this->catalog_object_type = $catalog_object_type;
         return $this;
     }
-
     /**
      * Gets quantity
      * @return string
@@ -503,12 +436,10 @@ class InventoryAdjustment implements ArrayAccess
     {
         return $this->quantity;
     }
-
+  
     /**
      * Sets quantity
-     * @param string $quantity The quantity of the objects in this adjustment line as a decimal string.
-     * Fractional quantities are not currently supported. The database will truncate fractional values smaller than
-     * 1/100,000 when fractional values are supported.
+     * @param string $quantity The number of items affected by the adjustment as a decimal string. Can support up to 5 digits after the decimal point.  _Important_: The Point of Sale app and Dashboard do not currently support decimal quantities. If a Point of Sale app or Dashboard attempts to read a decimal quantity on inventory counts or adjustments, the quantity will be rounded down to the nearest integer. For example, `2.5` will become `2`, and `-2.5` will become `-3`. Read [Decimal Quantities (BETA)](https://developer.squareup.com/docs/inventory-api/what-it-does#decimal-quantities-beta) for more information.
      * @return $this
      */
     public function setQuantity($quantity)
@@ -516,28 +447,6 @@ class InventoryAdjustment implements ArrayAccess
         $this->quantity = $quantity;
         return $this;
     }
-
-    /**
-     * Gets total_cost_money
-     * @return \SquareConnect\Model\Money
-     */
-    public function getTotalCostMoney()
-    {
-        return $this->total_cost_money;
-    }
-
-    /**
-     * Sets total_cost_money
-     * @param \SquareConnect\Model\Money $total_cost_money The total cost of the goods in this adjustment.
-     * Must be non-negative.
-     * @return $this
-     */
-    public function setTotalCostMoney($total_cost_money)
-    {
-        $this->total_cost_money = $total_cost_money;
-        return $this;
-    }
-
     /**
      * Gets total_price_money
      * @return \SquareConnect\Model\Money
@@ -546,11 +455,10 @@ class InventoryAdjustment implements ArrayAccess
     {
         return $this->total_price_money;
     }
-
+  
     /**
      * Sets total_price_money
-     * @param \SquareConnect\Model\Money $total_price_money Read-only total price paid for the goods in this adjustment.
-     * Present if and only if the `to_status` is `SOLD`. Always non-negative.
+     * @param \SquareConnect\Model\Money $total_price_money The read-only total price paid for goods associated with the adjustment. Present if and only if `to_state` is `SOLD`. Always non-negative.
      * @return $this
      */
     public function setTotalPriceMoney($total_price_money)
@@ -558,7 +466,6 @@ class InventoryAdjustment implements ArrayAccess
         $this->total_price_money = $total_price_money;
         return $this;
     }
-
     /**
      * Gets occurred_at
      * @return string
@@ -567,11 +474,10 @@ class InventoryAdjustment implements ArrayAccess
     {
         return $this->occurred_at;
     }
-
+  
     /**
      * Sets occurred_at
-     * @param string $occurred_at User-settable RFC 3339 timestamp when the adjustment occurred. On writes, cannot be
-     * older than 24 hours or in the future.
+     * @param string $occurred_at A client-generated timestamp in RFC 3339 format that indicates when the adjustment took place. For write actions, the `occurred_at` timestamp cannot be older than 24 hours or in the future relative to the time of the request.
      * @return $this
      */
     public function setOccurredAt($occurred_at)
@@ -579,7 +485,6 @@ class InventoryAdjustment implements ArrayAccess
         $this->occurred_at = $occurred_at;
         return $this;
     }
-
     /**
      * Gets created_at
      * @return string
@@ -588,10 +493,10 @@ class InventoryAdjustment implements ArrayAccess
     {
         return $this->created_at;
     }
-
+  
     /**
      * Sets created_at
-     * @param string $created_at Read-only RFC 3339 timestamp when the server received the adjustment. Ignored on write.
+     * @param string $created_at A read-only timestamp in RFC 3339 format that indicates when Square received the adjustment.
      * @return $this
      */
     public function setCreatedAt($created_at)
@@ -599,7 +504,6 @@ class InventoryAdjustment implements ArrayAccess
         $this->created_at = $created_at;
         return $this;
     }
-
     /**
      * Gets source
      * @return \SquareConnect\Model\SourceApplication
@@ -608,11 +512,10 @@ class InventoryAdjustment implements ArrayAccess
     {
         return $this->source;
     }
-
+  
     /**
      * Sets source
-     * @param \SquareConnect\Model\SourceApplication $source Read-only description of the software application that
-     * created the adjustment. Ignored on write.
+     * @param \SquareConnect\Model\SourceApplication $source Read-only information about the application that caused the inventory adjustment.
      * @return $this
      */
     public function setSource($source)
@@ -620,7 +523,6 @@ class InventoryAdjustment implements ArrayAccess
         $this->source = $source;
         return $this;
     }
-
     /**
      * Gets employee_id
      * @return string
@@ -629,11 +531,10 @@ class InventoryAdjustment implements ArrayAccess
     {
         return $this->employee_id;
     }
-
+  
     /**
      * Sets employee_id
-     * @param string $employee_id Id of the
-     * [Employee](https://docs.connect.squareup.com/api/connect/v1#datatype-employee) who made the adjustment.
+     * @param string $employee_id The Square ID of the `Employee` responsible for the inventory adjustment.
      * @return $this
      */
     public function setEmployeeId($employee_id)
@@ -641,7 +542,6 @@ class InventoryAdjustment implements ArrayAccess
         $this->employee_id = $employee_id;
         return $this;
     }
-
     /**
      * Gets transaction_id
      * @return string
@@ -650,11 +550,10 @@ class InventoryAdjustment implements ArrayAccess
     {
         return $this->transaction_id;
     }
-
+  
     /**
      * Sets transaction_id
-     * @param string $transaction_id Read-only id of the Square [Transaction][#type-transaction] that caused this
-     * adjustment to take place, if any.
+     * @param string $transaction_id The read-only Square ID of the [Transaction][#type-transaction] that caused the adjustment. Only relevant for payment-related state transitions.
      * @return $this
      */
     public function setTransactionId($transaction_id)
@@ -662,7 +561,6 @@ class InventoryAdjustment implements ArrayAccess
         $this->transaction_id = $transaction_id;
         return $this;
     }
-
     /**
      * Gets refund_id
      * @return string
@@ -671,11 +569,10 @@ class InventoryAdjustment implements ArrayAccess
     {
         return $this->refund_id;
     }
-
+  
     /**
      * Sets refund_id
-     * @param string $refund_id Read-only id of the Square [Refund][#type-refund] that caused this adjustment to take
-     * place, if any.
+     * @param string $refund_id The read-only Square ID of the [Refund][#type-refund] that caused the adjustment. Only relevant for refund-related state transitions.
      * @return $this
      */
     public function setRefundId($refund_id)
@@ -683,7 +580,6 @@ class InventoryAdjustment implements ArrayAccess
         $this->refund_id = $refund_id;
         return $this;
     }
-
     /**
      * Gets purchase_order_id
      * @return string
@@ -692,11 +588,10 @@ class InventoryAdjustment implements ArrayAccess
     {
         return $this->purchase_order_id;
     }
-
+  
     /**
      * Sets purchase_order_id
-     * @param string $purchase_order_id Read-only id of the Square Purchase Order that caused this adjustment to take
-     * place, if any.
+     * @param string $purchase_order_id The read-only Square ID of the purchase order that caused the adjustment. Only relevant for state transitions from the Square for Retail app.
      * @return $this
      */
     public function setPurchaseOrderId($purchase_order_id)
@@ -704,7 +599,6 @@ class InventoryAdjustment implements ArrayAccess
         $this->purchase_order_id = $purchase_order_id;
         return $this;
     }
-
     /**
      * Gets goods_receipt_id
      * @return string
@@ -713,11 +607,10 @@ class InventoryAdjustment implements ArrayAccess
     {
         return $this->goods_receipt_id;
     }
-
+  
     /**
      * Sets goods_receipt_id
-     * @param string $goods_receipt_id Read-only id of the Square Goods Receipt that caused this adjustment to take
-     * place, if any.
+     * @param string $goods_receipt_id The read-only Square ID of the Square goods receipt that caused the adjustment. Only relevant for state transitions from the Square for Retail app.
      * @return $this
      */
     public function setGoodsReceiptId($goods_receipt_id)
@@ -725,48 +618,47 @@ class InventoryAdjustment implements ArrayAccess
         $this->goods_receipt_id = $goods_receipt_id;
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string

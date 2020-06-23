@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * CreateCustomerCardResponse Class Doc Comment
  *
@@ -21,51 +20,51 @@ use \ArrayAccess;
 class CreateCustomerCardResponse implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
         'errors' => '\SquareConnect\Model\Error[]',
-        'card' => \SquareConnect\Model\Card::class
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+        'card' => '\SquareConnect\Model\Card'
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'errors' => 'errors',
         'card' => 'card'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'errors' => 'setErrors',
         'card' => 'setCard'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'errors' => 'getErrors',
         'card' => 'getCard'
-    ];
-
+    );
+  
     /**
-     * $errors Any errors that occurred during the request.
-     * @var \SquareConnect\Model\Error[]
-     */
-    private $errors;
+      * $errors Any errors that occurred during the request.
+      * @var \SquareConnect\Model\Error[]
+      */
+    protected $errors;
     /**
-     * $card The created card on file.
-     * @var \SquareConnect\Model\Card
-     */
-    private $card;
+      * $card The created card on file.
+      * @var \SquareConnect\Model\Card
+      */
+    protected $card;
 
     /**
      * Constructor
@@ -75,18 +74,17 @@ class CreateCustomerCardResponse implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["errors"])) {
-                $this->errors = $data["errors"];
+              $this->errors = $data["errors"];
             } else {
-                $this->errors = null;
+              $this->errors = null;
             }
             if (isset($data["card"])) {
-                $this->card = $data["card"];
+              $this->card = $data["card"];
             } else {
-                $this->card = null;
+              $this->card = null;
             }
         }
     }
-
     /**
      * Gets errors
      * @return \SquareConnect\Model\Error[]
@@ -95,7 +93,7 @@ class CreateCustomerCardResponse implements ArrayAccess
     {
         return $this->errors;
     }
-
+  
     /**
      * Sets errors
      * @param \SquareConnect\Model\Error[] $errors Any errors that occurred during the request.
@@ -106,7 +104,6 @@ class CreateCustomerCardResponse implements ArrayAccess
         $this->errors = $errors;
         return $this;
     }
-
     /**
      * Gets card
      * @return \SquareConnect\Model\Card
@@ -115,7 +112,7 @@ class CreateCustomerCardResponse implements ArrayAccess
     {
         return $this->card;
     }
-
+  
     /**
      * Sets card
      * @param \SquareConnect\Model\Card $card The created card on file.
@@ -126,48 +123,47 @@ class CreateCustomerCardResponse implements ArrayAccess
         $this->card = $card;
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string

@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * CatalogQueryRange Class Doc Comment
  *
@@ -21,60 +20,60 @@ use \ArrayAccess;
 class CatalogQueryRange implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
         'attribute_name' => 'string',
         'attribute_min_value' => 'int',
         'attribute_max_value' => 'int'
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'attribute_name' => 'attribute_name',
         'attribute_min_value' => 'attribute_min_value',
         'attribute_max_value' => 'attribute_max_value'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'attribute_name' => 'setAttributeName',
         'attribute_min_value' => 'setAttributeMinValue',
         'attribute_max_value' => 'setAttributeMaxValue'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'attribute_name' => 'getAttributeName',
         'attribute_min_value' => 'getAttributeMinValue',
         'attribute_max_value' => 'getAttributeMaxValue'
-    ];
-
+    );
+  
     /**
-     * $attribute_name The name of the attribute to be searched.
-     * @var string
-     */
-    private $attribute_name;
+      * $attribute_name The name of the attribute to be searched.
+      * @var string
+      */
+    protected $attribute_name;
     /**
-     * $attribute_min_value The desired minimum value for the search attribute (inclusive).
-     * @var int
-     */
-    private $attribute_min_value;
+      * $attribute_min_value The desired minimum value for the search attribute (inclusive).
+      * @var int
+      */
+    protected $attribute_min_value;
     /**
-     * $attribute_max_value The desired maximum value for the search attribute (inclusive).
-     * @var int
-     */
-    private $attribute_max_value;
+      * $attribute_max_value The desired maximum value for the search attribute (inclusive).
+      * @var int
+      */
+    protected $attribute_max_value;
 
     /**
      * Constructor
@@ -84,23 +83,22 @@ class CatalogQueryRange implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["attribute_name"])) {
-                $this->attribute_name = $data["attribute_name"];
+              $this->attribute_name = $data["attribute_name"];
             } else {
-                $this->attribute_name = null;
+              $this->attribute_name = null;
             }
             if (isset($data["attribute_min_value"])) {
-                $this->attribute_min_value = $data["attribute_min_value"];
+              $this->attribute_min_value = $data["attribute_min_value"];
             } else {
-                $this->attribute_min_value = null;
+              $this->attribute_min_value = null;
             }
             if (isset($data["attribute_max_value"])) {
-                $this->attribute_max_value = $data["attribute_max_value"];
+              $this->attribute_max_value = $data["attribute_max_value"];
             } else {
-                $this->attribute_max_value = null;
+              $this->attribute_max_value = null;
             }
         }
     }
-
     /**
      * Gets attribute_name
      * @return string
@@ -109,7 +107,7 @@ class CatalogQueryRange implements ArrayAccess
     {
         return $this->attribute_name;
     }
-
+  
     /**
      * Sets attribute_name
      * @param string $attribute_name The name of the attribute to be searched.
@@ -120,7 +118,6 @@ class CatalogQueryRange implements ArrayAccess
         $this->attribute_name = $attribute_name;
         return $this;
     }
-
     /**
      * Gets attribute_min_value
      * @return int
@@ -129,7 +126,7 @@ class CatalogQueryRange implements ArrayAccess
     {
         return $this->attribute_min_value;
     }
-
+  
     /**
      * Sets attribute_min_value
      * @param int $attribute_min_value The desired minimum value for the search attribute (inclusive).
@@ -140,7 +137,6 @@ class CatalogQueryRange implements ArrayAccess
         $this->attribute_min_value = $attribute_min_value;
         return $this;
     }
-
     /**
      * Gets attribute_max_value
      * @return int
@@ -149,7 +145,7 @@ class CatalogQueryRange implements ArrayAccess
     {
         return $this->attribute_max_value;
     }
-
+  
     /**
      * Sets attribute_max_value
      * @param int $attribute_max_value The desired maximum value for the search attribute (inclusive).
@@ -160,48 +156,47 @@ class CatalogQueryRange implements ArrayAccess
         $this->attribute_max_value = $attribute_max_value;
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string

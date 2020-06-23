@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * CatalogInfoResponseLimits Class Doc Comment
  *
@@ -21,10 +20,10 @@ use \ArrayAccess;
 class CatalogInfoResponseLimits implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
         'batch_upsert_max_objects_per_batch' => 'int',
         'batch_upsert_max_total_objects' => 'int',
         'batch_retrieve_max_object_ids' => 'int',
@@ -36,13 +35,13 @@ class CatalogInfoResponseLimits implements ArrayAccess
         'update_item_modifier_lists_max_item_ids' => 'int',
         'update_item_modifier_lists_max_modifier_lists_to_enable' => 'int',
         'update_item_modifier_lists_max_modifier_lists_to_disable' => 'int'
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'batch_upsert_max_objects_per_batch' => 'batch_upsert_max_objects_per_batch',
         'batch_upsert_max_total_objects' => 'batch_upsert_max_total_objects',
         'batch_retrieve_max_object_ids' => 'batch_retrieve_max_object_ids',
@@ -52,17 +51,15 @@ class CatalogInfoResponseLimits implements ArrayAccess
         'update_item_taxes_max_taxes_to_enable' => 'update_item_taxes_max_taxes_to_enable',
         'update_item_taxes_max_taxes_to_disable' => 'update_item_taxes_max_taxes_to_disable',
         'update_item_modifier_lists_max_item_ids' => 'update_item_modifier_lists_max_item_ids',
-        'update_item_modifier_lists_max_modifier_lists_to_enable' =>
-            'update_item_modifier_lists_max_modifier_lists_to_enable',
-        'update_item_modifier_lists_max_modifier_lists_to_disable' =>
-            'update_item_modifier_lists_max_modifier_lists_to_disable'
-    ];
-
+        'update_item_modifier_lists_max_modifier_lists_to_enable' => 'update_item_modifier_lists_max_modifier_lists_to_enable',
+        'update_item_modifier_lists_max_modifier_lists_to_disable' => 'update_item_modifier_lists_max_modifier_lists_to_disable'
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'batch_upsert_max_objects_per_batch' => 'setBatchUpsertMaxObjectsPerBatch',
         'batch_upsert_max_total_objects' => 'setBatchUpsertMaxTotalObjects',
         'batch_retrieve_max_object_ids' => 'setBatchRetrieveMaxObjectIds',
@@ -72,17 +69,15 @@ class CatalogInfoResponseLimits implements ArrayAccess
         'update_item_taxes_max_taxes_to_enable' => 'setUpdateItemTaxesMaxTaxesToEnable',
         'update_item_taxes_max_taxes_to_disable' => 'setUpdateItemTaxesMaxTaxesToDisable',
         'update_item_modifier_lists_max_item_ids' => 'setUpdateItemModifierListsMaxItemIds',
-        'update_item_modifier_lists_max_modifier_lists_to_enable' =>
-            'setUpdateItemModifierListsMaxModifierListsToEnable',
-        'update_item_modifier_lists_max_modifier_lists_to_disable' =>
-            'setUpdateItemModifierListsMaxModifierListsToDisable'
-    ];
-
+        'update_item_modifier_lists_max_modifier_lists_to_enable' => 'setUpdateItemModifierListsMaxModifierListsToEnable',
+        'update_item_modifier_lists_max_modifier_lists_to_disable' => 'setUpdateItemModifierListsMaxModifierListsToDisable'
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'batch_upsert_max_objects_per_batch' => 'getBatchUpsertMaxObjectsPerBatch',
         'batch_upsert_max_total_objects' => 'getBatchUpsertMaxTotalObjects',
         'batch_retrieve_max_object_ids' => 'getBatchRetrieveMaxObjectIds',
@@ -92,78 +87,65 @@ class CatalogInfoResponseLimits implements ArrayAccess
         'update_item_taxes_max_taxes_to_enable' => 'getUpdateItemTaxesMaxTaxesToEnable',
         'update_item_taxes_max_taxes_to_disable' => 'getUpdateItemTaxesMaxTaxesToDisable',
         'update_item_modifier_lists_max_item_ids' => 'getUpdateItemModifierListsMaxItemIds',
-        'update_item_modifier_lists_max_modifier_lists_to_enable' =>
-            'getUpdateItemModifierListsMaxModifierListsToEnable',
-        'update_item_modifier_lists_max_modifier_lists_to_disable' =>
-            'getUpdateItemModifierListsMaxModifierListsToDisable'
-    ];
-
+        'update_item_modifier_lists_max_modifier_lists_to_enable' => 'getUpdateItemModifierListsMaxModifierListsToEnable',
+        'update_item_modifier_lists_max_modifier_lists_to_disable' => 'getUpdateItemModifierListsMaxModifierListsToDisable'
+    );
+  
     /**
-     * $batch_upsert_max_objects_per_batch The maximum number of objects that may appear within a single batch in a
-     * `/v2/catalog/batch-upsert` request.
-     * @var int
-     */
-    private $batch_upsert_max_objects_per_batch;
+      * $batch_upsert_max_objects_per_batch The maximum number of objects that may appear within a single batch in a `/v2/catalog/batch-upsert` request.
+      * @var int
+      */
+    protected $batch_upsert_max_objects_per_batch;
     /**
-     * $batch_upsert_max_total_objects The maximum number of objects that may appear across all batches in a
-     * `/v2/catalog/batch-upsert` request.
-     * @var int
-     */
-    private $batch_upsert_max_total_objects;
+      * $batch_upsert_max_total_objects The maximum number of objects that may appear across all batches in a `/v2/catalog/batch-upsert` request.
+      * @var int
+      */
+    protected $batch_upsert_max_total_objects;
     /**
-     * $batch_retrieve_max_object_ids The maximum number of object IDs that may appear in a
-     * `/v2/catalog/batch-retrieve` request.
-     * @var int
-     */
-    private $batch_retrieve_max_object_ids;
+      * $batch_retrieve_max_object_ids The maximum number of object IDs that may appear in a `/v2/catalog/batch-retrieve` request.
+      * @var int
+      */
+    protected $batch_retrieve_max_object_ids;
     /**
-     * $search_max_page_limit The maximum number of results that may be returned in a page of a
-     * `/v2/catalog/search` response.
-     * @var int
-     */
-    private $search_max_page_limit;
+      * $search_max_page_limit The maximum number of results that may be returned in a page of a `/v2/catalog/search` response.
+      * @var int
+      */
+    protected $search_max_page_limit;
     /**
-     * $batch_delete_max_object_ids The maximum number of object IDs that may be included in a single
-     * `/v2/catalog/batch-delete` request.
-     * @var int
-     */
-    private $batch_delete_max_object_ids;
+      * $batch_delete_max_object_ids The maximum number of object IDs that may be included in a single `/v2/catalog/batch-delete` request.
+      * @var int
+      */
+    protected $batch_delete_max_object_ids;
     /**
-     * $update_item_taxes_max_item_ids The maximum number of item IDs that may be included in a single
-     * `/v2/catalog/update-item-taxes` request.
-     * @var int
-     */
-    private $update_item_taxes_max_item_ids;
+      * $update_item_taxes_max_item_ids The maximum number of item IDs that may be included in a single `/v2/catalog/update-item-taxes` request.
+      * @var int
+      */
+    protected $update_item_taxes_max_item_ids;
     /**
-     * $update_item_taxes_max_taxes_to_enable The maximum number of tax IDs to be enabled that may be included
-     * in a single `/v2/catalog/update-item-taxes` request.
-     * @var int
-     */
-    private $update_item_taxes_max_taxes_to_enable;
+      * $update_item_taxes_max_taxes_to_enable The maximum number of tax IDs to be enabled that may be included in a single `/v2/catalog/update-item-taxes` request.
+      * @var int
+      */
+    protected $update_item_taxes_max_taxes_to_enable;
     /**
-     * $update_item_taxes_max_taxes_to_disable The maximum number of tax IDs to be disabled that may be included
-     * in a single `/v2/catalog/update-item-taxes` request.
-     * @var int
-     */
-    private $update_item_taxes_max_taxes_to_disable;
+      * $update_item_taxes_max_taxes_to_disable The maximum number of tax IDs to be disabled that may be included in a single `/v2/catalog/update-item-taxes` request.
+      * @var int
+      */
+    protected $update_item_taxes_max_taxes_to_disable;
     /**
-     * $update_item_modifier_lists_max_item_ids The maximum number of item IDs that may be included in a single
-     * `/v2/catalog/update-item-modifier-lists` request.
-     * @var int
-     */
-    private $update_item_modifier_lists_max_item_ids;
+      * $update_item_modifier_lists_max_item_ids The maximum number of item IDs that may be included in a single `/v2/catalog/update-item-modifier-lists` request.
+      * @var int
+      */
+    protected $update_item_modifier_lists_max_item_ids;
     /**
-     * $update_item_modifier_lists_max_modifier_lists_to_enable The maximum number of modifier list IDs to be
-     * enabled that may be included in a single `/v2/catalog/update-item-modifier-lists` request.
-     * @var int
-     */
-    private $update_item_modifier_lists_max_modifier_lists_to_enable;
+      * $update_item_modifier_lists_max_modifier_lists_to_enable The maximum number of modifier list IDs to be enabled that may be included in a single `/v2/catalog/update-item-modifier-lists` request.
+      * @var int
+      */
+    protected $update_item_modifier_lists_max_modifier_lists_to_enable;
     /**
-     * $update_item_modifier_lists_max_modifier_lists_to_disable The maximum number of modifier list IDs to be
-     * disabled that may be included in a single `/v2/catalog/update-item-modifier-lists` request.
-     * @var int
-     */
-    private $update_item_modifier_lists_max_modifier_lists_to_disable;
+      * $update_item_modifier_lists_max_modifier_lists_to_disable The maximum number of modifier list IDs to be disabled that may be included in a single `/v2/catalog/update-item-modifier-lists` request.
+      * @var int
+      */
+    protected $update_item_modifier_lists_max_modifier_lists_to_disable;
 
     /**
      * Constructor
@@ -173,65 +155,62 @@ class CatalogInfoResponseLimits implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["batch_upsert_max_objects_per_batch"])) {
-                $this->batch_upsert_max_objects_per_batch = $data["batch_upsert_max_objects_per_batch"];
+              $this->batch_upsert_max_objects_per_batch = $data["batch_upsert_max_objects_per_batch"];
             } else {
-                $this->batch_upsert_max_objects_per_batch = null;
+              $this->batch_upsert_max_objects_per_batch = null;
             }
             if (isset($data["batch_upsert_max_total_objects"])) {
-                $this->batch_upsert_max_total_objects = $data["batch_upsert_max_total_objects"];
+              $this->batch_upsert_max_total_objects = $data["batch_upsert_max_total_objects"];
             } else {
-                $this->batch_upsert_max_total_objects = null;
+              $this->batch_upsert_max_total_objects = null;
             }
             if (isset($data["batch_retrieve_max_object_ids"])) {
-                $this->batch_retrieve_max_object_ids = $data["batch_retrieve_max_object_ids"];
+              $this->batch_retrieve_max_object_ids = $data["batch_retrieve_max_object_ids"];
             } else {
-                $this->batch_retrieve_max_object_ids = null;
+              $this->batch_retrieve_max_object_ids = null;
             }
             if (isset($data["search_max_page_limit"])) {
-                $this->search_max_page_limit = $data["search_max_page_limit"];
+              $this->search_max_page_limit = $data["search_max_page_limit"];
             } else {
-                $this->search_max_page_limit = null;
+              $this->search_max_page_limit = null;
             }
             if (isset($data["batch_delete_max_object_ids"])) {
-                $this->batch_delete_max_object_ids = $data["batch_delete_max_object_ids"];
+              $this->batch_delete_max_object_ids = $data["batch_delete_max_object_ids"];
             } else {
-                $this->batch_delete_max_object_ids = null;
+              $this->batch_delete_max_object_ids = null;
             }
             if (isset($data["update_item_taxes_max_item_ids"])) {
-                $this->update_item_taxes_max_item_ids = $data["update_item_taxes_max_item_ids"];
+              $this->update_item_taxes_max_item_ids = $data["update_item_taxes_max_item_ids"];
             } else {
-                $this->update_item_taxes_max_item_ids = null;
+              $this->update_item_taxes_max_item_ids = null;
             }
             if (isset($data["update_item_taxes_max_taxes_to_enable"])) {
-                $this->update_item_taxes_max_taxes_to_enable = $data["update_item_taxes_max_taxes_to_enable"];
+              $this->update_item_taxes_max_taxes_to_enable = $data["update_item_taxes_max_taxes_to_enable"];
             } else {
-                $this->update_item_taxes_max_taxes_to_enable = null;
+              $this->update_item_taxes_max_taxes_to_enable = null;
             }
             if (isset($data["update_item_taxes_max_taxes_to_disable"])) {
-                $this->update_item_taxes_max_taxes_to_disable = $data["update_item_taxes_max_taxes_to_disable"];
+              $this->update_item_taxes_max_taxes_to_disable = $data["update_item_taxes_max_taxes_to_disable"];
             } else {
-                $this->update_item_taxes_max_taxes_to_disable = null;
+              $this->update_item_taxes_max_taxes_to_disable = null;
             }
             if (isset($data["update_item_modifier_lists_max_item_ids"])) {
-                $this->update_item_modifier_lists_max_item_ids = $data["update_item_modifier_lists_max_item_ids"];
+              $this->update_item_modifier_lists_max_item_ids = $data["update_item_modifier_lists_max_item_ids"];
             } else {
-                $this->update_item_modifier_lists_max_item_ids = null;
+              $this->update_item_modifier_lists_max_item_ids = null;
             }
             if (isset($data["update_item_modifier_lists_max_modifier_lists_to_enable"])) {
-                $this->update_item_modifier_lists_max_modifier_lists_to_enable =
-                    $data["update_item_modifier_lists_max_modifier_lists_to_enable"];
+              $this->update_item_modifier_lists_max_modifier_lists_to_enable = $data["update_item_modifier_lists_max_modifier_lists_to_enable"];
             } else {
-                $this->update_item_modifier_lists_max_modifier_lists_to_enable = null;
+              $this->update_item_modifier_lists_max_modifier_lists_to_enable = null;
             }
             if (isset($data["update_item_modifier_lists_max_modifier_lists_to_disable"])) {
-                $this->update_item_modifier_lists_max_modifier_lists_to_disable =
-                    $data["update_item_modifier_lists_max_modifier_lists_to_disable"];
+              $this->update_item_modifier_lists_max_modifier_lists_to_disable = $data["update_item_modifier_lists_max_modifier_lists_to_disable"];
             } else {
-                $this->update_item_modifier_lists_max_modifier_lists_to_disable = null;
+              $this->update_item_modifier_lists_max_modifier_lists_to_disable = null;
             }
         }
     }
-
     /**
      * Gets batch_upsert_max_objects_per_batch
      * @return int
@@ -240,11 +219,10 @@ class CatalogInfoResponseLimits implements ArrayAccess
     {
         return $this->batch_upsert_max_objects_per_batch;
     }
-
+  
     /**
      * Sets batch_upsert_max_objects_per_batch
-     * @param int $batch_upsert_max_objects_per_batch The maximum number of objects that may appear within a single
-     * batch in a `/v2/catalog/batch-upsert` request.
+     * @param int $batch_upsert_max_objects_per_batch The maximum number of objects that may appear within a single batch in a `/v2/catalog/batch-upsert` request.
      * @return $this
      */
     public function setBatchUpsertMaxObjectsPerBatch($batch_upsert_max_objects_per_batch)
@@ -252,7 +230,6 @@ class CatalogInfoResponseLimits implements ArrayAccess
         $this->batch_upsert_max_objects_per_batch = $batch_upsert_max_objects_per_batch;
         return $this;
     }
-
     /**
      * Gets batch_upsert_max_total_objects
      * @return int
@@ -261,11 +238,10 @@ class CatalogInfoResponseLimits implements ArrayAccess
     {
         return $this->batch_upsert_max_total_objects;
     }
-
+  
     /**
      * Sets batch_upsert_max_total_objects
-     * @param int $batch_upsert_max_total_objects The maximum number of objects that may appear across all batches
-     * in a `/v2/catalog/batch-upsert` request.
+     * @param int $batch_upsert_max_total_objects The maximum number of objects that may appear across all batches in a `/v2/catalog/batch-upsert` request.
      * @return $this
      */
     public function setBatchUpsertMaxTotalObjects($batch_upsert_max_total_objects)
@@ -273,7 +249,6 @@ class CatalogInfoResponseLimits implements ArrayAccess
         $this->batch_upsert_max_total_objects = $batch_upsert_max_total_objects;
         return $this;
     }
-
     /**
      * Gets batch_retrieve_max_object_ids
      * @return int
@@ -282,11 +257,10 @@ class CatalogInfoResponseLimits implements ArrayAccess
     {
         return $this->batch_retrieve_max_object_ids;
     }
-
+  
     /**
      * Sets batch_retrieve_max_object_ids
-     * @param int $batch_retrieve_max_object_ids The maximum number of object IDs that may appear in a
-     * `/v2/catalog/batch-retrieve` request.
+     * @param int $batch_retrieve_max_object_ids The maximum number of object IDs that may appear in a `/v2/catalog/batch-retrieve` request.
      * @return $this
      */
     public function setBatchRetrieveMaxObjectIds($batch_retrieve_max_object_ids)
@@ -294,7 +268,6 @@ class CatalogInfoResponseLimits implements ArrayAccess
         $this->batch_retrieve_max_object_ids = $batch_retrieve_max_object_ids;
         return $this;
     }
-
     /**
      * Gets search_max_page_limit
      * @return int
@@ -303,11 +276,10 @@ class CatalogInfoResponseLimits implements ArrayAccess
     {
         return $this->search_max_page_limit;
     }
-
+  
     /**
      * Sets search_max_page_limit
-     * @param int $search_max_page_limit The maximum number of results that may be returned in a page of a
-     * `/v2/catalog/search` response.
+     * @param int $search_max_page_limit The maximum number of results that may be returned in a page of a `/v2/catalog/search` response.
      * @return $this
      */
     public function setSearchMaxPageLimit($search_max_page_limit)
@@ -315,7 +287,6 @@ class CatalogInfoResponseLimits implements ArrayAccess
         $this->search_max_page_limit = $search_max_page_limit;
         return $this;
     }
-
     /**
      * Gets batch_delete_max_object_ids
      * @return int
@@ -324,11 +295,10 @@ class CatalogInfoResponseLimits implements ArrayAccess
     {
         return $this->batch_delete_max_object_ids;
     }
-
+  
     /**
      * Sets batch_delete_max_object_ids
-     * @param int $batch_delete_max_object_ids The maximum number of object IDs that may be included in a single
-     * `/v2/catalog/batch-delete` request.
+     * @param int $batch_delete_max_object_ids The maximum number of object IDs that may be included in a single `/v2/catalog/batch-delete` request.
      * @return $this
      */
     public function setBatchDeleteMaxObjectIds($batch_delete_max_object_ids)
@@ -336,7 +306,6 @@ class CatalogInfoResponseLimits implements ArrayAccess
         $this->batch_delete_max_object_ids = $batch_delete_max_object_ids;
         return $this;
     }
-
     /**
      * Gets update_item_taxes_max_item_ids
      * @return int
@@ -345,11 +314,10 @@ class CatalogInfoResponseLimits implements ArrayAccess
     {
         return $this->update_item_taxes_max_item_ids;
     }
-
+  
     /**
      * Sets update_item_taxes_max_item_ids
-     * @param int $update_item_taxes_max_item_ids The maximum number of item IDs that may be included in a single
-     * `/v2/catalog/update-item-taxes` request.
+     * @param int $update_item_taxes_max_item_ids The maximum number of item IDs that may be included in a single `/v2/catalog/update-item-taxes` request.
      * @return $this
      */
     public function setUpdateItemTaxesMaxItemIds($update_item_taxes_max_item_ids)
@@ -357,7 +325,6 @@ class CatalogInfoResponseLimits implements ArrayAccess
         $this->update_item_taxes_max_item_ids = $update_item_taxes_max_item_ids;
         return $this;
     }
-
     /**
      * Gets update_item_taxes_max_taxes_to_enable
      * @return int
@@ -366,11 +333,10 @@ class CatalogInfoResponseLimits implements ArrayAccess
     {
         return $this->update_item_taxes_max_taxes_to_enable;
     }
-
+  
     /**
      * Sets update_item_taxes_max_taxes_to_enable
-     * @param int $update_item_taxes_max_taxes_to_enable The maximum number of tax IDs to be enabled that may be
-     * included in a single `/v2/catalog/update-item-taxes` request.
+     * @param int $update_item_taxes_max_taxes_to_enable The maximum number of tax IDs to be enabled that may be included in a single `/v2/catalog/update-item-taxes` request.
      * @return $this
      */
     public function setUpdateItemTaxesMaxTaxesToEnable($update_item_taxes_max_taxes_to_enable)
@@ -378,7 +344,6 @@ class CatalogInfoResponseLimits implements ArrayAccess
         $this->update_item_taxes_max_taxes_to_enable = $update_item_taxes_max_taxes_to_enable;
         return $this;
     }
-
     /**
      * Gets update_item_taxes_max_taxes_to_disable
      * @return int
@@ -387,11 +352,10 @@ class CatalogInfoResponseLimits implements ArrayAccess
     {
         return $this->update_item_taxes_max_taxes_to_disable;
     }
-
+  
     /**
      * Sets update_item_taxes_max_taxes_to_disable
-     * @param int $update_item_taxes_max_taxes_to_disable The maximum number of tax IDs to be disabled that may be
-     * included in a single `/v2/catalog/update-item-taxes` request.
+     * @param int $update_item_taxes_max_taxes_to_disable The maximum number of tax IDs to be disabled that may be included in a single `/v2/catalog/update-item-taxes` request.
      * @return $this
      */
     public function setUpdateItemTaxesMaxTaxesToDisable($update_item_taxes_max_taxes_to_disable)
@@ -399,7 +363,6 @@ class CatalogInfoResponseLimits implements ArrayAccess
         $this->update_item_taxes_max_taxes_to_disable = $update_item_taxes_max_taxes_to_disable;
         return $this;
     }
-
     /**
      * Gets update_item_modifier_lists_max_item_ids
      * @return int
@@ -408,11 +371,10 @@ class CatalogInfoResponseLimits implements ArrayAccess
     {
         return $this->update_item_modifier_lists_max_item_ids;
     }
-
+  
     /**
      * Sets update_item_modifier_lists_max_item_ids
-     * @param int $update_item_modifier_lists_max_item_ids The maximum number of item IDs that may be included
-     * in a single `/v2/catalog/update-item-modifier-lists` request.
+     * @param int $update_item_modifier_lists_max_item_ids The maximum number of item IDs that may be included in a single `/v2/catalog/update-item-modifier-lists` request.
      * @return $this
      */
     public function setUpdateItemModifierListsMaxItemIds($update_item_modifier_lists_max_item_ids)
@@ -420,7 +382,6 @@ class CatalogInfoResponseLimits implements ArrayAccess
         $this->update_item_modifier_lists_max_item_ids = $update_item_modifier_lists_max_item_ids;
         return $this;
     }
-
     /**
      * Gets update_item_modifier_lists_max_modifier_lists_to_enable
      * @return int
@@ -429,21 +390,17 @@ class CatalogInfoResponseLimits implements ArrayAccess
     {
         return $this->update_item_modifier_lists_max_modifier_lists_to_enable;
     }
-
+  
     /**
      * Sets update_item_modifier_lists_max_modifier_lists_to_enable
-     * @param int $update_item_modifier_lists_max_modifier_lists_to_enable The maximum number of modifier
-     * list IDs to be enabled that may be included in a single `/v2/catalog/update-item-modifier-lists` request.
+     * @param int $update_item_modifier_lists_max_modifier_lists_to_enable The maximum number of modifier list IDs to be enabled that may be included in a single `/v2/catalog/update-item-modifier-lists` request.
      * @return $this
      */
-    public function setUpdateItemModifierListsMaxModifierListsToEnable(
-        $update_item_modifier_lists_max_modifier_lists_to_enable
-    ) {
-        $this->update_item_modifier_lists_max_modifier_lists_to_enable =
-            $update_item_modifier_lists_max_modifier_lists_to_enable;
+    public function setUpdateItemModifierListsMaxModifierListsToEnable($update_item_modifier_lists_max_modifier_lists_to_enable)
+    {
+        $this->update_item_modifier_lists_max_modifier_lists_to_enable = $update_item_modifier_lists_max_modifier_lists_to_enable;
         return $this;
     }
-
     /**
      * Gets update_item_modifier_lists_max_modifier_lists_to_disable
      * @return int
@@ -452,62 +409,58 @@ class CatalogInfoResponseLimits implements ArrayAccess
     {
         return $this->update_item_modifier_lists_max_modifier_lists_to_disable;
     }
-
+  
     /**
      * Sets update_item_modifier_lists_max_modifier_lists_to_disable
-     * @param int $update_item_modifier_lists_max_modifier_lists_to_disable The maximum number of modifier list IDs
-     * to be disabled that may be included in a single `/v2/catalog/update-item-modifier-lists` request.
+     * @param int $update_item_modifier_lists_max_modifier_lists_to_disable The maximum number of modifier list IDs to be disabled that may be included in a single `/v2/catalog/update-item-modifier-lists` request.
      * @return $this
      */
-    public function setUpdateItemModifierListsMaxModifierListsToDisable(
-        $update_item_modifier_lists_max_modifier_lists_to_disable
-    ) {
-        $this->update_item_modifier_lists_max_modifier_lists_to_disable =
-            $update_item_modifier_lists_max_modifier_lists_to_disable;
+    public function setUpdateItemModifierListsMaxModifierListsToDisable($update_item_modifier_lists_max_modifier_lists_to_disable)
+    {
+        $this->update_item_modifier_lists_max_modifier_lists_to_disable = $update_item_modifier_lists_max_modifier_lists_to_disable;
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string
@@ -515,10 +468,7 @@ class CatalogInfoResponseLimits implements ArrayAccess
     public function __toString()
     {
         if (defined('JSON_PRETTY_PRINT')) {
-            return json_encode(
-                \SquareConnect\ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
+            return json_encode(\SquareConnect\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
         } else {
             return json_encode(\SquareConnect\ObjectSerializer::sanitizeForSerialization($this));
         }

@@ -8,7 +8,6 @@
 namespace SquareConnect\Model;
 
 use \ArrayAccess;
-
 /**
  * BatchUpsertCatalogObjectsResponse Class Doc Comment
  *
@@ -21,70 +20,69 @@ use \ArrayAccess;
 class BatchUpsertCatalogObjectsResponse implements ArrayAccess
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     * @var string[]
-     */
-    public static $swaggerTypes = [
+      * Array of property to type mappings. Used for (de)serialization 
+      * @var string[]
+      */
+    static $swaggerTypes = array(
         'errors' => '\SquareConnect\Model\Error[]',
         'objects' => '\SquareConnect\Model\CatalogObject[]',
         'updated_at' => 'string',
         'id_mappings' => '\SquareConnect\Model\CatalogIdMapping[]'
-    ];
-
-    /**
-     * Array of attributes where the key is the local name, and the value is the original name
-     * @var string[]
-     */
-    public static $attributeMap = [
+    );
+  
+    /** 
+      * Array of attributes where the key is the local name, and the value is the original name
+      * @var string[] 
+      */
+    static $attributeMap = array(
         'errors' => 'errors',
         'objects' => 'objects',
         'updated_at' => 'updated_at',
         'id_mappings' => 'id_mappings'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     * @var string[]
-     */
-    public static $setters = [
+      * Array of attributes to setter functions (for deserialization of responses)
+      * @var string[]
+      */
+    static $setters = array(
         'errors' => 'setErrors',
         'objects' => 'setObjects',
         'updated_at' => 'setUpdatedAt',
         'id_mappings' => 'setIdMappings'
-    ];
-
+    );
+  
     /**
-     * Array of attributes to getter functions (for serialization of requests)
-     * @var string[]
-     */
-    public static $getters = [
+      * Array of attributes to getter functions (for serialization of requests)
+      * @var string[]
+      */
+    static $getters = array(
         'errors' => 'getErrors',
         'objects' => 'getObjects',
         'updated_at' => 'getUpdatedAt',
         'id_mappings' => 'getIdMappings'
-    ];
-
+    );
+  
     /**
-     * $errors The set of [Error](#type-error)s encountered.
-     * @var \SquareConnect\Model\Error[]
-     */
-    private $errors;
+      * $errors Information on any errors that encountered.
+      * @var \SquareConnect\Model\Error[]
+      */
+    protected $errors;
     /**
-     * $objects The created [CatalogObject](#type-catalogobject)s
-     * @var \SquareConnect\Model\CatalogObject[]
-     */
-    private $objects;
+      * $objects The created successfully created CatalogObjects.
+      * @var \SquareConnect\Model\CatalogObject[]
+      */
+    protected $objects;
     /**
-     * $updated_at The database [timestamp](#workingwithdates) of this update in RFC 3339 format,
-     * e.g., \"2016-09-04T23:59:33.123Z\".
-     * @var string
-     */
-    private $updated_at;
+      * $updated_at The database [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates) of this update in RFC 3339 format, e.g., \"2016-09-04T23:59:33.123Z\".
+      * @var string
+      */
+    protected $updated_at;
     /**
-     * $id_mappings The mapping between client and server IDs for this Upsert.
-     * @var \SquareConnect\Model\CatalogIdMapping[]
-     */
-    private $id_mappings;
+      * $id_mappings The mapping between client and server IDs for this upsert.
+      * @var \SquareConnect\Model\CatalogIdMapping[]
+      */
+    protected $id_mappings;
 
     /**
      * Constructor
@@ -94,28 +92,27 @@ class BatchUpsertCatalogObjectsResponse implements ArrayAccess
     {
         if ($data != null) {
             if (isset($data["errors"])) {
-                $this->errors = $data["errors"];
+              $this->errors = $data["errors"];
             } else {
-                $this->errors = null;
+              $this->errors = null;
             }
             if (isset($data["objects"])) {
-                $this->objects = $data["objects"];
+              $this->objects = $data["objects"];
             } else {
-                $this->objects = null;
+              $this->objects = null;
             }
             if (isset($data["updated_at"])) {
-                $this->updated_at = $data["updated_at"];
+              $this->updated_at = $data["updated_at"];
             } else {
-                $this->updated_at = null;
+              $this->updated_at = null;
             }
             if (isset($data["id_mappings"])) {
-                $this->id_mappings = $data["id_mappings"];
+              $this->id_mappings = $data["id_mappings"];
             } else {
-                $this->id_mappings = null;
+              $this->id_mappings = null;
             }
         }
     }
-
     /**
      * Gets errors
      * @return \SquareConnect\Model\Error[]
@@ -124,10 +121,10 @@ class BatchUpsertCatalogObjectsResponse implements ArrayAccess
     {
         return $this->errors;
     }
-
+  
     /**
      * Sets errors
-     * @param \SquareConnect\Model\Error[] $errors The set of [Error](#type-error)s encountered.
+     * @param \SquareConnect\Model\Error[] $errors Information on any errors that encountered.
      * @return $this
      */
     public function setErrors($errors)
@@ -135,7 +132,6 @@ class BatchUpsertCatalogObjectsResponse implements ArrayAccess
         $this->errors = $errors;
         return $this;
     }
-
     /**
      * Gets objects
      * @return \SquareConnect\Model\CatalogObject[]
@@ -144,10 +140,10 @@ class BatchUpsertCatalogObjectsResponse implements ArrayAccess
     {
         return $this->objects;
     }
-
+  
     /**
      * Sets objects
-     * @param \SquareConnect\Model\CatalogObject[] $objects The created [CatalogObject](#type-catalogobject)s
+     * @param \SquareConnect\Model\CatalogObject[] $objects The created successfully created CatalogObjects.
      * @return $this
      */
     public function setObjects($objects)
@@ -155,7 +151,6 @@ class BatchUpsertCatalogObjectsResponse implements ArrayAccess
         $this->objects = $objects;
         return $this;
     }
-
     /**
      * Gets updated_at
      * @return string
@@ -164,11 +159,10 @@ class BatchUpsertCatalogObjectsResponse implements ArrayAccess
     {
         return $this->updated_at;
     }
-
+  
     /**
      * Sets updated_at
-     * @param string $updated_at The database [timestamp](#workingwithdates) of this update in RFC 3339 format,
-     * e.g., \"2016-09-04T23:59:33.123Z\".
+     * @param string $updated_at The database [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates) of this update in RFC 3339 format, e.g., \"2016-09-04T23:59:33.123Z\".
      * @return $this
      */
     public function setUpdatedAt($updated_at)
@@ -176,7 +170,6 @@ class BatchUpsertCatalogObjectsResponse implements ArrayAccess
         $this->updated_at = $updated_at;
         return $this;
     }
-
     /**
      * Gets id_mappings
      * @return \SquareConnect\Model\CatalogIdMapping[]
@@ -185,11 +178,10 @@ class BatchUpsertCatalogObjectsResponse implements ArrayAccess
     {
         return $this->id_mappings;
     }
-
+  
     /**
      * Sets id_mappings
-     * @param \SquareConnect\Model\CatalogIdMapping[] $id_mappings
-     * The mapping between client and server IDs for this Upsert.
+     * @param \SquareConnect\Model\CatalogIdMapping[] $id_mappings The mapping between client and server IDs for this upsert.
      * @return $this
      */
     public function setIdMappings($id_mappings)
@@ -197,48 +189,47 @@ class BatchUpsertCatalogObjectsResponse implements ArrayAccess
         $this->id_mappings = $id_mappings;
         return $this;
     }
-
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-
+  
     /**
      * Gets offset.
-     * @param  integer $offset Offset
-     * @return mixed
+     * @param  integer $offset Offset 
+     * @return mixed 
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-
+  
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed $value Value to be set
+     * @param  integer $offset Offset 
+     * @param  mixed   $value  Value to be set
      * @return void
      */
     public function offsetSet($offset, $value)
     {
         $this->$offset = $value;
     }
-
+  
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     * @param  integer $offset Offset 
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-
+  
     /**
      * Gets the string presentation of the object
      * @return string
@@ -246,10 +237,7 @@ class BatchUpsertCatalogObjectsResponse implements ArrayAccess
     public function __toString()
     {
         if (defined('JSON_PRETTY_PRINT')) {
-            return json_encode(
-                \SquareConnect\ObjectSerializer::sanitizeForSerialization($this),
-                JSON_PRETTY_PRINT
-            );
+            return json_encode(\SquareConnect\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
         } else {
             return json_encode(\SquareConnect\ObjectSerializer::sanitizeForSerialization($this));
         }
